@@ -352,6 +352,7 @@ set_property(SOURCE "${CMAKE_SOURCE_DIR}/src/xa_player.c" APPEND PROPERTY
         "XaPlayer_SetMasterVolume=PcLegacyXa_SetMasterVolume"
         "XaPlayer_PlayFile=PcLegacyXa_PlayFile"
         "XaPlayer_StopFile=PcLegacyXa_StopFile"
+        "XaPlayer_IsFilePlaying=PcLegacyXa_IsFilePlaying"
 )
 if(SH_DEBUG)
     target_compile_definitions(SilentHillPC PRIVATE SH_DEBUG=1)

@@ -9790,6 +9790,13 @@ void func_8007C0D8(s_SubCharacter* player, s_PlayerExtra* extra, GsCOORDINATE2* 
     }
 
     temp_s0_2 = Q12_MULT_PRECISE(player->moveSpeed, g_DeltaTime);
+#ifdef SH_PC_PORT
+    {
+        /* Rage slows the world's clock; Harry keeps his own pace. */
+        extern int Pc_Rage_HarrySpeedPct(void);
+        temp_s0_2 = (temp_s0_2 * Pc_Rage_HarrySpeedPct()) / 100;
+    }
+#endif
 
 #ifdef SH_PC_PORT
     /* Intended horizontal step this frame, before collision clamps `offset`.

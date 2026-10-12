@@ -27,6 +27,7 @@ extern int g_DebugViewNpcSlot;
 void Pc_KeyframeViewerPoseNpc(s_AnmHeader* anmHdr, GsCOORDINATE2* boneCoords);
 #include "pc_pick.h"
 #include "pc_merchant.h"
+#include "pc_rage.h"
 #include "pc_revenge.h"
 #endif
 
@@ -89,6 +90,7 @@ void func_80037E78(s_SubCharacter* chara) // 0x80037E78
             Pc_Rando_OnEnemyKilled();
             Pc_Revenge_OnEnemyKilled();
             Pc_Merchant_OnKill(chara->model.charaId);
+            Pc_Rage_OnKill();
         }
 #endif
 
@@ -909,6 +911,9 @@ void Game_NpcUpdate(void) // 0x80038354
     }
 
     g_RadioPitchState = k + 1;
+#ifdef SH_PC_PORT
+    Pc_Rage_OnRadioTick(k + 1);
+#endif
 
     if (!(g_SavegamePtr->itemToggleFlags & ItemToggleFlag_RadioOn))
     {
@@ -1005,7 +1010,12 @@ void Game_NpcUpdate(void) // 0x80038354
                     var_v1_3 >>= 1;
                 }
 
+#ifdef SH_PC_PORT
+                /* Attenuation: duck the static under the voice on the radio. */
+                var_a2_2 = CLAMP(var_v1_3 + Pc_Rage_RadioDuck(), 0, 0xFF);
+#else
                 var_a2_2 = CLAMP(var_v1_3, 0, 0xFF);
+#endif
 
                 Sd_SfxAttributesUpdate(Sfx_RadioInterferenceLoop + l, temp_s0_4, var_a2_2, 0);
             }

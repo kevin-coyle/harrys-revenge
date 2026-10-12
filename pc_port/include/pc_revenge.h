@@ -41,6 +41,8 @@ void Pc_Revenge_OnMapLoad(void);
 
 /* A voice line played now (merchant), and the module's RNG. */
 void Pc_Revenge_Voice(const char* event);
+/* A voice line with a percent chance, subject to the line cooldown. */
+void Pc_Revenge_Bark(const char* event, int pct);
 u32  Pc_Revenge_Rand(void);
 
 /* func_8008B714, before damage is applied: weapon upgrades, head and leg

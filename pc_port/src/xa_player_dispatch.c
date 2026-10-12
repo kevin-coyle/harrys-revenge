@@ -13,6 +13,7 @@ int PcLegacyXa_VoiceGapHold(void);
 void PcLegacyXa_SetMasterVolume(float);
 int PcLegacyXa_PlayFile(const char*);
 void PcLegacyXa_StopFile(void);
+int  PcLegacyXa_IsFilePlaying(void);
 
 void PcSoftwareXa_PlayWithParams(uint16_t, uint16_t, uint32_t, uint32_t);
 void PcSoftwareXa_Play(uint16_t);
@@ -25,6 +26,7 @@ int PcSoftwareXa_VoiceGapHold(void);
 void PcSoftwareXa_SetMasterVolume(float);
 int PcSoftwareXa_PlayFile(const char*);
 void PcSoftwareXa_StopFile(void);
+int  PcSoftwareXa_IsFilePlaying(void);
 
 #define XA_DISPATCH_VOID(publicName, legacyName, softwareName, args, callargs) \
     void publicName args { \
@@ -47,6 +49,13 @@ XA_DISPATCH_VOID(XaPlayer_SetPauseHold, PcLegacyXa_SetPauseHold,
 XA_DISPATCH_VOID(XaPlayer_SetMasterVolume, PcLegacyXa_SetMasterVolume,
                  PcSoftwareXa_SetMasterVolume, (float volume), (volume))
 XA_DISPATCH_VOID(XaPlayer_StopFile, PcLegacyXa_StopFile, PcSoftwareXa_StopFile, (void), ())
+
+int XaPlayer_IsFilePlaying(void)
+{
+    return PcAudioConfig_UsesSoftwareSpu()
+        ? PcSoftwareXa_IsFilePlaying()
+        : PcLegacyXa_IsFilePlaying();
+}
 
 int XaPlayer_PlayFile(const char* path)
 {

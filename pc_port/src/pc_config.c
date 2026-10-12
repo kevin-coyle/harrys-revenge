@@ -98,6 +98,8 @@ s_PcConfig g_PcConfig = {
     .revengeAmmoDrops       = 1,
     .revengeBarks           = 1,
     .revengeSwearing        = 1,
+    .revengeRage            = 1,
+    .revengeRadio           = 1,
     .controllerMovement = 2, /* 0=analog, 1=dpad, 2=both */
     .movementOriginal = 1,   /* 1 = PSX lower-body movement machine (default); 0 = legacy PC shim */
 
@@ -250,6 +252,7 @@ s_PcConfig g_PcConfig = {
     .keyQuickSave = "F6", .keyQuickLoad = "F8",
     .keyQuickOptions = "F10",
     .keyMerchant = "M", .padMerchant = "rightshoulder",
+    .keyRage = "G", .padRage = "x",
     .keySwapShoulder = "Mouse3",
     .keyConsole = "`",
     .keyGfxCycle = "\\",
@@ -370,6 +373,8 @@ static const struct { const char* key; size_t off; } s_GlobalBinds[] = {
     { "pad_quick_options", offsetof(s_PcConfig, padQuickOptions) },
     { "key_merchant",      offsetof(s_PcConfig, keyMerchant)     },
     { "pad_merchant",      offsetof(s_PcConfig, padMerchant)     },
+    { "key_rage",          offsetof(s_PcConfig, keyRage)         },
+    { "pad_rage",          offsetof(s_PcConfig, padRage)         },
     { "key_quickload",     offsetof(s_PcConfig, keyQuickLoad)    },
     { "key_swap_shoulder", offsetof(s_PcConfig, keySwapShoulder) },
     { "pad_swap_shoulder", offsetof(s_PcConfig, padSwapShoulder) },
@@ -1371,6 +1376,14 @@ else if (strcmp(key, "enable_plugins") == 0)
         else if (strcmp(key, "revenge_swearing") == 0)
         {
             g_PcConfig.revengeSwearing = (atoi(value) != 0);
+        }
+        else if (strcmp(key, "revenge_rage") == 0)
+        {
+            g_PcConfig.revengeRage = (atoi(value) != 0);
+        }
+        else if (strcmp(key, "revenge_radio") == 0)
+        {
+            g_PcConfig.revengeRadio = (atoi(value) != 0);
         }
         else if (strcmp(key, "randomizer") == 0)
         {

@@ -29,6 +29,7 @@
 #include "dbg_overlay.h"
 #include "pc_config.h"
 #include "pc_merchant.h"
+#include "pc_rage.h"
 #include "pc_revenge.h"
 #include "sh_log.h"
 
@@ -163,6 +164,11 @@ static void bark(const char* event, int pct)
         play_line(event, 0);
 }
 
+void Pc_Revenge_Bark(const char* event, int pct)
+{
+    bark(event, pct);
+}
+
 /* Merchant lines answer the player directly, so no cooldown or dice roll. */
 void Pc_Revenge_Voice(const char* event)
 {
@@ -205,6 +211,8 @@ s32 Pc_Revenge_ScaleDamageTaken(s32 damageAmount)
 {
     if (!Pc_Revenge_Active())
         return damageAmount;
+    if (Pc_Rage_Active())
+        return 0;
     return scale(damageAmount, g_PcConfig.revengeDamageTakenPct);
 }
 
@@ -227,6 +235,7 @@ void Pc_Revenge_Update(void)
     s_rng  += (u32)g_DeltaTimeRaw;
     s_time += g_DeltaTimeRaw;
     apply_capacity();
+    Pc_Rage_Update();
 
     if (s_barkCooldown > 0)
         s_barkCooldown -= g_DeltaTimeRaw;
@@ -511,6 +520,7 @@ void Pc_Revenge_OnHit(struct _SubCharacter* attackerV, struct _SubCharacter* tar
 
     if (weapon >= 0)
         *damage = scale(*damage, 100 + 20 * Pc_Merchant_Level(weapon, MERCHANT_STAT_DAMAGE));
+    *damage = scale(*damage, Pc_Rage_DamagePct());
 
     if (weapon == MERCHANT_WPN_HANDGUN || weapon == MERCHANT_WPN_SHOTGUN || weapon == MERCHANT_WPN_RIFLE)
     {
@@ -529,6 +539,7 @@ void Pc_Revenge_OnHit(struct _SubCharacter* attackerV, struct _SubCharacter* tar
                 *damage = scale(*damage, 200);
                 stagger = 1;
                 DbgOverlay_ToastLine("HEADSHOT");
+                Pc_Rage_OnHeadshot();
             }
             else if (frac <= 30)
                 stagger = 1;

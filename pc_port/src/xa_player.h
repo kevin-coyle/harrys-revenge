@@ -28,6 +28,8 @@ void XaPlayer_Update(void);
 int XaPlayer_PlayFile(const char* path);
 /* Stop only if a loose file is what is playing; a disc line is left alone. */
 void XaPlayer_StopFile(void);
+/* A loose file is what is playing (pacing tail included). */
+int XaPlayer_IsFilePlaying(void);
 void XaPlayer_SetVolume(int16_t volLeft, int16_t volRight);
 
 /* Console-freeze hold: pauses the OpenAL voice source and freezes the PSX

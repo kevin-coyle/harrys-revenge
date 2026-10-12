@@ -262,6 +262,8 @@ typedef struct {
     int revengeAmmoDrops;       /* revenge_ammo_drops */
     int revengeBarks;           /* revenge_voice: Harry's combat lines */
     int revengeSwearing;        /* revenge_swearing: mix in the salty takes */
+    int revengeRage;            /* revenge_rage: kills fill a meter that triggers slow motion + triple damage */
+    int revengeRadio;           /* revenge_radio: a voice taunts Harry through the radio static */
     int randomizer;         /* 1 = randomizer gamemode: New Game always opens in map2_s04, every door leads
                              * somewhere random, monsters/items are rerolled per area, and the run ends at the
                              * map7_s03 boss with a score-picked ending. Forces global_chara_pool on and
@@ -383,6 +385,8 @@ typedef struct {
     char padQuickOptions[24]; /* PC-only: OPTIONAL controller bind for the same overlay (config key: pad_quick_options); unbound by default */
     char keyMerchant[24];     /* Harry's Revenge shop (config key: key_merchant); default M */
     char padMerchant[24];     /* pad_merchant; default rightshoulder, ignored on the Classic camera where R1 sidesteps */
+    char keyRage[24];         /* key_rage: unleash a full rage meter; default G */
+    char padRage[24];         /* pad_rage; default x (Square), ignored on the Classic camera where Square runs */
     char keySwapShoulder[24]; /* PC-only: swap OTS shoulder side (default Mouse3) */
     char padSwapShoulder[24]; /* PC-only: controller bind for the same (config key: pad_swap_shoulder); unbound by default */
     char keyConsole[24]; /* PC-only: dev console toggle key (default tilde "`"); keyboard-only */

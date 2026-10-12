@@ -694,6 +694,13 @@ int XaPlayer_PlayFile(const char* path)
     return 1;
 }
 
+/* A loose file (not a disc line) is still playing: lets a caller queue the
+ * next file instead of cutting this one off. */
+int XaPlayer_IsFilePlaying(void)
+{
+    return g_XaPlayer.isPlaying && g_XaPlayer.xaIdx == XA_FILE_IDX;
+}
+
 void XaPlayer_StopFile(void)
 {
     if (g_XaPlayer.isPlaying && g_XaPlayer.xaIdx == XA_FILE_IDX) {

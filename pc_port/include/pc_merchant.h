@@ -28,7 +28,7 @@ void Pc_Merchant_TryOpen(void);
 void Pc_Merchant_OnClose(void);
 
 /* Shop pages for the quick options overlay. */
-#define MERCHANT_PAGES 3
+#define MERCHANT_PAGES 4
 int         Pc_Merchant_PageCount(int page);
 int         Pc_Merchant_PageItem(int page, int row);
 const char* Pc_Merchant_PageName(int page);

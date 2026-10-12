@@ -259,6 +259,15 @@ s32 Inventory_HyperBlasterFunctionalTest(void) // 0x8004C4F8
 {
     if (g_SavegamePtr->mapIdx > MapIdx_MAP0_S00)
     {
+#ifdef SH_PC_PORT
+        /* Harry's Revenge sells the HyperBlaster, so it fires without the UFO
+         * ending (setting that flag would also record the ending as earned). */
+        extern int Pc_Revenge_Active(void);
+        if (Pc_Revenge_Active())
+        {
+            return 1;
+        }
+#endif
         if ((g_SavegamePtr->clearGameEndings & GameEndingFlag_Ufo) != 0)
         {
             // Game completed with Ufo ending.

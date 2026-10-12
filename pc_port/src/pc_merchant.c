@@ -113,14 +113,23 @@ static int has_item(u8 id)
     return 0;
 }
 
-/* Inventory_AddSpecialItem appends a slot (the re-sort merges it into an
- * existing stack) and counts a pickup for the end-of-game ranking; a purchase
- * or drop is not a pickup the player found, so the count is put back. */
-static void give_item(u8 id, u8 count)
+/* Inventory_AddSpecialItem appends a slot (the re-sort merges ammo and health
+ * into an existing stack) without a bounds check, and counts a pickup for the
+ * end-of-game ranking. A purchase or drop is not a pickup the player found, so
+ * both counters are put back: the special count is a 3-bit field that carries
+ * into the HyperBlaster's colour bits. Returns 0 when the inventory is full. */
+static int give_item(u8 id, u8 count)
 {
-    u8 picked = g_SavegamePtr->pickedUpItemCount;
+    u8 picked, special;
+
+    if (g_SavegamePtr->inventorySlotCount >= INV_ITEM_COUNT_MAX)
+        return 0;
+    picked  = g_SavegamePtr->pickedUpItemCount;
+    special = g_SavegamePtr->pickedUpSpecialItemCount;
     Inventory_AddSpecialItem(id, count);
-    g_SavegamePtr->pickedUpItemCount = picked;
+    g_SavegamePtr->pickedUpItemCount        = picked;
+    g_SavegamePtr->pickedUpSpecialItemCount = special;
+    return 1;
 }
 
 void Pc_Revenge_GiveItem(u8 id, u8 count)
@@ -179,7 +188,20 @@ enum
 {
     ITEM_HANDGUN_AMMO = 0, ITEM_SHOTGUN_AMMO, ITEM_RIFLE_AMMO,
     ITEM_HEALTH_DRINK, ITEM_FIRST_AID, ITEM_AMPOULE,
-    ITEM_UPGRADE_FIRST /* + weapon * MERCHANT_STAT_COUNT + stat */
+    ITEM_WEAPON_FIRST, /* + index into WEAPONS_FOR_SALE */
+    ITEM_UPGRADE_FIRST = ITEM_WEAPON_FIRST + 7 /* + weapon * MERCHANT_STAT_COUNT + stat */
+};
+
+/* The late-game and unlockable weapons, for sale from the start. Each also sets
+ * its world pickup's flag, so the map copy is gone rather than a duplicate. */
+static const struct { u8 item; int price; u16 pickupFlag; const char* name; } WEAPONS_FOR_SALE[] = {
+    { InvItemId_SteelPipe,    300,  EventFlag_M2S00_PickupSteelPipe, "Steel pipe"   },
+    { InvItemId_Hammer,       800,  EventFlag_M3S05_PickupHammer,    "Hammer"       },
+    { InvItemId_Axe,          1200, EventFlag_M4S01_PickupAxe,       "Axe"          },
+    { InvItemId_Katana,       2500, EventFlag_M0S02_PickupKatana,    "Katana"       },
+    { InvItemId_RockDrill,    3500, EventFlag_M2S00_PickupRockDrill, "Rock drill"   },
+    { InvItemId_Chainsaw,     4000, EventFlag_M2S00_PickupChainsaw,  "Chainsaw"     },
+    { InvItemId_HyperBlaster, 9999, 0,                               "HyperBlaster" },
 };
 
 static const char* const WEAPON_NAMES[MERCHANT_WPN_COUNT] = { "Handgun", "Shotgun", "Rifle", "Melee" };
@@ -199,6 +221,9 @@ static const u8 WEAPON_ITEM[MERCHANT_WPN_COUNT] = {
 
 static const int PAGE_SUPPLIES[] = { ITEM_HANDGUN_AMMO, ITEM_SHOTGUN_AMMO, ITEM_RIFLE_AMMO,
                                      ITEM_HEALTH_DRINK, ITEM_FIRST_AID, ITEM_AMPOULE };
+static const int PAGE_WEAPONS[]  = { ITEM_WEAPON_FIRST + 0, ITEM_WEAPON_FIRST + 1, ITEM_WEAPON_FIRST + 2,
+                                     ITEM_WEAPON_FIRST + 3, ITEM_WEAPON_FIRST + 4, ITEM_WEAPON_FIRST + 5,
+                                     ITEM_WEAPON_FIRST + 6 };
 #define UPG(w, s) (ITEM_UPGRADE_FIRST + (w) * MERCHANT_STAT_COUNT + (s))
 static const int PAGE_GUNS[] = {
     UPG(MERCHANT_WPN_HANDGUN, MERCHANT_STAT_DAMAGE), UPG(MERCHANT_WPN_HANDGUN, MERCHANT_STAT_CAPACITY),
@@ -217,7 +242,8 @@ int Pc_Merchant_PageCount(int page)
     switch (page)
     {
         case 0:  return (int)ARRAY_SIZE(PAGE_SUPPLIES);
-        case 1:  return (int)ARRAY_SIZE(PAGE_GUNS);
+        case 1:  return (int)ARRAY_SIZE(PAGE_WEAPONS);
+        case 2:  return (int)ARRAY_SIZE(PAGE_GUNS);
         default: return (int)ARRAY_SIZE(PAGE_MORE);
     }
 }
@@ -227,7 +253,8 @@ int Pc_Merchant_PageItem(int page, int row)
     switch (page)
     {
         case 0:  return PAGE_SUPPLIES[row];
-        case 1:  return PAGE_GUNS[row];
+        case 1:  return PAGE_WEAPONS[row];
+        case 2:  return PAGE_GUNS[row];
         default: return PAGE_MORE[row];
     }
 }
@@ -235,7 +262,7 @@ int Pc_Merchant_PageItem(int page, int row)
 const char* Pc_Merchant_PageName(int page)
 {
     static const char* const NAMES[MERCHANT_PAGES] = {
-        "Merchant: Supplies", "Merchant: Handgun & Shotgun", "Merchant: Rifle & Melee" };
+        "Merchant: Supplies", "Merchant: Weapons", "Merchant: Handgun & Shotgun", "Merchant: Rifle & Melee" };
     return NAMES[(page < 0 || page >= MERCHANT_PAGES) ? 0 : page];
 }
 
@@ -251,6 +278,8 @@ static int item_price(int item)
         case ITEM_AMPOULE:      return 1000;
         default:
         {
+            if (item < ITEM_UPGRADE_FIRST)
+                return WEAPONS_FOR_SALE[item - ITEM_WEAPON_FIRST].price;
             int u = item - ITEM_UPGRADE_FIRST;
             int w = u / MERCHANT_STAT_COUNT, s = u % MERCHANT_STAT_COUNT;
             return UPGRADE_BASE[w][s] * (Pc_Merchant_Level(w, s) + 1);
@@ -271,6 +300,8 @@ const char* Pc_Merchant_ItemName(int item)
         case ITEM_AMPOULE:      return "Ampoule";
         default:
         {
+            if (item < ITEM_UPGRADE_FIRST)
+                return WEAPONS_FOR_SALE[item - ITEM_WEAPON_FIRST].name;
             int u = item - ITEM_UPGRADE_FIRST;
             snprintf(buf, sizeof(buf), "%s %s", WEAPON_NAMES[u / MERCHANT_STAT_COUNT],
                      STAT_NAMES[u % MERCHANT_STAT_COUNT]);
@@ -292,6 +323,8 @@ static const char* unavailable(int item)
         case ITEM_AMPOULE:      return NULL;
         default:
         {
+            if (item < ITEM_UPGRADE_FIRST)
+                return has_item(WEAPONS_FOR_SALE[item - ITEM_WEAPON_FIRST].item) ? "Owned" : NULL;
             int u = item - ITEM_UPGRADE_FIRST;
             int w = u / MERCHANT_STAT_COUNT, s = u % MERCHANT_STAT_COUNT;
             if (WEAPON_ITEM[w] != 0 && !has_item(WEAPON_ITEM[w]))
@@ -339,15 +372,41 @@ void Pc_Merchant_Buy(int item)
         return;
     }
 
+    if (item < ITEM_UPGRADE_FIRST)
+    {
+        u8 id = 0, count = 1;
+        switch (item)
+        {
+            case ITEM_HANDGUN_AMMO: id = InvItemId_HandgunBullets; count = 15; break;
+            case ITEM_SHOTGUN_AMMO: id = InvItemId_ShotgunShells;  count = 10; break;
+            case ITEM_RIFLE_AMMO:   id = InvItemId_RifleShells;    count = 6;  break;
+            case ITEM_HEALTH_DRINK: id = InvItemId_HealthDrink;    break;
+            case ITEM_FIRST_AID:    id = InvItemId_FirstAidKit;    break;
+            case ITEM_AMPOULE:      id = InvItemId_Ampoule;        break;
+            default:                id = WEAPONS_FOR_SALE[item - ITEM_WEAPON_FIRST].item; break;
+        }
+        if (!give_item(id, count))
+        {
+            Sd_PlaySfx(Sfx_MenuCancel, 0, 64);
+            DbgOverlay_ToastLine("Inventory full.");
+            return;
+        }
+        set_money(Pc_Merchant_Money() - price);
+        Sd_PlaySfx(Sfx_MenuConfirm, 0, 64);
+        if (item >= ITEM_WEAPON_FIRST)
+        {
+            if (WEAPONS_FOR_SALE[item - ITEM_WEAPON_FIRST].pickupFlag != 0)
+                Savegame_EventFlagSet(WEAPONS_FOR_SALE[item - ITEM_WEAPON_FIRST].pickupFlag);
+            Pc_Revenge_Voice("merchant_weapon");
+        }
+        else
+            Pc_Revenge_Voice("merchant_buy");
+        return;
+    }
+
     set_money(Pc_Merchant_Money() - price);
     switch (item)
     {
-        case ITEM_HANDGUN_AMMO: give_item(InvItemId_HandgunBullets, 15); break;
-        case ITEM_SHOTGUN_AMMO: give_item(InvItemId_ShotgunShells, 10);  break;
-        case ITEM_RIFLE_AMMO:   give_item(InvItemId_RifleShells, 6);     break;
-        case ITEM_HEALTH_DRINK: give_item(InvItemId_HealthDrink, 1);     break;
-        case ITEM_FIRST_AID:    give_item(InvItemId_FirstAidKit, 1);     break;
-        case ITEM_AMPOULE:      give_item(InvItemId_Ampoule, 1);         break;
         default:
         {
             int u = item - ITEM_UPGRADE_FIRST;
@@ -360,8 +419,6 @@ void Pc_Merchant_Buy(int item)
             return;
         }
     }
-    Sd_PlaySfx(Sfx_MenuConfirm, 0, 64);
-    Pc_Revenge_Voice("merchant_buy");
 }
 
 /* ------------------------------------------------------------------ open */

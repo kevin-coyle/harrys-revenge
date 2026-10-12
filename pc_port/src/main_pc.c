@@ -1058,6 +1058,10 @@ int main(int argc, char* argv[])
     PsyX_Initialise("Silent Hill", windowWidth, windowHeight, g_PcConfig.fullscreen);
 
     SH_LOG("PsyCross initialized. Window: %dx%d", windowWidth, windowHeight);
+    /* Harry's Revenge: only the window caption. The string passed above also
+     * names the log and crash files, which tools and docs expect. */
+    if (SDL_GL_GetCurrentWindow())
+        SDL_SetWindowTitle(SDL_GL_GetCurrentWindow(), "Harry's Revenge");
 
     /* Needs the GL context, so it runs here rather than beside the system-RAM
      * clamp above. Same rule as that one: only ever lowers. */

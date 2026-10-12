@@ -10,12 +10,15 @@ Usage: ELEVENLABS_KEY=... python3 gen_voice.py [--force]
 """
 import json
 import os
+import subprocess
 import sys
 import urllib.request
 import wave
 
 VOICE_ID = "SOYHLrjzK2X1ezoPC6cr"     # "Harry - Fierce Warrior" (ElevenLabs stock voice)
 MERCHANT_VOICE_ID = "N2lVS1w4EtoT3dr4eOWO"  # "Callum - Husky Trickster"
+VILLAIN_VOICE_ID = "5PWbsfogbLtky5sxqtBz"   # "Kayla - Evil Witch Villian", the voice on the radio
+ANNOUNCER_VOICE_ID = "M5E055lOUxMi0kJpGyE9" # "Gravel Midnight - Deep Character Voice"
 MODEL_ID = "eleven_v4"
 RATE = 24000
 
@@ -131,6 +134,58 @@ BARKS = {
     "merchant_bye_salty": [
         "[cackles] Don't die out there, ya poor bastard.",
     ],
+    # Harry's rage (pc_revenge.c) and kill streaks.
+    "rage": [
+        "[roaring] Now I'm angry!",
+        "[screaming] You took my daughter!",
+        "[shouts] Come get some!",
+        "[furious] My turn!",
+    ],
+    "rage_salty": [
+        "[roaring] Alright, you sons of bitches!",
+    ],
+    "rage_end": [
+        "[panting] Okay... okay. Breathe.",
+        "[exhales] Whew. That felt good.",
+    ],
+    "streak": [
+        "[laughing] Who's next? Anybody?",
+        "[smug] I'm on fire.",
+        "[cocky] And they say writers can't fight.",
+        "[chuckles] I could do this all day.",
+    ],
+    # Harry answering the voice on the radio.
+    "radio_reply": [
+        "[annoyed] Lady, get off my radio.",
+        "[sarcastic] Great. A talk show.",
+        "[growls] Keep talking. I'm coming for you next.",
+        "[dryly] Who gave you this frequency?",
+        "[shouts] Send them! I've got bullets!",
+        "[muttering] Should've bought a walkie-talkie.",
+    ],
+    "radio_reply_salty": [
+        "[shouts] Shut the hell up!",
+        "[annoyed] Lady, piss off.",
+    ],
+    # The voice on the radio (VILLAIN_VOICE_ID, radio-filtered).
+    "radio": [
+        "[sinister] Harry... Harry Mason. You're going the wrong way.",
+        "[mocking laugh] Run, little writer. Run.",
+        "[whispers] They can smell you, Harry.",
+        "[cruel] Your daughter cries for you. Isn't that sweet?",
+        "[amused] More of my children are coming to play.",
+        "[sneering] You can't kill what this town keeps making.",
+        "[singsong] Ready or not, Harry...",
+        "[cold] I hear every bullet you fire.",
+    ],
+    "radio_salty": [
+        "[mocking] Oh, Harry. You poor, stupid bastard.",
+    ],
+    # The merchant selling the big guns.
+    "merchant_weapon": [
+        "[impressed] Ooh, now you're talkin', stranger.",
+        "[chuckles] Careful... she bites.",
+    ],
     # The merchant (MERCHANT_VOICE_ID).
     "merchant_hello": [
         "[creepy whisper] Ah... a customer. What're you buyin', stranger?",
@@ -154,6 +209,16 @@ BARKS = {
         "[ominous] Come back... alive, preferably.",
         "[whispering] The fog will be waiting.",
     ],
+}
+
+# Announcer stings (ANNOUNCER_VOICE_ID), played over everything as UI sounds:
+# revenge/sting_<name>.wav.
+STINGS = {
+    "double": "[booming] Double kill!",
+    "triple": "[booming] Triple kill!",
+    "rampage": "[booming, intense] Rampage!",
+    "unstoppable": "[booming, intense] Unstoppable!",
+    "revenge": "[booming, epic] Harry's... REVENGE!",
 }
 
 # Text boxes the original game leaves silent (pc_port/localization keys).
@@ -191,6 +256,20 @@ def write_wav(path, pcm):
         w.writeframes(pcm)
 
 
+def radio_filter(path):
+    """Make a clean take sound like it is coming through Harry's pocket radio."""
+    tmp = path + ".tmp.wav"
+    subprocess.run(
+        ["ffmpeg", "-loglevel", "error", "-y", "-i", path,
+         "-filter_complex",
+         "[0:a]highpass=f=350,lowpass=f=3200,acrusher=bits=8:mode=log:aa=1,volume=1.6[v];"
+         "anoisesrc=color=white:amplitude=0.035:r=%d[n];"
+         "[v][n]amix=inputs=2:duration=first:normalize=0" % RATE,
+         "-ac", "1", "-ar", str(RATE), "-sample_fmt", "s16", tmp],
+        check=True)
+    os.replace(tmp, path)
+
+
 def main():
     key = os.environ.get("ELEVENLABS_KEY")
     if not key:
@@ -201,8 +280,15 @@ def main():
     jobs = []
     for event, lines in BARKS.items():
         for i, text in enumerate(lines, 1):
-            voice = MERCHANT_VOICE_ID if event.startswith("merchant_") else VOICE_ID
+            if event.startswith("merchant_"):
+                voice = MERCHANT_VOICE_ID
+            elif event == "radio" or event == "radio_salty":
+                voice = VILLAIN_VOICE_ID
+            else:
+                voice = VOICE_ID
             jobs.append((os.path.join(root, "revenge", f"bark_{event}_{i}.wav"), text, voice))
+    for name, text in STINGS.items():
+        jobs.append((os.path.join(root, "revenge", f"sting_{name}.wav"), text, ANNOUNCER_VOICE_ID))
     for msg, text in MESSAGES.items():
         jobs.append((os.path.join(root, "load", "XA", f"msg_{msg.replace('.', '_')}.wav"), text, VOICE_ID))
 
@@ -210,6 +296,8 @@ def main():
         if os.path.exists(path) and not force:
             continue
         write_wav(path, tts(key, text, voice))
+        if voice == VILLAIN_VOICE_ID:
+            radio_filter(path)
         print(f"{os.path.relpath(path, root)}  {text}")
 
 

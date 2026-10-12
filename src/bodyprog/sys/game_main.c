@@ -2618,6 +2618,10 @@ void MainLoop(void) // 0x80032EE0
             extern void Pc_LowHealthGlowUpdate(void);
             Pc_HealFlashUpdate();
             Pc_LowHealthGlowUpdate(); /* optional low-health red edge pulse, same window */
+            {
+                extern void Pc_Rage_Draw(void);
+                Pc_Rage_Draw();
+            }
 
             /* Minimap: load the area's paper-map TIM here (game side) when it
              * changes — the Fs queue must not be touched from the GL hook that
@@ -3130,6 +3134,11 @@ void MainLoop(void) // 0x80032EE0
             g_DeltaTime    = dtCapped;
             g_DeltaTimeRaw = dtRaw;
             g_GravitySpeed = Q12_MULT(dtCapped, Q12(9.8f));
+            {
+                /* Harry's Revenge rage: slows the world, not the real clock. */
+                extern void Pc_Rage_ScaleWorldTime(void);
+                Pc_Rage_ScaleWorldTime();
+            }
 
             #undef PC_DT_STEP_30FPS
             #undef PC_DT_STEP_15FPS

@@ -420,7 +420,7 @@ static const QoRowDef* qo_page_rows(int page, int* count)
 static const char* const s_pageNames[QO_PAGES + MERCHANT_PAGES] = {
     "Graphics", "Lighting & Effects", "HUD", "Audio", "View",
     "Cheats", "Cheat Actions", "Debug", "Debug Actions", "Controls",
-    "Supplies", "Handgun & Shotgun", "Rifle & Melee" };
+    "Supplies", "Weapons", "Handgun & Shotgun", "Rifle & Melee" };
 
 /* ------------------------------------------------------------------ */
 /* State                                                               */

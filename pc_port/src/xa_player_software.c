@@ -738,6 +738,11 @@ int PcSoftwareXa_PlayFile(const char* path)
     return 1;
 }
 
+int PcSoftwareXa_IsFilePlaying(void)
+{
+    return g_XaPlayer.isPlaying && g_XaPlayer.xaIdx == XA_FILE_IDX;
+}
+
 void PcSoftwareXa_StopFile(void)
 {
     if (g_XaPlayer.isPlaying && g_XaPlayer.xaIdx == XA_FILE_IDX) {
