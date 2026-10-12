@@ -224,6 +224,11 @@ BARKS = {
     ],
     # Harry answering the voice on the radio.
     "radio_reply": [
+        "[indignant] At least my books have a plot!",
+        "[offended] Leave my pancakes out of this!",
+        "[annoyed] I do not snore!",
+        "[dryly] Everybody's a critic.",
+        "[shouts] Alan Wake had it easy!",
         "[annoyed] Lady, get off my radio.",
         "[sarcastic] Great. A talk show.",
         "[growls] Keep talking. I'm coming for you next.",
@@ -232,11 +237,24 @@ BARKS = {
         "[muttering] Should've bought a walkie-talkie.",
     ],
     "radio_reply_salty": [
+        "[shouts] Oh, piss off, lady!",
         "[shouts] Shut the hell up!",
         "[annoyed] Lady, piss off.",
     ],
     # The voice on the radio (VILLAIN_VOICE_ID, radio-filtered).
     "radio": [
+        "[mocking] Oh, Harry. You're hardly Alan Wake.",
+        "[amused] A writer, Harry? Stephen King you are not.",
+        "[sneering] I read your last novel, Harry. Even the monsters fell asleep.",
+        "[cruel] Your agent called, Harry. He's dropping you.",
+        "[mocking] Write a book about it, Harry. Nobody will read that one either.",
+        "[amused] Cheryl says your pancakes are terrible.",
+        "[singsong] Cheryl likes it here, Harry. We let her stay up past nine.",
+        "[mocking] Cheryl tells me you snore. Like a chainsaw.",
+        "[sneering] Father of the year, Harry. You lost her in under five minutes.",
+        "[amused] Your bedtime stories bore her, Harry. Mine have demons.",
+        "[mocking] Running again, Harry? Your cardio is embarrassing.",
+        "[sinister] Is that a gun, Harry? How very... compensating.",
         "[sinister] Harry... Harry Mason. You're going the wrong way.",
         "[mocking laugh] Run, little writer. Run.",
         "[whispers] They can smell you, Harry.",
@@ -247,6 +265,7 @@ BARKS = {
         "[cold] I hear every bullet you fire.",
     ],
     "radio_salty": [
+        "[mocking] Your prose is shit, Harry. And so is your aim.",
         "[mocking] Oh, Harry. You poor, stupid bastard.",
     ],
     # The merchant selling the big guns.
@@ -493,13 +512,23 @@ def main():
     for msg, text in MESSAGES.items():
         jobs.append((os.path.join(root, "load", "XA", f"msg_{msg.replace('.', '_')}.wav"), text, VOICE_ID))
 
+    # Which text each file was recorded from: a list edit that shifts the
+    # numbering re-records the files whose line changed, not just new numbers.
+    manifest_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voice_manifest.json")
+    manifest = json.load(open(manifest_path)) if os.path.exists(manifest_path) else {}
+
     for path, text, voice in jobs:
-        if os.path.exists(path) and not force:
+        rel = os.path.relpath(path, root)
+        if os.path.exists(path) and not force and manifest.get(rel, text) == text:
+            manifest[rel] = text
             continue
         write_wav(path, tts(key, text, voice))
         if voice == VILLAIN_VOICE_ID:
             radio_filter(path)
-        print(f"{os.path.relpath(path, root)}  {text}")
+        manifest[rel] = text
+        json.dump(manifest, open(manifest_path, "w"), indent=1, sort_keys=True)
+        print(f"{rel}  {text}")
+    json.dump(manifest, open(manifest_path, "w"), indent=1, sort_keys=True)
 
 
 if __name__ == "__main__":
