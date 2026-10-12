@@ -258,6 +258,7 @@ typedef struct {
     int revengeDamageTakenPct;  /* revenge_damage_taken: damage to Harry, percent */
     int revengeRegenCap;        /* revenge_regen: heal to this percent of health between fights, 0 = off */
     int revengeEnemyMultiplier; /* revenge_enemies: monsters per natural spawn, 1..4 */
+    int revengeHorde;           /* revenge_horde: keep this many monsters around Harry where the map has live enemies, 0 = off */
     int revengeInvaderPct;      /* revenge_invaders: percent of extra monsters drawn from other areas */
     int revengeAmmoDrops;       /* revenge_ammo_drops */
     int revengeBarks;           /* revenge_voice: Harry's combat lines */

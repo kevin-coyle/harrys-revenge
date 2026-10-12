@@ -148,6 +148,18 @@ BARKS = {
         "[panting] Okay... okay. Breathe.",
         "[exhales] Whew. That felt good.",
     ],
+    "running": [
+        "[panting] I'm a writer, not a marathon runner!",
+        "[out of breath] Should've... taken up jogging... before this vacation.",
+        "[wheezing] My cardio... is a crime.",
+        "[panting] Okay... where am I even running to?",
+        "[gasping] Note to self... buy a car.",
+        "[panting] This town is way bigger on foot.",
+    ],
+    "running_salty": [
+        "[panting] Holy shit, this town is huge.",
+        "[wheezing] Damn it... my legs are on fire.",
+    ],
     "streak": [
         "[laughing] Who's next? Anybody?",
         "[smug] I'm on fire.",

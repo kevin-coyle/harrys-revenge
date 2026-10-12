@@ -81,7 +81,12 @@ static q19_12 s_barkCooldown = 0;
 static q19_12 s_areaBarkIn   = -1;
 
 static q19_12 s_time;
+static q19_12 s_runFor;
 static void   apply_capacity(void);
+static void   horde_tick(void);
+
+#define REVENGE_RUN_SPEED Q12(3.0f)  /* run speeds are 3.5-5.0; a walk is under 2 */
+#define REVENGE_RUN_QUIP  Q12(14.0f) /* this long running without a break */
 static q19_12 s_sinceHit = 0;
 static u32    s_rng      = 0x9E3779B9u;
 
@@ -244,6 +249,21 @@ void Pc_Revenge_Update(void)
     s_rng  += (u32)g_DeltaTimeRaw;
     s_time += g_DeltaTimeRaw;
     apply_capacity();
+    horde_tick();
+
+    /* A long run earns Harry a complaint about his cardio. */
+    if (g_SysWork.sysState == SysState_Gameplay &&
+        g_SysWork.playerWork.player.moveSpeed >= REVENGE_RUN_SPEED)
+    {
+        s_runFor += g_DeltaTimeRaw;
+        if (s_runFor >= REVENGE_RUN_QUIP)
+        {
+            s_runFor = 0;
+            bark("running", 80);
+        }
+    }
+    else if (g_SysWork.sysState == SysState_Gameplay)
+        s_runFor = 0;
     Pc_Rage_Update();
 
     if (s_barkCooldown > 0)
@@ -350,10 +370,36 @@ static void pick_type(int parentId, int parentStep, int* charaId, int* stateStep
     }
 }
 
+/* An extra monster in npc slot `c`. It borrows native row `row`'s field_40
+ * (field_40 indexes the 32-bit row masks, so it must stay below 32) and is
+ * flagged as a debug spawn, so killing it never writes the save's kill bits. */
+static void spawn_extra(int c, int charaId, int stateStep, int row, q19_12 x, q19_12 z)
+{
+    s_SubCharacter*    npc = &g_SysWork.npcs[c];
+    s_CollisionSurface surf;
+
+    memset(npc, 0, sizeof(*npc));
+    npc->model.charaId      = (s8)charaId;
+    npc->model.controlState = 0;
+    npc->model.stateStep    = (u8)stateStep;
+    npc->field_40           = (s8)row;
+    npc->position.vx        = x;
+    npc->position.vz        = z;
+    Collision_SurfaceGet(&surf, x, z);
+    npc->position.vy        = surf.groundHeight;
+    npc->rotation.vy        = (s16)(rnd() & 0xFFF);
+    npc->model.anim.flags  |= AnimFlag_Visible;
+
+    SET_FLAG(&g_SysWork.npcFlags, c);
+    g_PcNpcDebugSpawned[c] = 1;
+    s_isClone[c]           = 1;
+    if (g_SysWork.npcFlagsId < (u8)(c + 1))
+        g_SysWork.npcFlagsId = (u8)(c + 1);
+}
+
 void Pc_Revenge_OnNativeSpawn(int row, int slot)
 {
     s_SubCharacter*    parent;
-    s_CollisionSurface surf;
     int                n;
 
     if (!Pc_Revenge_Active() || slot < 0 || slot >= NPC_COUNT_MAX)
@@ -365,7 +411,6 @@ void Pc_Revenge_OnNativeSpawn(int row, int slot)
 
     for (n = 1; n < g_PcConfig.revengeEnemyMultiplier; n++)
     {
-        s_SubCharacter* clone;
         q19_12          x, z;
         int             charaId, stateStep;
         int             c = free_slot();
@@ -374,30 +419,105 @@ void Pc_Revenge_OnNativeSpawn(int row, int slot)
             return;
 
         pick_type(parent->model.charaId, parent->model.stateStep, &charaId, &stateStep);
-
-        clone = &g_SysWork.npcs[c];
-        memset(clone, 0, sizeof(*clone));
-        clone->model.charaId      = (s8)charaId;
-        clone->model.controlState = 0;
-        clone->model.stateStep    = (u8)stateStep;
-        clone->field_40           = (s8)row;
-        clone->position.vx        = x;
-        clone->position.vz        = z;
-        Collision_SurfaceGet(&surf, x, z);
-        clone->position.vy        = surf.groundHeight;
-        clone->rotation.vy        = (s16)(rnd() & 0xFFF);
-        clone->model.anim.flags  |= AnimFlag_Visible;
-
-        SET_FLAG(&g_SysWork.npcFlags, c);
-        g_PcNpcDebugSpawned[c] = 1;
-        s_isClone[c]           = 1;
-        if (g_SysWork.npcFlagsId < (u8)(c + 1))
-            g_SysWork.npcFlagsId = (u8)(c + 1);
+        spawn_extra(c, charaId, stateStep, row, x, z);
 
         SH_DBG("[REVENGE] row %d -> clone npc[%d] charaId=%d%s", row, c, charaId,
                charaId != parent->model.charaId ? " (invader)" : "");
         if (charaId != parent->model.charaId)
             bark("invader", 60);
+    }
+}
+
+/* ------------------------------------------------------------------ horde */
+
+#define HORDE_TICK      Q12(1.5f)  /* one new monster at most this often */
+#define HORDE_COUNT_R   Q12(30.0f) /* monsters within this range count toward the target */
+#define HORDE_NEAR      Q12(13.0f) /* new ones appear in the fog, between these */
+#define HORDE_FAR       Q12(20.0f)
+
+static q19_12 s_hordeTimer;
+
+static int monsters_within(q19_12 range)
+{
+    VECTOR3* p = &g_SysWork.playerWork.player.position;
+    int      i, n = 0;
+
+    for (i = 0; i < NPC_COUNT_MAX; i++)
+    {
+        s_SubCharacter* npc = &g_SysWork.npcs[i];
+        s64             dx, dz;
+
+        if (npc->model.charaId < Chara_AirScreamer || npc->model.charaId > Chara_MonsterCybil ||
+            npc->health <= Q12(0.0f))
+            continue;
+        dx = (s64)npc->position.vx - p->vx;
+        dz = (s64)npc->position.vz - p->vz;
+        if (dx * dx + dz * dz < (s64)range * range)
+            n++;
+    }
+    return n;
+}
+
+/* Keeps the area topped up to revenge_horde monsters around Harry. Only where
+ * the map itself currently has live enemies: a spawn row of a regular monster
+ * whose kill bit is still set is the map saying "monsters belong here now",
+ * so cleared, safe and scripted areas stay as the story left them. */
+static void horde_tick(void)
+{
+    static const int ANGLES = 12;
+    VECTOR3*         p = &g_SysWork.playerWork.player.position;
+    s32              states;
+    int              rows[32], nRows = 0, i, c, pick, charaId, stateStep;
+
+    if (g_PcConfig.revengeHorde <= 0 || g_SysWork.sysState != SysState_Gameplay ||
+        (g_SysWork.sysFlags & (SysFlag_NoEnemySpawn | SysFlag_CutsceneActive | SysFlag_DemoActive)))
+        return;
+    s_hordeTimer -= g_DeltaTimeRaw;
+    if (s_hordeTimer > 0)
+        return;
+    s_hordeTimer = HORDE_TICK;
+
+    if (monsters_within(HORDE_COUNT_R) >= g_PcConfig.revengeHorde)
+        return;
+
+    states = g_SavegamePtr->ovlEnemyStates[g_SavegamePtr->mapIdx];
+    for (i = 0; i < 32; i++)
+    {
+        s_SpawnInfo* row = &g_MapOverlayHdr.charaSpawnInfos[i / 16][i % 16];
+        int          id  = row->charaId > Chara_None ? row->charaId : g_MapOverlayHdr.charaGroupIds[i / 16];
+
+        if (row->flags == 0 || !(states & (1 << i)) || !is_cloneable(id) ||
+            g_SavegamePtr->gameDifficulty < row->gameDifficultyMin)
+            continue;
+        rows[nRows++] = i;
+    }
+    if (nRows == 0)
+        return;
+
+    c = free_slot();
+    if (c < 0)
+        return;
+
+    pick = rows[rnd() % (u32)nRows];
+    {
+        s_SpawnInfo* row = &g_MapOverlayHdr.charaSpawnInfos[pick / 16][pick % 16];
+        int          id  = row->charaId > Chara_None ? row->charaId : g_MapOverlayHdr.charaGroupIds[pick / 16];
+        pick_type(id, row->flags, &charaId, &stateStep);
+    }
+
+    for (i = 0; i < ANGLES; i++)
+    {
+        q19_12 angle = (q19_12)(rnd() & 0xFFF);
+        q19_12 dist  = HORDE_NEAR + (q19_12)(rnd() % (u32)(HORDE_FAR - HORDE_NEAR));
+        q19_12 x     = p->vx + (q19_12)(((s64)dist * Math_Cos(angle)) >> 12);
+        q19_12 z     = p->vz + (q19_12)(((s64)dist * Math_Sin(angle)) >> 12);
+
+        if (func_800808AC(x, z) != 0)
+        {
+            spawn_extra(c, charaId, stateStep, pick, x, z);
+            SH_DBG("[REVENGE] horde npc[%d] charaId=%d at %d units", c, charaId, dist >> 12);
+            return;
+        }
     }
 }
 
