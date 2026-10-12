@@ -24,11 +24,11 @@ s_PcConfig g_PcConfig = {
     .fullscreen     = 0,
     .confineCursor  = 1, /* borderless/fullscreen pointer trap; alt-tab still releases it */
     .disableCulling = 1,
-    .drawDistancePct = 100, /* 100 = vanilla ~61u; 200 doubles it (worth it with fog turned down) */
+    .drawDistancePct = 200, /* 100 = vanilla ~61u; 200 doubles it (worth it with fog turned down) */
     .preloadChunks  = 1,
     .vsync          = 0,
     .refreshRate    = 0,
-    .fpsCap         = 30,
+    .fpsCap         = 60,
     .weatherSimHz      = 60,   /* per-frame weather sim; 30 = the console's cadence */
     .cutsceneLineGapMs = 300,
     .darkHarry         = 1,   /* on by default for now */
@@ -40,8 +40,8 @@ s_PcConfig g_PcConfig = {
     .skipIntros     = 0,
     .showConsole    = 0,
     .psxDither      = -1, /* -1 = absent; see the dithering/texture_filter migration */
-    .dithering      = 1,  /* PSX ordered dither on, the long-standing default */
-    .textureFilter  = 0,  /* point sampling */
+    .dithering      = 0,  /* PSX ordered dither off */
+    .textureFilter  = 6,  /* aniso 16x */
     .scaling        = 2,  /* bilinear: what the present blit always did */
     .imageAdjustScope = 1, /* world frames only; menus and FMVs left alone */
     .widescreenMode  = 1, /* 0=pillarbox, 1=Hor+ (default, no bars + correct proportions), 2=stretch */
@@ -59,7 +59,7 @@ s_PcConfig g_PcConfig = {
                          * Cursor and repeat speeds on those screens are per-frame, so a
                          * 240Hz menu moved them four times too fast (reported). */
     .lowHealthGlow = 0, /* 1=pulsing red edge glow below 20 hp (SH2 remake style); off by default */
-    .bulletDecals = 0, /* 1=bullet-hole decals at player gunshot impacts (gamedata/decal.png); off by default */
+    .bulletDecals = 1, /* 1=bullet-hole decals at player gunshot impacts (gamedata/decal.png) */
     .globalCharaPool = 1, /* 1=all chara assets resident PC-side + chara_global.dll AI backfill (SPAWN anything anywhere) */
     .wholeMapExteriors = 0, /* EXPERIMENTAL: texture+draw every exterior chunk (whole town visible; heavy with fog weakened) */
     .usePgxp        = 0, /* 0=affine textures (PSX look), 1=PGXP perspective correct (WIP) */
@@ -68,14 +68,14 @@ s_PcConfig g_PcConfig = {
     .psxPolySizeCull = 1, /* 1=PSX GPU parity: cull triangles with screen bbox >1023x511 (hardware never drew them) */
     .msaaSamples    = 0, /* 0=off, 2/4/8 = MSAA sample count */
     .renderer       = "gl", /* native OpenGL — the long-tested path */
-    .postProcess    = 0, /* 0=off, 1.. = post-process look */
-    .tonemap        = 0, /* 0=off, 1=Reinhard, 2=ACES, 3=Filmic */
-    .flashlightMode = 0, /* 0=Classic (PSX), 1=Classic+Shadows, 2=Modern, 3=Modern+Shadows */
-    .perPixelFlashlight = 0, /* DERIVED from flashlightMode */
-    .flashlightShadows  = 1, /* per-pixel flashlight casts real-time shadows (on by default; only visible when perPixelFlashlight is on) */
-    .fogStrength          = 1.10f, /* PSX-matched density; lower reveals more of the widened draw distance */
-    .flashlightIntensity  = 1.20f, /* per-pixel flashlight cone brightness scale, 0..3 */
-    .flashlightSize       = 3.00f, /* per-pixel flashlight cone coverage multiplier */
+    .postProcess    = 4, /* 0=off, 1.. = post-process look */
+    .tonemap        = 1, /* 0=off, 1=Reinhard, 2=ACES, 3=Filmic */
+    .flashlightMode = 2, /* 0=Classic (PSX), 1=Classic+Shadows, 2=Modern, 3=Modern+Shadows */
+    .perPixelFlashlight = 1, /* DERIVED from flashlightMode */
+    .flashlightShadows  = 0, /* DERIVED from flashlightMode */
+    .fogStrength          = 0.90f, /* below the PSX-matched 1.10; lower reveals more of the widened draw distance */
+    .flashlightIntensity  = 2.10f, /* per-pixel flashlight cone brightness scale, 0..3 */
+    .flashlightSize       = 2.40f, /* per-pixel flashlight cone coverage multiplier */
     .flashlightIntensityFps = 2.10f, /* FPS-mode brightness (head-mounted) */
     .flashlightSizeFps      = 1.30f, /* FPS-mode coverage (tighter than third-person) */
     .postProcessIntensity = 1.0f, /* post-process effect mix, 0..1 */
@@ -92,13 +92,13 @@ s_PcConfig g_PcConfig = {
     .controllerMovement = 2, /* 0=analog, 1=dpad, 2=both */
     .movementOriginal = 1,   /* 1 = PSX lower-body movement machine (default); 0 = legacy PC shim */
 
-    .controlStyle        = 0, /* 0 = Classic (default), 1 = TPS */
+    .controlStyle        = 1, /* 0 = Classic, 1 = TPS (default), 2 = OTS, 3 = FPS */
     .allowMouseSecondary = 1, /* deprecated: mouse + alternate binds always active */
     .invertMouseY        = 0,
     .invertControllerY   = 0,
     .tpsCameraCollision  = 1, /* pull the TPS/OTS eye in off walls (off = eye may pass through geometry) */
     .tpsOtsAim           = 1, /* raising the gun in TPS eases the camera into the OTS shoulder framing */
-    .crosshair           = 0, /* draw a center crosshair while aiming in TPS/OTS */
+    .crosshair           = 1, /* draw a center crosshair while aiming in TPS/OTS */
     .crosshairStyle      = 0, /* 0 = cross (+), 1 = dot, 2 = circle, 3 = dashes/gap */
     .crosshairSize       = 100.0f,
     .textSize            = 100.0f,
@@ -106,9 +106,9 @@ s_PcConfig g_PcConfig = {
     .mouseCursor         = 1, /* mouse controls cursor puzzles + clickable main menu */
     .altButtonSprint     = 0, /* alt cams sprint from the run control only (off = full stick push also sprints) */
     .immersiveFpsHeadTracking = 0, /* FPS view follows head-bone rotation (experiment, off by default) */
-    .control2d               = 0, /* 2D screen-relative movement (experiment, off by default) */
+    .control2d               = 1, /* 2D screen-relative movement */
     .control2dSnap           = 0, /* 2D control turns into the direction (0), doesn't snap */
-    .minimap                 = 0, /* minimap overlay off by default */
+    .minimap                 = 1, /* minimap overlay */
     .anisoLevel              = 8,
     .shadowMapSize           = 1024,
     .minimapCorner           = 0, /* top-left */
