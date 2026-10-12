@@ -2029,7 +2029,9 @@ static void UsaPatchMapMessages(int mapIdx)
             break;
         }
     }
-    if (!diff)
+    /* An active pack installs over the disc's text even when that text is the
+     * stock English: this is the one path that can read a USA map's table. */
+    if (!diff && !Pc_LangPackActive())
     {
         free(ovl);
         return;
@@ -2066,11 +2068,30 @@ static void UsaPatchMapMessages(int mapIdx)
         }
     }
 
+    if (Pc_LangPackActive())
+    {
+        int replaced = 0;
+
+        for (i = 0; i < MSG_COUNT_MAX; i++)
+        {
+            const char* tr = Pc_LangPackMapMsg(mapIdx, i);
+
+            if (tr != NULL)
+            {
+                s_MsgPtrs[i] = tr;
+                replaced++;
+            }
+        }
+        SH_LOG("[LANG] map %d: %d pack messages overlaid on the disc's text", mapIdx, replaced);
+    }
+
     s_LangMapHeader             = *g_pMapOverlayHeader;
     s_LangMapHeader.mapMessages = s_MsgPtrs;
     g_pMapOverlayHeader         = &s_LangMapHeader;
 
     free(ovl);
+    if (!diff)
+        return;
     SH_LOG("[FANPATCH] map %d: %d translated messages installed", mapIdx, srcCount);
     if (dubbed > 0)
     {
@@ -2103,7 +2124,10 @@ void Pc_LangPatchMapMessages(int mapIdx, void* ovl, unsigned int ovlSize)
     else if (s_PristineMapHeader != NULL)
         g_pMapOverlayHeader = s_PristineMapHeader;
 
-    if (g_GameRegion == Region_USA && !Pc_LangPackActive())
+    /* On PC the USA overlays are native code, so g_OvlDynamic holds no PSX
+     * message table; the USA patcher reads the map's table off the disc image
+     * and lays a pack over it too. */
+    if (g_GameRegion == Region_USA)
     {
         UsaPatchMapMessages(mapIdx);
         return;
