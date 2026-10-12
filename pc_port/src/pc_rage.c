@@ -66,9 +66,9 @@ static q19_12 s_replyIn = -1;
 
 /* The announcer plays over everything (outside the voice channel), so a
  * streak call never waits for Harry to finish talking. */
-static void sting(const char* name)
+void Pc_Rage_Sting(const char* name)
 {
-    static struct { const char* name; PcUiSound* snd; int loaded; } cache[8];
+    static struct { const char* name; PcUiSound* snd; int loaded; } cache[16];
     char path[512];
     int  i;
 
@@ -117,7 +117,7 @@ static void rage_start(void)
 {
     s_rage     = 0;
     s_rageLeft = RAGE_DURATION;
-    sting("revenge");
+    Pc_Rage_Sting("revenge");
     Pc_Revenge_Voice("rage");
     DbgOverlay_ToastLine("HARRY'S REVENGE!");
 }
@@ -176,7 +176,7 @@ void Pc_Rage_OnKill(void)
     {
         if (STREAKS[i].count == s_streak)
         {
-            sting(STREAKS[i].name);
+            Pc_Rage_Sting(STREAKS[i].name);
             DbgOverlay_ToastLine(STREAKS[i].text);
             Pc_Merchant_AddMoney(STREAKS[i].bonus);
             Pc_Revenge_Bark("streak", 45);

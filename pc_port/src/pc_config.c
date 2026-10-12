@@ -95,6 +95,8 @@ s_PcConfig g_PcConfig = {
     .revengeRegenCap        = 60,
     .revengeEnemyMultiplier = 3,
     .revengeHorde           = 10,
+    .revengeWaves           = 3,
+    .revengeRest            = 40,
     .revengeInvaderPct      = 35,
     .revengeAmmoDrops       = 1,
     .revengeBarks           = 1,
@@ -1366,6 +1368,16 @@ else if (strcmp(key, "enable_plugins") == 0)
         {
             int v = atoi(value);
             g_PcConfig.revengeHorde = v < 0 ? 0 : v > 24 ? 24 : v;
+        }
+        else if (strcmp(key, "revenge_waves") == 0)
+        {
+            int v = atoi(value);
+            g_PcConfig.revengeWaves = v < 0 ? 0 : v > 9 ? 9 : v;
+        }
+        else if (strcmp(key, "revenge_rest") == 0)
+        {
+            int v = atoi(value);
+            g_PcConfig.revengeRest = v < 5 ? 5 : v > 600 ? 600 : v;
         }
         else if (strcmp(key, "revenge_invaders") == 0)
         {

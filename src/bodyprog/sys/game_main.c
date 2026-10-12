@@ -2187,6 +2187,10 @@ void MainLoop(void) // 0x80032EE0
             Pc_Rando_Update();
             Pc_Revenge_Update();
             Pc_Music_Update();
+            {
+                extern void Pc_Waves_Update(void);
+                Pc_Waves_Update();
+            }
         }
         {
             extern void Pc_RandoLua_OnUpdate(void);
@@ -2622,7 +2626,9 @@ void MainLoop(void) // 0x80032EE0
             Pc_LowHealthGlowUpdate(); /* optional low-health red edge pulse, same window */
             {
                 extern void Pc_Rage_Draw(void);
+                extern void Pc_Waves_Draw(void);
                 Pc_Rage_Draw();
+                Pc_Waves_Draw();
             }
 
             /* Minimap: load the area's paper-map TIM here (game side) when it

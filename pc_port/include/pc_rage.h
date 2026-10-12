@@ -11,6 +11,9 @@ void Pc_Rage_Draw(void);            /* per frame, the overlay layer */
 void Pc_Rage_OnKill(void);
 void Pc_Rage_OnHeadshot(void);
 
+/* An announcer call (gamedata/revenge/sting_<name>.wav) over everything else. */
+void Pc_Rage_Sting(const char* name);
+
 /* Rage effects: Harry's damage, his move speed against the slowed world, and
  * the world clock itself (after the frame's dt is computed). */
 int  Pc_Rage_DamagePct(void);

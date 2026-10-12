@@ -24,6 +24,12 @@ RATE = 24000
 
 BARKS = {
     "kill": [
+        "[smug] Tell your friends. Actually, don't.",
+        "[deadpan] One star. Would not recommend.",
+        "[cocky] Somebody's getting a bad review.",
+        "[dryly] That's going in the book.",
+        "[satisfied] Nap time, ugly.",
+        "[chuckles] Should've RSVP'd no.",
         "[growls] Stay down.",
         "[breathing hard] That's for Cheryl.",
         "[coldly] Next.",
@@ -39,6 +45,9 @@ BARKS = {
         "[exasperated] Cheryl is so grounded after this.",
     ],
     "hurt": [
+        "[groans] Okay, that one I felt.",
+        "[pained] I bruise like a peach!",
+        "[wincing] Ow! Not the face!",
         "[strained] I'm not done yet...",
         "[panting] Just a scratch. Keep moving.",
         "[grunts] Still standing.",
@@ -48,6 +57,8 @@ BARKS = {
         "[through gritted teeth] That's going to leave a mark. And a lawsuit.",
     ],
     "reload": [
+        "[muttering] Click click. Love that sound.",
+        "[calm] New clip, same bad attitude.",
         "[muttering] Reloading.",
         "[quickly] Come on, come on...",
         "[calm] Fresh rounds.",
@@ -55,6 +66,9 @@ BARKS = {
         "[indignant] Very rude to attack a man while he's reloading.",
     ],
     "area": [
+        "[sighs] Oh look. More fog. Shocking.",
+        "[dryly] Charming. Real estate's gotta be cheap here.",
+        "[muttering] If I find a gift shop, I'm burning it down.",
         "[determined] Cheryl... I'm coming.",
         "[low] Whatever's in here... it's not leaving.",
         "[quietly] Let's finish this.",
@@ -64,6 +78,7 @@ BARKS = {
         "[sarcastic] Lovely fog. Real tourist trap.",
     ],
     "ammo": [
+        "[pleased] Christmas came early.",
         "[satisfied] Ammo. Good.",
         "I'll take that.",
         "[grim] More rounds. Perfect.",
@@ -71,12 +86,16 @@ BARKS = {
         "[cheerfully] Free ammo. This town isn't all bad.",
     ],
     "money": [
+        "[pleased] Don't mind if I do.",
+        "[smug] Monster tax.",
         "[pleased] Cha-ching.",
         "[puzzled] Where do monsters even keep their wallets?",
         "That's going in the Cheryl fund.",
         "[satisfied] Thanks for the tip.",
     ],
     "invader": [
+        "[confused] Are you lost, buddy?",
+        "[annoyed] Wrong neighbourhood, pal.",
         "[confused] Wait... you're not from around here.",
         "[annoyed] Who invited you?",
         "[sighs] Oh good, they brought friends.",
@@ -93,6 +112,8 @@ BARKS = {
     # Salty takes, mixed in when revenge_swearing = 1 (pc_revenge.c).
     # The user's limit: mild swearing, the F-word at most, never the C-word.
     "kill_salty": [
+        "[spits] Rot in hell, ugly.",
+        "[shouts] Hell yes! Who's next?",
         "[growls] Eat lead, you ugly son of a bitch.",
         "[spits] Stay dead, asshole.",
         "[shouts] Hell yeah! Next!",
@@ -136,6 +157,7 @@ BARKS = {
     ],
     # Harry's rage (pc_revenge.c) and kill streaks.
     "rage": [
+        "[screaming] You want some? Come get some!",
         "[roaring] Now I'm angry!",
         "[screaming] You took my daughter!",
         "[shouts] Come get some!",
@@ -160,7 +182,41 @@ BARKS = {
         "[panting] Holy shit, this town is huge.",
         "[wheezing] Damn it... my legs are on fire.",
     ],
+    # Waves (pc_waves.c).
+    "wave_start": [
+        "[cracks knuckles] Here they come. Let's dance.",
+        "[sighs] Oh good. More of you.",
+        "[cocky] Round two? I was just warming up.",
+        "[determined] Come on then. All of you.",
+        "[dryly] Ah. The second act.",
+    ],
+    "wave_clear": [
+        "[exhales] Is that all you've got?",
+        "[satisfied] Clean sweep.",
+        "[smug] And that's how it's done.",
+        "[panting] Okay. Okay. Still alive.",
+    ],
+    "wave_clear_salty": [
+        "[laughing] Hell yeah! Who's next?",
+        "[panting] Damn, I'm good.",
+    ],
+    "rest": [
+        "[sighs] Breather. Thank god.",
+        "[muttering] Reload, breathe, repeat.",
+        "[dryly] Quick, somebody bring me a sandwich.",
+        "[exhales] Five minutes. I just need five minutes.",
+    ],
+    "area_clear": [
+        "[satisfied] Neighbourhood's clean. You're welcome.",
+        "[smug] Area cleared. I should charge for this.",
+        "[cocky] That's this street done. Next.",
+    ],
+    "area_clear_salty": [
+        "[satisfied] Hell of a job, Harry. Hell of a job.",
+    ],
     "streak": [
+        "[laughing] I'm actually good at this!",
+        "[smug] Somebody stop me. Seriously, nobody?",
         "[laughing] Who's next? Anybody?",
         "[smug] I'm on fire.",
         "[cocky] And they say writers can't fight.",
@@ -231,6 +287,13 @@ STINGS = {
     "rampage": "[booming, intense] Rampage!",
     "unstoppable": "[booming, intense] Unstoppable!",
     "revenge": "[booming, epic] Harry's... REVENGE!",
+    "wave": "[booming] Here they come!",
+    "wave_clear": "[booming] Wave cleared!",
+    "area_clear": "[booming, epic] Area... cleared!",
+    "rank_s": "[booming, excited] S rank! Sensational!",
+    "rank_a": "[booming] A rank! Awesome!",
+    "rank_b": "[booming] B rank. Not bad.",
+    "rank_c": "[unimpressed] C rank. Try harder.",
 }
 
 # Text boxes the original game leaves silent (pc_port/localization keys).

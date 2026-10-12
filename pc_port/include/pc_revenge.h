@@ -63,4 +63,14 @@ void Pc_Revenge_ApplyUpgrades(void);
 /* Give an item without counting it as a pickup for the ranking. */
 void Pc_Revenge_GiveItem(u8 id, u8 count);
 
+/* Waves (pc_waves.c): whether the area has live monsters of its own, spawning
+ * one wave monster out of the fog (returns its slot or -1), and their count. */
+int  Pc_Revenge_AreaHasMonsters(void);
+int  Pc_Revenge_SpawnWaveMonster(void);
+int  Pc_Revenge_IsWaveMonster(int slot);
+int  Pc_Revenge_WaveMonstersAlive(void);
+void Pc_Revenge_ForgetWave(void);
+int  Pc_Revenge_MonstersWithin(q19_12 range);
+void Pc_Revenge_OnKillSlot(int slot);
+
 #endif /* PC_REVENGE_H */

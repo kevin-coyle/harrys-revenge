@@ -91,6 +91,7 @@ void func_80037E78(s_SubCharacter* chara) // 0x80037E78
             Pc_Revenge_OnEnemyKilled();
             Pc_Merchant_OnKill(chara->model.charaId);
             Pc_Rage_OnKill();
+            Pc_Revenge_OnKillSlot((int)(chara - g_SysWork.npcs));
         }
 #endif
 

@@ -31,6 +31,7 @@
 #include "pc_merchant.h"
 #include "pc_quick_options.h"
 #include "pc_rage.h"
+#include "pc_waves.h"
 #include "pc_revenge.h"
 #include "sh_log.h"
 
@@ -73,7 +74,7 @@ static const s_Invader INVADERS[] = {
 };
 
 #define REVENGE_BARK_COOLDOWN Q12(6.0f)
-#define REVENGE_BARK_TAKES    16
+#define REVENGE_BARK_TAKES    32
 #define REVENGE_AREA_DELAY    Q12(2.5f) /* let the area fade in before Harry speaks */
 
 static u8     s_isClone[NPC_COUNT_MAX];
@@ -83,7 +84,6 @@ static q19_12 s_areaBarkIn   = -1;
 static q19_12 s_time;
 static q19_12 s_runFor;
 static void   apply_capacity(void);
-static void   horde_tick(void);
 
 #define REVENGE_RUN_SPEED Q12(3.0f)  /* run speeds are 3.5-5.0; a walk is under 2 */
 #define REVENGE_RUN_QUIP  Q12(14.0f) /* this long running without a break */
@@ -107,7 +107,7 @@ static int chance(int pct) { return (int)(rnd() % 100u) < pct; }
  * while a disc line is playing, so Harry never talks over a cutscene. */
 static int bark_takes(const char* event)
 {
-    static struct { char event[48]; int takes; } cache[32];
+    static struct { char event[48]; int takes; } cache[64];
     static int cached = 0;
     char       path[512];
     struct stat st;
@@ -249,7 +249,6 @@ void Pc_Revenge_Update(void)
     s_rng  += (u32)g_DeltaTimeRaw;
     s_time += g_DeltaTimeRaw;
     apply_capacity();
-    horde_tick();
 
     /* A long run earns Harry a complaint about his cardio. */
     if (g_SysWork.sysState == SysState_Gameplay &&
@@ -428,16 +427,16 @@ void Pc_Revenge_OnNativeSpawn(int row, int slot)
     }
 }
 
-/* ------------------------------------------------------------------ horde */
+/* ------------------------------------------------------------------ waves */
 
-#define HORDE_TICK      Q12(1.5f)  /* one new monster at most this often */
-#define HORDE_COUNT_R   Q12(30.0f) /* monsters within this range count toward the target */
-#define HORDE_NEAR      Q12(13.0f) /* new ones appear in the fog, between these */
-#define HORDE_FAR       Q12(20.0f)
+/* Wave monsters (pc_waves.c) appear out of the fog between these distances. */
+#define WAVE_NEAR Q12(13.0f)
+#define WAVE_FAR  Q12(20.0f)
 
-static q19_12 s_hordeTimer;
+static u8 s_isWave[NPC_COUNT_MAX];
+static u8 s_waveKilled[NPC_COUNT_MAX];
 
-static int monsters_within(q19_12 range)
+int Pc_Revenge_MonstersWithin(q19_12 range)
 {
     VECTOR3* p = &g_SysWork.playerWork.player.position;
     int      i, n = 0;
@@ -458,29 +457,16 @@ static int monsters_within(q19_12 range)
     return n;
 }
 
-/* Keeps the area topped up to revenge_horde monsters around Harry. Only where
- * the map itself currently has live enemies: a spawn row of a regular monster
- * whose kill bit is still set is the map saying "monsters belong here now",
- * so cleared, safe and scripted areas stay as the story left them. */
-static void horde_tick(void)
+/* Spawn rows the map has live right now: a row of a regular monster whose kill
+ * bit is still set is the map saying "monsters belong here now", so cleared,
+ * safe and scripted areas stay as the story left them. */
+static int live_rows(int* rows)
 {
-    static const int ANGLES = 12;
-    VECTOR3*         p = &g_SysWork.playerWork.player.position;
-    s32              states;
-    int              rows[32], nRows = 0, i, c, pick, charaId, stateStep;
+    s32 states = g_SavegamePtr->ovlEnemyStates[g_SavegamePtr->mapIdx];
+    int i, n = 0;
 
-    if (g_PcConfig.revengeHorde <= 0 || g_SysWork.sysState != SysState_Gameplay ||
-        (g_SysWork.sysFlags & (SysFlag_NoEnemySpawn | SysFlag_CutsceneActive | SysFlag_DemoActive)))
-        return;
-    s_hordeTimer -= g_DeltaTimeRaw;
-    if (s_hordeTimer > 0)
-        return;
-    s_hordeTimer = HORDE_TICK;
-
-    if (monsters_within(HORDE_COUNT_R) >= g_PcConfig.revengeHorde)
-        return;
-
-    states = g_SavegamePtr->ovlEnemyStates[g_SavegamePtr->mapIdx];
+    if (g_SysWork.sysFlags & SysFlag_NoEnemySpawn)
+        return 0;
     for (i = 0; i < 32; i++)
     {
         s_SpawnInfo* row = &g_MapOverlayHdr.charaSpawnInfos[i / 16][i % 16];
@@ -489,14 +475,28 @@ static void horde_tick(void)
         if (row->flags == 0 || !(states & (1 << i)) || !is_cloneable(id) ||
             g_SavegamePtr->gameDifficulty < row->gameDifficultyMin)
             continue;
-        rows[nRows++] = i;
+        rows[n++] = i;
     }
-    if (nRows == 0)
-        return;
+    return n;
+}
 
+int Pc_Revenge_AreaHasMonsters(void)
+{
+    int rows[32];
+    return Pc_Revenge_Active() && live_rows(rows) > 0;
+}
+
+int Pc_Revenge_SpawnWaveMonster(void)
+{
+    VECTOR3* p = &g_SysWork.playerWork.player.position;
+    int      rows[32], nRows, i, c, pick, charaId, stateStep;
+
+    nRows = live_rows(rows);
+    if (nRows == 0)
+        return -1;
     c = free_slot();
     if (c < 0)
-        return;
+        return -1;
 
     pick = rows[rnd() % (u32)nRows];
     {
@@ -505,26 +505,68 @@ static void horde_tick(void)
         pick_type(id, row->flags, &charaId, &stateStep);
     }
 
-    for (i = 0; i < ANGLES; i++)
+    for (i = 0; i < 12; i++)
     {
         q19_12 angle = (q19_12)(rnd() & 0xFFF);
-        q19_12 dist  = HORDE_NEAR + (q19_12)(rnd() % (u32)(HORDE_FAR - HORDE_NEAR));
+        q19_12 dist  = WAVE_NEAR + (q19_12)(rnd() % (u32)(WAVE_FAR - WAVE_NEAR));
         q19_12 x     = p->vx + (q19_12)(((s64)dist * Math_Cos(angle)) >> 12);
         q19_12 z     = p->vz + (q19_12)(((s64)dist * Math_Sin(angle)) >> 12);
 
         if (func_800808AC(x, z) != 0)
         {
             spawn_extra(c, charaId, stateStep, pick, x, z);
-            SH_DBG("[REVENGE] horde npc[%d] charaId=%d at %d units", c, charaId, dist >> 12);
-            return;
+            s_isWave[c]     = 1;
+            s_waveKilled[c] = 0;
+            SH_DBG("[WAVE] npc[%d] charaId=%d at %d units", c, charaId, dist >> 12);
+            return c;
         }
     }
+    return -1;
+}
+
+int Pc_Revenge_IsWaveMonster(int slot)
+{
+    return slot >= 0 && slot < NPC_COUNT_MAX && s_isWave[slot] &&
+           g_SysWork.npcs[slot].model.charaId != Chara_None;
+}
+
+int Pc_Revenge_WaveMonstersAlive(void)
+{
+    int i, n = 0;
+    for (i = 0; i < NPC_COUNT_MAX; i++)
+        if (Pc_Revenge_IsWaveMonster(i) && g_SysWork.npcs[i].health > Q12(0.0f))
+            n++;
+    return n;
+}
+
+void Pc_Revenge_ForgetWave(void)
+{
+    memset(s_isWave, 0, sizeof(s_isWave));
+    memset(s_waveKilled, 0, sizeof(s_waveKilled));
 }
 
 void Pc_Revenge_SlotReset(int slot)
 {
-    if (slot >= 0 && slot < NPC_COUNT_MAX)
-        s_isClone[slot] = 0;
+    if (slot < 0 || slot >= NPC_COUNT_MAX)
+        return;
+    /* A wave monster freed without dying (it wandered past the despawn range)
+     * goes back into the wave's quota, or the wave could end with it unkilled. */
+    if (s_isWave[slot] && !s_waveKilled[slot])
+        Pc_Waves_OnMonsterLost();
+    s_isClone[slot]    = 0;
+    s_isWave[slot]     = 0;
+    s_waveKilled[slot] = 0;
+}
+
+void Pc_Revenge_OnKillSlot(int slot)
+{
+    if (slot < 0 || slot >= NPC_COUNT_MAX)
+        return;
+    if (s_isWave[slot] && !s_waveKilled[slot])
+    {
+        s_waveKilled[slot] = 1;
+        Pc_Waves_OnKill();
+    }
 }
 
 int Pc_Revenge_IsClone(int slot)
@@ -669,6 +711,7 @@ void Pc_Revenge_OnHit(struct _SubCharacter* attackerV, struct _SubCharacter* tar
                 stagger = 1;
                 DbgOverlay_ToastLine("HEADSHOT");
                 Pc_Rage_OnHeadshot();
+                Pc_Waves_OnHeadshot();
             }
             else if (frac <= 30)
                 stagger = 1;
