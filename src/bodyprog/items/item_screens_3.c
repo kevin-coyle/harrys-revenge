@@ -4620,6 +4620,12 @@ void Inventory_AddSpecialItem(u8 itemId, u8 itemCount) // 0x80054CAC
             break;
     }
 
+#ifdef SH_PC_PORT
+    {
+        extern void Pc_Revenge_OnItemAdded(int itemId);
+        Pc_Revenge_OnItemAdded(itemId);
+    }
+#endif
     g_SavegamePtr->items[g_SavegamePtr->inventorySlotCount].id_0    = itemId;
     g_SavegamePtr->items[g_SavegamePtr->inventorySlotCount].count_1 = itemCount;
     g_SavegamePtr->inventorySlotCount                                 = func_8004F190(g_SavegamePtr);

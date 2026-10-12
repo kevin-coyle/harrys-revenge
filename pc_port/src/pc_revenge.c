@@ -76,6 +76,7 @@ static const s_Invader INVADERS[] = {
 #define REVENGE_BARK_COOLDOWN Q12(6.0f)
 #define REVENGE_BARK_TAKES    32
 #define REVENGE_AREA_DELAY    Q12(2.5f) /* let the area fade in before Harry speaks */
+#define REVENGE_LINE_WAIT     Q12(20.0f) /* a place or item line gives up after waiting this long */
 
 static u8     s_isClone[NPC_COUNT_MAX];
 static q19_12 s_barkCooldown = 0;
@@ -132,14 +133,14 @@ static int bark_takes(const char* event)
     return n;
 }
 
-static void play_line(const char* event, int force)
+static int play_line(const char* event, int force)
 {
     char path[512];
     int  takes;
 
     if (!Pc_Revenge_Active() || !g_PcConfig.revengeBarks || Pc_MsgVoice_Holding() ||
         (!force && s_barkCooldown > 0))
-        return;
+        return 0;
     /* Only in free play, and never while the game's own voice task is busy:
      * a scripted scene waits on that task, and a file played into the middle
      * of it changes when the scene sees its line finish. The merchant panel
@@ -147,7 +148,7 @@ static void play_line(const char* event, int force)
     if (Sd_AudioStreamingCheck() ||
         (g_SysWork.sysFlags & (SysFlag_CutsceneActive | SysFlag_DemoActive)) ||
         (g_SysWork.sysState != SysState_Gameplay && !Pc_QuickOptions_IsOpen()))
-        return;
+        return 0;
 
     {
         /* The salty takes (bark_<event>_salty_<n>) join the pool when swearing is on. */
@@ -159,7 +160,7 @@ static void play_line(const char* event, int force)
         dirty = g_PcConfig.revengeSwearing ? bark_takes(salty) : 0;
         takes = clean + dirty;
         if (takes == 0)
-            return;
+            return 0;
 
         pick = (int)(rnd() % (u32)takes);
         if (pick < clean)
@@ -168,8 +169,10 @@ static void play_line(const char* event, int force)
             snprintf(path, sizeof(path), "%s/revenge/bark_%s_%d.wav", PcPort_GetGameDataPath(), salty,
                      pick - clean + 1);
     }
-    if (XaPlayer_PlayFile(path))
-        s_barkCooldown = REVENGE_BARK_COOLDOWN;
+    if (!XaPlayer_PlayFile(path))
+        return 0;
+    s_barkCooldown = REVENGE_BARK_COOLDOWN;
+    return 1;
 }
 
 static void bark(const char* event, int pct)
@@ -202,6 +205,104 @@ void Pc_Revenge_OnReload(void)
 void Pc_Revenge_OnMapLoad(void)
 {
     s_areaBarkIn = REVENGE_AREA_DELAY;
+}
+
+/* Location lines (bark_place_<key>_<n>.wav), the first time each location is
+ * entered in a session; otherwise the generic "area" pool. */
+static const char* const REVENGE_PLACES[] = {
+    [MapIdx_MAP0_S01] = "cafe",          [MapIdx_MAP0_S02] = "oldtown",
+    [MapIdx_MAP1_S00] = "school",        [MapIdx_MAP1_S01] = "school",
+    [MapIdx_MAP1_S02] = "school_other",  [MapIdx_MAP1_S03] = "school_other",
+    [MapIdx_MAP1_S05] = "school_boss",   [MapIdx_MAP1_S06] = "school",
+    [MapIdx_MAP2_S00] = "oldtown",       [MapIdx_MAP2_S01] = "church",
+    [MapIdx_MAP2_S02] = "central",       [MapIdx_MAP2_S04] = "police",
+    [MapIdx_MAP3_S00] = "hospital",      [MapIdx_MAP3_S01] = "hospital",
+    [MapIdx_MAP3_S02] = "hospital",      [MapIdx_MAP3_S03] = "hospital_other",
+    [MapIdx_MAP3_S04] = "hospital_other",[MapIdx_MAP3_S05] = "hospital_other",
+    [MapIdx_MAP3_S06] = "hospital",      [MapIdx_MAP4_S01] = "antiques",
+    [MapIdx_MAP4_S02] = "central_other", [MapIdx_MAP4_S03] = "mall",
+    [MapIdx_MAP4_S04] = "hospital",      [MapIdx_MAP4_S05] = "central_other",
+    [MapIdx_MAP5_S00] = "sewers",        [MapIdx_MAP5_S01] = "resort",
+    [MapIdx_MAP5_S02] = "bar",           [MapIdx_MAP5_S03] = "motel",
+    [MapIdx_MAP6_S00] = "resort_other",  [MapIdx_MAP6_S01] = "boat",
+    [MapIdx_MAP6_S02] = "lighthouse",    [MapIdx_MAP6_S03] = "sewers",
+    [MapIdx_MAP6_S04] = "amusement",     [MapIdx_MAP7_S00] = "nowhere",
+    [MapIdx_MAP7_S01] = "nowhere",       [MapIdx_MAP7_S02] = "nowhere",
+    [MapIdx_MAP7_S03] = "nowhere",
+};
+static char s_placesSeen[32][16];
+static int  s_placesSeenCount;
+
+static int place_seen(const char* key, int mark)
+{
+    int i;
+    for (i = 0; i < s_placesSeenCount; i++)
+        if (strcmp(s_placesSeen[i], key) == 0)
+            return 1;
+    if (mark && s_placesSeenCount < (int)ARRAY_SIZE(s_placesSeen))
+        snprintf(s_placesSeen[s_placesSeenCount++], sizeof(s_placesSeen[0]), "%s", key);
+    return 0;
+}
+
+/* The area line, once the arrival delay has passed. A place's first line waits
+ * (up to REVENGE_LINE_WAIT) for the arrival message or scene to finish. */
+static q19_12 s_placeWait;
+
+static void area_line(void)
+{
+    int         map = g_SavegamePtr->mapIdx;
+    const char* key = (map >= 0 && map < (int)ARRAY_SIZE(REVENGE_PLACES)) ? REVENGE_PLACES[map] : NULL;
+    char        event[32];
+
+    if (key == NULL || place_seen(key, 0))
+    {
+        bark("area", 40);
+        s_areaBarkIn = -1;
+        return;
+    }
+    snprintf(event, sizeof(event), "place_%s", key);
+    if (play_line(event, 1) || s_placeWait > REVENGE_LINE_WAIT)
+    {
+        place_seen(key, 1);
+        s_areaBarkIn = -1;
+        s_placeWait  = 0;
+    }
+    else
+        s_placeWait += g_DeltaTimeRaw;
+}
+
+/* Item lines: Inventory_AddSpecialItem reports every item added, from pickups
+ * and scripted gifts alike; purchases and drops go through give_item, which
+ * silences this. The line plays once the pickup prompt has closed. */
+static int    s_itemQuiet;
+static int    s_itemPending = -1;
+static q19_12 s_itemWait;
+
+void Pc_Revenge_OnItemAdded(int itemId)
+{
+    if (!Pc_Revenge_Active() || s_itemQuiet)
+        return;
+    s_itemPending = itemId;
+    s_itemWait    = 0;
+}
+
+void Pc_Revenge_QuietItems(int quiet)
+{
+    s_itemQuiet = quiet;
+}
+
+static void item_line(void)
+{
+    char event[32];
+
+    if (s_itemPending < 0)
+        return;
+    snprintf(event, sizeof(event), "item_%d", s_itemPending);
+    s_itemWait += g_DeltaTimeRaw;
+    if (s_itemWait < Q12(0.6f))
+        return;
+    if (bark_takes(event) == 0 || play_line(event, 1) || s_itemWait > REVENGE_LINE_WAIT)
+        s_itemPending = -1;
 }
 
 int Pc_Revenge_Active(void)
@@ -269,10 +370,15 @@ void Pc_Revenge_Update(void)
         s_barkCooldown -= g_DeltaTimeRaw;
     if (s_areaBarkIn >= 0)
     {
-        s_areaBarkIn -= g_DeltaTimeRaw;
-        if (s_areaBarkIn < 0)
-            bark("area", 40);
+        if (s_areaBarkIn > 0)
+            s_areaBarkIn -= g_DeltaTimeRaw;
+        if (s_areaBarkIn <= 0)
+        {
+            s_areaBarkIn = 0;
+            area_line();
+        }
     }
+    item_line();
 
     if (g_PcConfig.revengeRegenCap <= 0 || player->health <= Q12(0.0f))
         return;

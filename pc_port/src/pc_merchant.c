@@ -126,7 +126,9 @@ static int give_item(u8 id, u8 count)
         return 0;
     picked  = g_SavegamePtr->pickedUpItemCount;
     special = g_SavegamePtr->pickedUpSpecialItemCount;
+    Pc_Revenge_QuietItems(1);
     Inventory_AddSpecialItem(id, count);
+    Pc_Revenge_QuietItems(0);
     g_SavegamePtr->pickedUpItemCount        = picked;
     g_SavegamePtr->pickedUpSpecialItemCount = special;
     return 1;

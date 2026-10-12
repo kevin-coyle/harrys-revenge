@@ -38,6 +38,8 @@ void Pc_Revenge_OnEnemyKilled(void);
 /* Harry's voice lines for these moments (gamedata/revenge/bark_*.wav). */
 void Pc_Revenge_OnReload(void);
 void Pc_Revenge_OnMapLoad(void);
+void Pc_Revenge_OnItemAdded(int itemId);
+void Pc_Revenge_QuietItems(int quiet); /* around a purchase or drop */
 
 /* A voice line played now (merchant), and the module's RNG. */
 void Pc_Revenge_Voice(const char* event);
