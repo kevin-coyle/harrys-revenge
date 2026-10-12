@@ -1410,8 +1410,22 @@ void Sd_SetVolume(u8 xaVol, s16 bgmVol, u8 seVol) // 0x80047798
 
 void Sd_SetVolBgm(s16 volLeft, s16 volRight) // 0x80047808
 {
+#ifdef SH_PC_PORT
+    /* Harry's Revenge combat music ducks the game's BGM underneath it. */
+    extern int g_PcBgmDuckPct;
+    volLeft  = (s16)((volLeft * g_PcBgmDuckPct) / 100);
+    volRight = (s16)((volRight * g_PcBgmDuckPct) / 100);
+#endif
     SdSeqSetVol(0, (volLeft * gSDVolConfig.globalVolumeBgm_D) >> 7, (volRight * gSDVolConfig.globalVolumeBgm_D) >> 7);
 }
+
+#ifdef SH_PC_PORT
+/* Re-apply the BGM's current volume, for a change in g_PcBgmDuckPct. */
+void Pc_Sd_ReapplyBgmVolume(void)
+{
+    Sd_SetVolBgm(gSDVolConfig.volumeBgm_6, gSDVolConfig.volumeBgm_6);
+}
+#endif
 
 void Sd_SetVolXa(s16 volLeft, s16 volRight) // 0x80047860
 {

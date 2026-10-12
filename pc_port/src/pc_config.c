@@ -100,6 +100,7 @@ s_PcConfig g_PcConfig = {
     .revengeSwearing        = 1,
     .revengeRage            = 1,
     .revengeRadio           = 1,
+    .revengeMusic           = 70,
     .controllerMovement = 2, /* 0=analog, 1=dpad, 2=both */
     .movementOriginal = 1,   /* 1 = PSX lower-body movement machine (default); 0 = legacy PC shim */
 
@@ -260,7 +261,7 @@ s_PcConfig g_PcConfig = {
     .keyGfxNext  = "]",
     .keyExitGame = "Escape",
 
-    .languageCode   = "auto", /* resolved per disc in Pc_LangInit */
+    .languageCode   = "en_revenge", /* Harry's Revenge redub subtitles (gamedata/lang/en_revenge.lang); resolved per disc in Pc_LangInit */
     .language       = 0, /* 0=en 1=de 2=fr 3=es 4=it — PAL-disc text language; USA: menu translations on fan-patched discs */
     .jpLanguage     = 0, /* 0=ja 1=zh 2=en — NTSC-J text language */
     .crossRegionLanguages = 1, /* see pc_config.h */
@@ -1384,6 +1385,11 @@ else if (strcmp(key, "enable_plugins") == 0)
         else if (strcmp(key, "revenge_radio") == 0)
         {
             g_PcConfig.revengeRadio = (atoi(value) != 0);
+        }
+        else if (strcmp(key, "revenge_music") == 0)
+        {
+            int v = atoi(value);
+            g_PcConfig.revengeMusic = v < 0 ? 0 : v > 100 ? 100 : v;
         }
         else if (strcmp(key, "randomizer") == 0)
         {

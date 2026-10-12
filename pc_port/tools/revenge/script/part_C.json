@@ -1,0 +1,770 @@
+[
+ {
+  "key": "MAP4_S03.16",
+  "xa": 373,
+  "speaker": "HARRY",
+  "orig": "~J0(1.0)\tCheryl! ~E  ",
+  "text": "~J0(1.0)\tCheryl! ~E  ",
+  "spoken": "[shouts] Cheryl!"
+ },
+ {
+  "key": "MAP4_S04.15",
+  "xa": 315,
+  "speaker": "HARRY",
+  "orig": "~J0(1.8)\tWhere_am_I? ~E ",
+  "text": "~J0(1.8)\tUgh._Where_the_hell_am_I? ~E ",
+  "spoken": "[groggy] Ugh. Where the hell am I?"
+ },
+ {
+  "key": "MAP4_S04.16",
+  "xa": 342,
+  "speaker": "LISA",
+  "orig": "~J1(1.0)\tHarry. ",
+  "text": "~J1(1.0)\tOh!_Hi,_Harry. ",
+  "spoken": "Oh! Hi, Harry."
+ },
+ {
+  "key": "MAP4_S04.17",
+  "xa": 346,
+  "speaker": "HARRY",
+  "orig": "~J1(1.2)\tLisa... ",
+  "text": "~J1(1.2)\tLisa._Hey. ",
+  "spoken": "Lisa. Hey."
+ },
+ {
+  "key": "MAP4_S04.18",
+  "xa": 330,
+  "speaker": "HARRY",
+  "orig": "~J1(1.5)\tThen_I'm_in_the_hospital. ",
+  "text": "~J1(1.5)\tSo,_hospital_again._Fantastic. ",
+  "spoken": "[sighs] So, hospital again. Fantastic."
+ },
+ {
+  "key": "MAP4_S04.19",
+  "xa": 309,
+  "speaker": "LISA",
+  "orig": "~J1(2.4)\tYou_were_having_a_bad_dream. ",
+  "text": "~J1(2.4)\tBad_dream._You_were_drooling_a_little. ",
+  "spoken": "Bad dream. You were drooling a little."
+ },
+ {
+  "key": "MAP4_S04.20",
+  "xa": 345,
+  "speaker": "HARRY",
+  "orig": "~J1(0.8)\tWas_I? ",
+  "text": "~J1(0.8)\tWas_I?_Classy. ",
+  "spoken": "[deadpan] Was I? Classy."
+ },
+ {
+  "key": "MAP4_S04.21",
+  "xa": 264,
+  "speaker": "HARRY",
+  "orig": "~J1(4.2)\tHey,_you_don't_look_too_good. ~N\n\t\t\tAre_you_OK? ",
+  "text": "~J1(4.2)\tNo_offense,_but_you_look_like_hell. ~N\n\t\t\tYou_doing_OK? ",
+  "spoken": "No offense, but you look like hell. You doing OK?"
+ },
+ {
+  "key": "MAP4_S04.22",
+  "xa": 338,
+  "speaker": "LISA",
+  "orig": "~J1(1.3)\tI'm_fine. ",
+  "text": "~J1(1.3)\tI'm_totally_fine! ",
+  "spoken": "[nervous] I'm totally fine!"
+ },
+ {
+  "key": "MAP4_S04.23",
+  "xa": 308,
+  "speaker": "LISA",
+  "orig": "~J1(2.2)\tNothing_you_need_to ~N\n\t\t\tworry_about. ",
+  "text": "~J1(2.2)\tNothing_you_need_to ~N\n\t\t\tworry_about._Promise! ",
+  "spoken": "Nothing you need to worry about. Promise!"
+ },
+ {
+  "key": "MAP4_S04.24",
+  "xa": 296,
+  "speaker": "HARRY",
+  "orig": "~J1(2.2)\tWell,_if_you're_sure... ~E ",
+  "text": "~J1(2.2)\tSure._But_I'm_a_writer._I_notice_things. ~E ",
+  "spoken": "[sarcastic] Sure. But I'm a writer. I notice things."
+ },
+ {
+  "key": "MAP4_S04.25",
+  "xa": 263,
+  "speaker": "HARRY",
+  "orig": "~J1(4.3)\tLisa... ~N\n\t\t\tDo_you_know_a_woman ~N\n\t\t\tnamed_Dahlia_Gillespie? ",
+  "text": "~J1(4.3)\tLisa... ~N\n\t\t\tever_heard_of_a_creepy_lady ~N\n\t\t\tnamed_Dahlia_Gillespie? ",
+  "spoken": "Lisa... ever heard of a creepy lady named Dahlia Gillespie?"
+ },
+ {
+  "key": "MAP4_S04.26",
+  "xa": 294,
+  "speaker": "LISA",
+  "orig": "~J1(3.2)\tOh_yeah, ~N\n\t\t\tthat_crazy_Gillespie_lady. ",
+  "text": "~J1(3.2)\tOh_yeah, ~N\n\t\t\tthat_wacko_Gillespie_lady! ",
+  "spoken": "Oh yeah, that wacko Gillespie lady!"
+ },
+ {
+  "key": "MAP4_S04.27",
+  "xa": 307,
+  "speaker": "LISA",
+  "orig": "~J1(2.3)\tShe's_kinda'_famous_around_here. ",
+  "text": "~J1(2.3)\tShe's_kinda_famous._Not_the_good_kind. ",
+  "spoken": "She's kinda famous. Not the good kind."
+ },
+ {
+  "key": "MAP4_S04.28",
+  "xa": 274,
+  "speaker": "LISA",
+  "orig": "~J1(4.0)\tShe_never_sees_anybody, ~N\n\t\t\tso_I_don't_know ~N\n\t\t\tthat_much_about_her. ",
+  "text": "~J1(4.0)\tShe_never_sees_anybody, ~N\n\t\t\tso_all_I_really_know ~N\n\t\t\tis_she_yells_at_mailmen. ",
+  "spoken": "She never sees anybody, so all I really know is she yells at mailmen."
+ },
+ {
+  "key": "MAP4_S04.29",
+  "xa": 257,
+  "speaker": "LISA",
+  "orig": "~J1(5.2)\tI_heard_her_kid_died_in_a_fire, ~N\n\t\t\tand_supposedly_she's_been_crazy ~N\n\t\t\tever_since. ~E ",
+  "text": "~J1(5.2)\tI_heard_her_kid_died_in_a_fire, ~N\n\t\t\tand_she's_been_totally_bonkers ~N\n\t\t\tever_since._Poor_thing. ~E ",
+  "spoken": "I heard her kid died in a fire, and she's been totally bonkers ever since. Poor thing."
+ },
+ {
+  "key": "MAP4_S04.30",
+  "xa": 260,
+  "speaker": "HARRY",
+  "orig": "~J1(5.1)\tWell,_she_says_the_town_is_being ~N\n\t\t\tdevoured_by_the_darkness. ",
+  "text": "~J1(5.1)\tWell,_she_says_this_town_is_being ~N\n\t\t\tdevoured_by_darkness._Dramatic_lady. ",
+  "spoken": "Well, she says this town is being devoured by darkness. Dramatic lady."
+ },
+ {
+  "key": "MAP4_S04.31",
+  "xa": 301,
+  "speaker": "HARRY",
+  "orig": "~J1(2.7)\tDo_you_have_any_idea ~N\n\t\t\twhat_she's_talking_about? ",
+  "text": "~J1(2.7)\tAny_idea_what_the_hell ~N\n\t\t\tshe's_talking_about? ",
+  "spoken": "Any idea what the hell she's talking about?"
+ },
+ {
+  "key": "MAP4_S04.32",
+  "xa": 278,
+  "speaker": "LISA",
+  "orig": "~J1(3.5)\tThe_town..._devoured ~N\n\t\t\tby_the_darkness. ",
+  "text": "~J1(3.5)\tThe_town..._devoured ~N\n\t\t\tby_darkness._Ooh,_spooky. ",
+  "spoken": "[whispers] The town... devoured by darkness. Ooh, spooky."
+ },
+ {
+  "key": "MAP4_S04.33",
+  "xa": 311,
+  "speaker": "LISA",
+  "orig": "~J1(2.1)\tYes,_I_think_I_do. ",
+  "text": "~J1(2.1)\tActually,_yeah,_I_think_I_do! ",
+  "spoken": "Actually, yeah, I think I do!"
+ },
+ {
+  "key": "MAP4_S04.34",
+  "xa": 293,
+  "speaker": "LISA",
+  "orig": "~J1(2.9)\tBefore_this_place_was_turned ~N\n\t\t\tinto_a_resort, ",
+  "text": "~J1(2.9)\tBefore_this_place_got_turned ~N\n\t\t\tinto_a_tourist_trap, ",
+  "spoken": "Before this place got turned into a tourist trap,"
+ },
+ {
+  "key": "MAP4_S04.35",
+  "xa": 284,
+  "speaker": "LISA",
+  "orig": "~J1(3.4)\tthe_townspeople_here_were ~N\n\t\t\ton_the_quiet_side. ",
+  "text": "~J1(3.4)\tthe_locals_here_were ~N\n\t\t\tthe_quiet,_staring_type. ",
+  "spoken": "the locals here were the quiet, staring type."
+ },
+ {
+  "key": "MAP4_S04.36",
+  "xa": 267,
+  "speaker": "LISA",
+  "orig": "~J1(4.1)\tEverybody_followed ~N\n\t\t\tsome_kind_of_queer_religion. ~E ",
+  "text": "~J1(4.1)\tEverybody_belonged_to ~N\n\t\t\tsome_freaky_religion._Robes,_chanting. ~E ",
+  "spoken": "Everybody belonged to some freaky religion. Robes, chanting."
+ },
+ {
+  "key": "MAP4_S04.37",
+  "xa": 262,
+  "speaker": "LISA",
+  "orig": "~J1(4.8)\tWeird_occult_stuff... ~N\n\t\t\tBlack_magic,_that_kind_of_thing. ",
+  "text": "~J1(4.8)\tWeird_occult_stuff... ~N\n\t\t\tBlack_magic,_candles,_goats,_the_works. ",
+  "spoken": "Weird occult stuff... Black magic, candles, goats, the works."
+ },
+ {
+  "key": "MAP4_S04.38",
+  "xa": 258,
+  "speaker": "LISA",
+  "orig": "~J1(5.0)\tAs_young_people_moved_away, ~N\n\t\t\tthe_people_figured_they'd_been ~N\n\t\t\tsummoned_by_the_gods. ",
+  "text": "~J1(5.0)\tWhen_young_people_moved_away, ~N\n\t\t\tthe_old_folks_figured_they'd_been ~N\n\t\t\tsummoned_by_the_gods._Not_Ohio. ",
+  "spoken": "When young people moved away, the old folks figured they'd been summoned by the gods. Not Ohio."
+ },
+ {
+  "key": "MAP4_S04.39",
+  "xa": 269,
+  "speaker": "LISA",
+  "orig": "~J1(3.7)\tEvidently,_things_like_that ~N\n\t\t\tused_to_happen_around_here ~N\n\t\t\tall_the_time. ",
+  "text": "~J1(3.7)\tApparently,_stuff_like_that ~N\n\t\t\tused_to_happen_around_here ~N\n\t\t\tall_the_time._Fun_town! ",
+  "spoken": "Apparently, stuff like that used to happen around here all the time. Fun town!"
+ },
+ {
+  "key": "MAP4_S04.40",
+  "xa": 276,
+  "speaker": "LISA",
+  "orig": "~J1(3.5)\tBefore_the_resort, ~N\n\t\t\tthere_really_wasn't ~N\n\t\t\tanything_else_out_here. ",
+  "text": "~J1(3.5)\tBefore_the_resort, ~N\n\t\t\tthere_really_wasn't ~N\n\t\t\tanything_else_to_do_out_here. ",
+  "spoken": "Before the resort, there really wasn't anything else to do out here."
+ },
+ {
+  "key": "MAP4_S04.41",
+  "xa": 273,
+  "speaker": "LISA",
+  "orig": "~J1(4.5)\tEveryone_was_so_flipped_out. ~N\n\t\t\tGotta_blame_it_on_something. ",
+  "text": "~J1(4.5)\tEverybody_was_so_freaked_out. ~N\n\t\t\tGotta_blame_it_on_something,_right? ",
+  "spoken": "Everybody was so freaked out. Gotta blame it on something, right?"
+ },
+ {
+  "key": "MAP4_S04.42",
+  "xa": 268,
+  "speaker": "LISA",
+  "orig": "~J1(3.8)\tThen_a_lot_of_new_people ~N\n\t\t\tcame_in_and_everybody ~N\n\t\t\tclammed_up_about_it. ",
+  "text": "~J1(3.8)\tThen_a_bunch_of_new_people ~N\n\t\t\tmoved_in_and_everybody ~N\n\t\t\tzipped_it._Real_quiet. ",
+  "spoken": "Then a bunch of new people moved in and everybody zipped it. Real quiet."
+ },
+ {
+  "key": "MAP4_S04.43",
+  "xa": 324,
+  "speaker": "HARRY",
+  "orig": "~J0(1.8)\tA_cult... ~E ",
+  "text": "~J0(1.8)\tA_cult._Of_course._Why_not. ~E ",
+  "spoken": "[deadpan] A cult. Of course. Why not."
+ },
+ {
+  "key": "MAP4_S04.44",
+  "xa": 259,
+  "speaker": "LISA",
+  "orig": "~J0(4.8)\tLast_time_I_heard_anything ~N\n\t\t\tabout_it_was,_gosh,_years_ago... ",
+  "text": "~J0(4.8)\tLast_time_I_heard_anything ~N\n\t\t\tabout_it_was,_gosh,_years_ago... ",
+  "spoken": "Last time I heard anything about it was, gosh, years ago..."
+ },
+ {
+  "key": "MAP4_S04.45",
+  "xa": 261,
+  "speaker": "LISA",
+  "orig": "~J1(4.4)\tWhen_several_people_connected ~N\n\t\t\twith_developing_the_town ~N\n\t\t\tdied_in_accidents. ",
+  "text": "~J1(4.4)\tWhen_a_bunch_of_people_involved ~N\n\t\t\twith_developing_the_town ~N\n\t\t\tdied_in_freaky_accidents. ",
+  "spoken": "When a bunch of people involved with developing the town died in freaky accidents."
+ },
+ {
+  "key": "MAP4_S04.46",
+  "xa": 318,
+  "speaker": "LISA",
+  "orig": "~J1(2.0)\tPeople_said_it_was_a_curse. ",
+  "text": "~J1(2.0)\tPeople_said_it_was_a_curse._Ooh. ",
+  "spoken": "[whispers] People said it was a curse. Ooh."
+ },
+ {
+  "key": "MAP4_S04.47",
+  "xa": 266,
+  "speaker": "LISA",
+  "orig": "~J1(4.2)\tI'm_sorry,_I'm_rambling... ~N\n\t\t\tI'll_shut_up. ~E ",
+  "text": "~J1(4.2)\tOh_gosh,_I'm_rambling_again... ~N\n\t\t\tI'll_shut_up_now._Sorry! ~E ",
+  "spoken": "Oh gosh, I'm rambling again... I'll shut up now. Sorry!"
+ },
+ {
+  "key": "MAP4_S04.48",
+  "xa": 365,
+  "speaker": "LISA",
+  "orig": "~J0(1.1)\tHarry! ~E ",
+  "text": "~J0(1.1)\tHarry! ~E ",
+  "spoken": "[excited] Harry!"
+ },
+ {
+  "key": "MAP4_S04.49",
+  "xa": 354,
+  "speaker": "HARRY",
+  "orig": "~J0(1.6)\tGlad_you're_OK. ~E ",
+  "text": "~J0(1.6)\tHey._You're_alive. ~E ",
+  "spoken": "Hey. You're alive."
+ },
+ {
+  "key": "MAP4_S04.50",
+  "xa": 279,
+  "speaker": "LISA",
+  "orig": "~J0(4.6)\tThank_God_you_came_back. ~N\n\t\t\tI_was_scared_to_be_here_all_alone. ",
+  "text": "~J0(4.6)\tThank_God_you_came_back. ~N\n\t\t\tI_was_scared_stiff_here_all_alone. ",
+  "spoken": "Thank God you came back. I was scared stiff here all alone."
+ },
+ {
+  "key": "MAP4_S04.51",
+  "xa": 325,
+  "speaker": "HARRY",
+  "orig": "~J0(2.5)\tI'm_here_now. ~N\n\t\t\tI_was_worried,_too. ",
+  "text": "~J0(2.5)\tI'm_here_now. ~N\n\t\t\tBrought_guns,_too. ",
+  "spoken": "I'm here now. Brought guns, too."
+ },
+ {
+  "key": "MAP4_S04.52",
+  "xa": 353,
+  "speaker": "LISA",
+  "orig": "~J0(1.6)\tI'm_real_happy_to_see_you. ~E ",
+  "text": "~J0(1.6)\tYay!_Harry_and_guns! ~E ",
+  "spoken": "[excited] Yay! Harry and guns!"
+ },
+ {
+  "key": "MAP4_S04.53",
+  "xa": 305,
+  "speaker": "HARRY",
+  "orig": "~J1(3.3)\tLisa,_can_you_tell_me ~N\n\t\t\thow_to_get_to_the_lake? ",
+  "text": "~J1(3.3)\tLisa,_quick:_how_do_I ~N\n\t\t\tget_to_the_lake? ",
+  "spoken": "Lisa, quick: how do I get to the lake?"
+ },
+ {
+  "key": "MAP4_S04.54",
+  "xa": 310,
+  "speaker": "LISA",
+  "orig": "~J1(3.0)\tThe_lake? ~N\n\t\t\tYou_take_Bachman_Road. ",
+  "text": "~J1(3.0)\tThe_lake? ~N\n\t\t\tEasy,_take_Bachman_Road. ",
+  "spoken": "The lake? Easy, take Bachman Road."
+ },
+ {
+  "key": "MAP4_S04.55",
+  "xa": 356,
+  "speaker": "HARRY",
+  "orig": "~J1(1.5)\tThe_road's_blocked. ",
+  "text": "~J1(1.5)\tThe_road's_gone._Literally. ",
+  "spoken": "[deadpan] The road's gone. Literally."
+ },
+ {
+  "key": "MAP4_S04.56",
+  "xa": 337,
+  "speaker": "LISA",
+  "orig": "~J1(2.3)\tWell,_that's ~N\n\t\t\tthe_only_way_out_there. ",
+  "text": "~J1(2.3)\tWell,_that's ~N\n\t\t\tthe_only_way_there._Sorry. ",
+  "spoken": "Well, that's the only way there. Sorry."
+ },
+ {
+  "key": "MAP4_S04.57",
+  "xa": 363,
+  "speaker": "HARRY",
+  "orig": "~J1(1.3)\tAre_you_sure? ",
+  "text": "~J1(1.3)\tSeriously? ",
+  "spoken": "Seriously?"
+ },
+ {
+  "key": "MAP4_S04.58",
+  "xa": 351,
+  "speaker": "HARRY",
+  "orig": "~J1(2.7)\tThere's_gotta_be_another_way. ~E ",
+  "text": "~J1(2.7)\tCome_on._Another_way? ~E ",
+  "spoken": "Come on. Another way?"
+ },
+ {
+  "key": "MAP4_S04.59",
+  "xa": 320,
+  "speaker": "LISA",
+  "orig": "~J1(3.0)\tWait, ~N\n\t\t\tI_just_remembered_something. ",
+  "text": "~J1(3.0)\tOoh,_wait, ~N\n\t\t\tI_just_remembered_something! ",
+  "spoken": "Ooh, wait, I just remembered something!"
+ },
+ {
+  "key": "MAP4_S04.61",
+  "xa": 317,
+  "speaker": "LISA",
+  "orig": "~J1(3.3)\tThere's_a_water_works_over_by ~N\n\t\t\tmy_old_elementary_school. ",
+  "text": "~J1(3.3)\tThere's_a_water_works_by ~N\n\t\t\tmy_old_elementary_school. ",
+  "spoken": "There's a water works by my old elementary school."
+ },
+ {
+  "key": "MAP4_S04.62",
+  "xa": 331,
+  "speaker": "LISA",
+  "orig": "~J1(2.3)\tIt's_been_abandoned_for_years. ",
+  "text": "~J1(2.3)\tIt's_been_abandoned_forever. ",
+  "spoken": "It's been abandoned forever."
+ },
+ {
+  "key": "MAP4_S04.63",
+  "xa": 287,
+  "speaker": "LISA",
+  "orig": "~J1(4.2)\tThere's_an_underground_tunnel ~N\n\t\t\tout_there_used_for_inspections, ~N\n\t\t\tor_something! ",
+  "text": "~J1(4.2)\tThere's_an_underground_tunnel ~N\n\t\t\tfor_inspections,_or_plumbing, ~N\n\t\t\tor_murder,_something! ",
+  "spoken": "There's an underground tunnel for inspections, or plumbing, or murder, something!"
+ },
+ {
+  "key": "MAP4_S04.64",
+  "xa": 313,
+  "speaker": "LISA",
+  "orig": "~J1(3.2)\tI_remember_hearing_it_runs ~N\n\t\t\tall_the_way_to_the_lake! ~E ",
+  "text": "~J1(3.2)\tI_heard_it_runs ~N\n\t\t\tall_the_way_to_the_lake! ~E ",
+  "spoken": "I heard it runs all the way to the lake!"
+ },
+ {
+  "key": "MAP4_S04.65",
+  "xa": 370,
+  "speaker": "HARRY",
+  "orig": "~J1(0.9)\tReally?! ",
+  "text": "~J1(0.9)\tNo_way! ",
+  "spoken": "No way!"
+ },
+ {
+  "key": "MAP4_S04.66",
+  "xa": 332,
+  "speaker": "HARRY",
+  "orig": "~J1(2.3)\tYou_think_I_can_get_to_the_lake ~N\n\t\t\tfrom_there? ",
+  "text": "~J1(2.3)\tThat_gets_me ~N\n\t\t\tto_the_lake? ",
+  "spoken": "That gets me to the lake?"
+ },
+ {
+  "key": "MAP4_S04.67",
+  "xa": 306,
+  "speaker": "LISA",
+  "orig": "~J1(3.1)\tI've_never_been_down ~N\n\t\t\tin_there_myself, ~N\n\t\t\tso_I'm_not_positive. ",
+  "text": "~J1(3.1)\tI've_never_been_down ~N\n\t\t\tthere_myself, ~N\n\t\t\tso,_um,_maybe? ",
+  "spoken": "I've never been down there myself, so, um, maybe?"
+ },
+ {
+  "key": "MAP4_S04.68",
+  "xa": 323,
+  "speaker": "LISA",
+  "orig": "~J1(2.8)\tBesides,_it's_all_fenced_off ~N\n\t\t\tto_keep_people_out. ",
+  "text": "~J1(2.8)\tPlus_it's_all_fenced_off ~N\n\t\t\tto_keep_weirdos_out. ",
+  "spoken": "Plus it's all fenced off to keep weirdos out."
+ },
+ {
+  "key": "MAP4_S04.69",
+  "xa": 336,
+  "speaker": "HARRY",
+  "orig": "~J1(2.3)\tIf_there's_a_chance, ~N\n\t\t\tI've_got_to_try. ~E  ",
+  "text": "~J1(2.3)\tI'm_a_weirdo. ~N\n\t\t\tI'll_manage. ~E  ",
+  "spoken": "[smug] I'm a weirdo. I'll manage."
+ },
+ {
+  "key": "MAP4_S04.70",
+  "xa": 355,
+  "speaker": "LISA",
+  "orig": "~J1(2.0)\tHarry,_don't_go! ",
+  "text": "~J1(2.0)\tHarry,_don't_go! ",
+  "spoken": "[panicked] Harry, don't go!"
+ },
+ {
+  "key": "MAP4_S04.71",
+  "xa": 285,
+  "speaker": "LISA",
+  "orig": "~J1(4.2)\tI_don't_want_to_be_alone. ~N\n\t\t\tIt's_so_scary._I_can't_stand_it. ",
+  "text": "~J1(4.2)\tI_don't_wanna_be_alone. ~N\n\t\t\tIt's_so_scary_here! ",
+  "spoken": "I don't wanna be alone. It's so scary here!"
+ },
+ {
+  "key": "MAP4_S04.72",
+  "xa": 357,
+  "speaker": "HARRY",
+  "orig": "~J1(1.6)\tHow_about_coming_with_me? ",
+  "text": "~J1(1.6)\tSo_come_with_me. ",
+  "spoken": "So come with me."
+ },
+ {
+  "key": "MAP4_S04.73",
+  "xa": 322,
+  "speaker": "HARRY",
+  "orig": "~J1(2.6)\tThis_may_not_be_the_safest_place ~N\n\t\t\tin_the_world_either. ",
+  "text": "~J1(2.6)\tFair_warning,_I'm_not ~N\n\t\t\tthe_safest_company_either. ",
+  "spoken": "Fair warning, I'm not the safest company either."
+ },
+ {
+  "key": "MAP4_S04.74",
+  "xa": 297,
+  "speaker": "HARRY",
+  "orig": "~J1(3.6)\tI_can't_promise_you_anything, ~N\n\t\t\tbut_I'll_do_my_best ~N\n\t\t\tto_protect_you. ",
+  "text": "~J1(3.6)\tNo_promises, ~N\n\t\t\tbut_I'll_shoot_anything ~N\n\t\t\tthat_looks_at_you_funny. ",
+  "spoken": "No promises, but I'll shoot anything that looks at you funny."
+ },
+ {
+  "key": "MAP4_S04.75",
+  "xa": 282,
+  "speaker": "LISA",
+  "orig": "~J1(4.2)\tNo... ~N\n\t\t\tsomehow_I_feel_I'm_not_supposed ~N\n\t\t\tto_leave_this_place. ",
+  "text": "~J1(4.2)\tNo... ~N\n\t\t\tsomehow_I_feel_like_I'm_not_supposed ~N\n\t\t\tto_leave_this_place. ",
+  "spoken": "[sad] No... somehow I feel like I'm not supposed to leave this place."
+ },
+ {
+  "key": "MAP4_S04.76",
+  "xa": 292,
+  "speaker": "LISA",
+  "orig": "~J1(4.0)\tOh,_Harry,_I'm_so_scared... ~N\n\t\t\tI'm_cold. ",
+  "text": "~J1(4.0)\tOh,_Harry,_I'm_so_scared... ~N\n\t\t\tAnd_so_cold. ",
+  "spoken": "[trembling] Oh, Harry, I'm so scared... And so cold."
+ },
+ {
+  "key": "MAP4_S04.77",
+  "xa": 302,
+  "speaker": "HARRY",
+  "orig": "~J1(3.8)\tLook,_just_wait_here ~N\n\t\t\ta_little_longer. ",
+  "text": "~J1(3.8)\tOkay._Just_sit_tight ~N\n\t\t\ta_little_longer. ",
+  "spoken": "[gently] Okay. Just sit tight a little longer."
+ },
+ {
+  "key": "MAP4_S04.78",
+  "xa": 321,
+  "speaker": "HARRY",
+  "orig": "~J1(3.0)\tI'll_be_back_as_soon_as ~N\n\t\t\tI_find_my_daughter. ~E ",
+  "text": "~J1(3.0)\tI'll_be_back,_soon_as ~N\n\t\t\tI_find_my_daughter. ~E ",
+  "spoken": "I'll be back, soon as I find my daughter."
+ },
+ {
+  "key": "MAP4_S04.79",
+  "xa": 367,
+  "speaker": "LISA",
+  "orig": "~J0(1.5)\tHarry... ~E ",
+  "text": "~J0(1.5)\tHarry... ~E ",
+  "spoken": "[whispers] Harry..."
+ },
+ {
+  "key": "MAP5_S02.16",
+  "xa": 366,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(1.2)\tAre_you_OK? ~E ",
+  "text": "~J0(1.2)\tYou_alive? ~E ",
+  "spoken": "You alive?"
+ },
+ {
+  "key": "MAP5_S02.17",
+  "xa": 360,
+  "speaker": "HARRY",
+  "orig": "~J0(1.4)\tYeah,_I_guess_so. ",
+  "text": "~J0(1.4)\tYeah,_sort_of. ",
+  "spoken": "Yeah, sort of."
+ },
+ {
+  "key": "MAP5_S02.18",
+  "xa": 312,
+  "speaker": "HARRY",
+  "orig": "~J0(3.0)\tBut_I'm_beat. ~N\n\t\t\tI_thought_I_was_a_goner_there. ~E ",
+  "text": "~J0(3.0)\tBut_I'm_beat. ~N\n\t\t\tAlmost_became_bar_food. ~E ",
+  "spoken": "[sighs] But I'm beat. Almost became bar food."
+ },
+ {
+  "key": "MAP5_S02.19",
+  "xa": 316,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.0)\tSo,_how'd_it_go? ~N\n\t\t\tDid_you_find_a_way_out? ",
+  "text": "~J1(3.0)\tSo,_genius,_any_luck? ~N\n\t\t\tFind_a_way_out? ",
+  "spoken": "[smug] So, genius, any luck? Find a way out?"
+ },
+ {
+  "key": "MAP5_S02.20",
+  "xa": 339,
+  "speaker": "HARRY",
+  "orig": "~J1(2.4)\tNo._Not_yet. ",
+  "text": "~J1(2.4)\tNope._Not_yet. ",
+  "spoken": "Nope. Not yet."
+ },
+ {
+  "key": "MAP5_S02.21",
+  "xa": 369,
+  "speaker": "HARRY",
+  "orig": "~J1(1.1)\tHow_about_you? ",
+  "text": "~J1(1.1)\tAnd_you? ",
+  "spoken": "And you?"
+ },
+ {
+  "key": "MAP5_S02.22",
+  "xa": 374,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(1.0)\tZip. ",
+  "text": "~J1(1.0)\tNada. ",
+  "spoken": "Nada."
+ },
+ {
+  "key": "MAP5_S02.23",
+  "xa": 347,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(1.8)\tBut_it's_too_soon_to_give_up. ",
+  "text": "~J1(1.8)\tBut_I_don't_quit_easy. ",
+  "spoken": "But I don't quit easy."
+ },
+ {
+  "key": "MAP5_S02.24",
+  "xa": 329,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.8)\tThis_craziness_can't ~N\n\t\t\tgo_on_forever. ",
+  "text": "~J1(2.8)\tThis_circus_can't ~N\n\t\t\tgo_on_forever. ",
+  "spoken": "This circus can't go on forever."
+ },
+ {
+  "key": "MAP5_S02.25",
+  "xa": 299,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.4)\tA_military_rescue_squad ~N\n\t\t\tshould_be_here_any_time_now. ",
+  "text": "~J1(3.4)\tThe_army's_sending_a_rescue_squad. ~N\n\t\t\tAny_minute_now._Probably. ",
+  "spoken": "The army's sending a rescue squad. Any minute now. Probably."
+ },
+ {
+  "key": "MAP5_S02.26",
+  "xa": 319,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.8)\tIf_they_come_through_the_town, ~N\n\t\t\twe're_home_free. ",
+  "text": "~J1(2.8)\tIf_they_roll_through_town, ~N\n\t\t\tI'm_saved._Maybe_you. ",
+  "spoken": "If they roll through town, I'm saved. Maybe you."
+ },
+ {
+  "key": "MAP5_S02.27",
+  "xa": 359,
+  "speaker": "HARRY",
+  "orig": "~J1(1.7)\tI_hope_so. ",
+  "text": "~J1(1.7)\tGee,_thanks. ",
+  "spoken": "[sarcastic] Gee, thanks."
+ },
+ {
+  "key": "MAP5_S02.28",
+  "xa": 352,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(1.4)\tI_better_get_going. ",
+  "text": "~J1(1.4)\tWell,_gotta_run. ",
+  "spoken": "Well, gotta run."
+ },
+ {
+  "key": "MAP5_S02.29",
+  "xa": 298,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.4)\tThis_isn't_the_time_to_stand ~N\n\t\t\taround_flapping_our_gums. ~E ",
+  "text": "~J1(3.4)\tNo_time_to_stand_around ~N\n\t\t\tflapping_our_gums,_Shakespeare. ~E ",
+  "spoken": "No time to stand around flapping our gums, Shakespeare."
+ },
+ {
+  "key": "MAP5_S02.30",
+  "xa": 341,
+  "speaker": "HARRY",
+  "orig": "~J0(2.0)\tDo_you_know ~N\n\t\t\ta_girl_called_Alessa? ~E ",
+  "text": "~J0(2.0)\tHey,_you_know ~N\n\t\t\ta_girl_named_Alessa? ~E ",
+  "spoken": "Hey, you know a girl named Alessa?"
+ },
+ {
+  "key": "MAP5_S02.31",
+  "xa": 371,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(1.0)\tNo. ~E ",
+  "text": "~J0(1.0)\tNope. ~E ",
+  "spoken": "[nervous] Nope."
+ },
+ {
+  "key": "MAP5_S03.27",
+  "xa": 454,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(1.3)\tGive_me_that! ",
+  "text": "~J0(1.3)\tGimme_that! ",
+  "spoken": "[shouts] Gimme that!"
+ },
+ {
+  "key": "MAP5_S03.28",
+  "xa": 451,
+  "speaker": "HARRY",
+  "orig": "~J0(1.2)\tWhat_is_this? ~E ",
+  "text": "~J0(1.2)\tWhat's_this,_Doc? ~E ",
+  "spoken": "What's this, Doc?"
+ },
+ {
+  "key": "MAP5_S03.29",
+  "xa": 430,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.0)\tThat's_none_of_your_business! ",
+  "text": "~J1(2.0)\tNone_of_your_damn_business! ",
+  "spoken": "None of your damn business!"
+ },
+ {
+  "key": "MAP5_S03.30",
+  "xa": 389,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.3)\tInstead_of_messing_with_that, ~N\n\t\t\thow_about_coming_up_with_a_way ~N\n\t\t\tto_get_out_of_here? ",
+  "text": "~J1(3.3)\tQuit_snooping_and ~N\n\t\t\tfind_us_a_way ~N\n\t\t\tout_of_this_dump! ",
+  "spoken": "Quit snooping and find us a way out of this dump!"
+ },
+ {
+  "key": "MAP5_S03.31",
+  "xa": 469,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(0.9)\tHumph. ~E ",
+  "text": "~J1(0.9)\tHmph. ~E ",
+  "spoken": "Hmph."
+ },
+ {
+  "key": "MAP5_S03.32",
+  "xa": 419,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.6)\tYou_shouldn't_be_hanging ~N\n\t\t\taround_here_goofing_off! ",
+  "text": "~J1(2.6)\tWhy_are_you_hanging ~N\n\t\t\taround_here,_slacker? ",
+  "spoken": "Why are you hanging around here, slacker?"
+ },
+ {
+  "key": "MAP5_S03.33",
+  "xa": 452,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(1.3)\tWhat_do_you_think ~N\n\t\t\tyou_are_doing? ",
+  "text": "~J1(1.3)\tThe_hell ~N\n\t\t\tis_this? ",
+  "spoken": "The hell is this?"
+ },
+ {
+  "key": "MAP5_S03.34",
+  "xa": 411,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.0)\tYou_want_to_get_yourself_killed!? ~N\n\t\t\tGet_outta_here! ",
+  "text": "~J1(3.0)\tWanna_get_yourself_killed!? ~N\n\t\t\tGet_lost! ",
+  "spoken": "[shouts] Wanna get yourself killed!? Get lost!"
+ },
+ {
+  "key": "MAP5_S03.35",
+  "xa": 428,
+  "speaker": "HARRY",
+  "orig": "~J1(1.9)\tOkay,_take_it_easy. ~E ",
+  "text": "~J1(1.9)\tOkay,_okay._Relax,_Doc. ~E ",
+  "spoken": "[sarcastic] Okay, okay. Relax, Doc."
+ },
+ {
+  "key": "MAP5_S03.36",
+  "xa": 408,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.2)\tUnless_you_want_to_die, ~N\n\t\t\tkeep_your_mind_on_business. ",
+  "text": "~J1(3.2)\tIf_you_wanna_live, ~N\n\t\t\tkeep_your_nose_clean. ",
+  "spoken": "[sinister] If you wanna live, keep your nose clean."
+ },
+ {
+  "key": "MAP5_S03.37",
+  "xa": 463,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(0.8)\tGot_it? ~E ",
+  "text": "~J1(0.8)\tCapisce? ~E ",
+  "spoken": "Capisce?"
+ },
+ {
+  "key": "MAP6_S00.15",
+  "xa": 448,
+  "speaker": "HARRY",
+  "orig": "~J0(1.5)\tWhat's_this! ~E ",
+  "text": "~J0(1.5)\tWhat_the_hell! ~E ",
+  "spoken": "[shouts] What the hell!"
+ },
+ {
+  "key": "MAP6_S00.16",
+  "xa": 468,
+  "speaker": "HARRY",
+  "orig": "~J0(0.1)\t~E ",
+  "text": "~J0(0.1)\t~E ",
+  "spoken": ""
+ },
+ {
+  "key": "MAP6_S00.17",
+  "xa": 470,
+  "speaker": "HARRY",
+  "orig": "~J0(0.1)\t~E ",
+  "text": "~J0(0.1)\t~E ",
+  "spoken": ""
+ },
+ {
+  "key": "MAP6_S00.18",
+  "xa": 459,
+  "speaker": "HARRY",
+  "orig": "~J0(0.1)\t~E ",
+  "text": "~J0(0.1)\t~E ",
+  "spoken": ""
+ }
+]

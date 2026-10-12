@@ -1,0 +1,890 @@
+[
+ {
+  "key": "MAP0_S00.21",
+  "xa": 13,
+  "speaker": "HARRY",
+  "orig": "~J0(2.8)\tCheryl? ~N\n\t\t\tIs_that_Cheryl!? ~E ",
+  "text": "~J0(2.8)\tCheryl? ~N\n\t\t\tSweetie,_Daddy's_cardio_is_terrible! ~E ",
+  "spoken": "Cheryl? Sweetie, Daddy's cardio is terrible!"
+ },
+ {
+  "key": "MAP0_S00.22",
+  "xa": 35,
+  "speaker": "HARRY",
+  "orig": "~J0(1.2)\tWhere_are_you_going? ~E ",
+  "text": "~J0(1.2)\tNot_the_creepy_alley! ~E ",
+  "spoken": "[shouts] Not the creepy alley!"
+ },
+ {
+  "key": "MAP0_S00.23",
+  "xa": 36,
+  "speaker": "HARRY",
+  "orig": "~J0(1.8)\tHey_wait...stop! ~E ",
+  "text": "~J0(1.8)\tHey!_Slow_down! ~E ",
+  "spoken": "Hey! Slow down!"
+ },
+ {
+  "key": "MAP0_S00.27",
+  "xa": 30,
+  "speaker": "HARRY",
+  "orig": "~J0(1.6)\tWhat_is_this? ",
+  "text": "~J0(1.6)\tWhat_fresh_hell? ",
+  "spoken": "[confused] What fresh hell?"
+ },
+ {
+  "key": "MAP0_S00.28",
+  "xa": 23,
+  "speaker": "HARRY",
+  "orig": "~J0(2.5)\tWhat's_going_on_here!? ~E ",
+  "text": "~J0(2.5)\tThis_was_NOT_in_the_brochure! ~E ",
+  "spoken": "[shouts] This was NOT in the brochure!"
+ },
+ {
+  "key": "MAP0_S01.15",
+  "xa": 31,
+  "speaker": "HARRY",
+  "orig": "~J0(2.0)\tWas_I_dreaming?  ~E ",
+  "text": "~J0(2.0)\tUgh._Worst_nap_ever.  ~E ",
+  "spoken": "[groans] Ugh. Worst nap ever."
+ },
+ {
+  "key": "MAP0_S01.16",
+  "xa": 34,
+  "speaker": "CYBIL",
+  "orig": "~J0(2.5)\tHow_do_you_feel? ~E ",
+  "text": "~J0(2.5)\tYou_alive,_sunshine? ~E ",
+  "spoken": "[deadpan] You alive, sunshine?"
+ },
+ {
+  "key": "MAP0_S01.17",
+  "xa": 1,
+  "speaker": "HARRY",
+  "orig": "~J0(6.0)\tLike_I've_been ~N\n\t\t\trun_over_by_a_truck, ~N\n\t\t\tbut_I'm_all_right,_I_guess. ~E ",
+  "text": "~J0(6.0)\tLike_a_truck_hit_me, ~N\n\t\t\tthen_backed_up_to_check, ~N\n\t\t\tbut_I'll_live,_I_guess. ~E ",
+  "spoken": "Like a truck hit me, then backed up to check, but I'll live, I guess."
+ },
+ {
+  "key": "MAP0_S01.18",
+  "xa": 40,
+  "speaker": "CYBIL",
+  "orig": "~J0(1.5)\tGlad_to_hear_it.",
+  "text": "~J0(1.5)\tThrilled_for_you.",
+  "spoken": "[deadpan] Thrilled for you."
+ },
+ {
+  "key": "MAP0_S01.19",
+  "xa": 3,
+  "speaker": "CYBIL",
+  "orig": "~J0(5.0)\tYou_from_around_here? ~N\n\t\t\tWhy_don't_you ~N\n\t\t\ttell_me_what_happened? ",
+  "text": "~J0(5.0)\tYou_from_around_here? ~N\n\t\t\tStart_talking._What ~N\n\t\t\tthe_hell_happened_here? ",
+  "spoken": "You from around here? Start talking. What the hell happened here?"
+ },
+ {
+  "key": "MAP0_S01.20",
+  "xa": 16,
+  "speaker": "HARRY",
+  "orig": "~J0(3.0)\tWait_a_second. ~N\n\t\t\tI'm_just_a_tourist. ",
+  "text": "~J0(3.0)\tWhoa,_Officer_Friendly, ~N\n\t\t\tI'm_just_a_tourist. ",
+  "spoken": "Whoa, Officer Friendly, I'm just a tourist."
+ },
+ {
+  "key": "MAP0_S01.21",
+  "xa": 9,
+  "speaker": "HARRY",
+  "orig": "~J0(5.2)\tI_came_here_for_a_vacation. ~N\n\t\t\tI_just_got_here... ",
+  "text": "~J0(5.2)\tI_came_here_for_a_vacation. ~N\n\t\t\tShould've_gone_to_Florida... ",
+  "spoken": "I came here for a vacation. [sighs] Should've gone to Florida..."
+ },
+ {
+  "key": "MAP0_S01.22",
+  "xa": 29,
+  "speaker": "HARRY",
+  "orig": "~J0(4.2)\tI_don't_know_what_happened. ",
+  "text": "~J0(4.2)\tNo_clue_what_happened. ",
+  "spoken": "No clue what happened."
+ },
+ {
+  "key": "MAP0_S01.23",
+  "xa": 27,
+  "speaker": "HARRY",
+  "orig": "~J0(4.0)\tI'd_like_to_find_out_myself. ",
+  "text": "~J0(4.0)\tWish_I_knew_myself. ",
+  "spoken": "Wish I knew myself."
+ },
+ {
+  "key": "MAP0_S01.24",
+  "xa": 48,
+  "speaker": "CYBIL",
+  "orig": "~J0(2.0)\tUh-huh? ~E ",
+  "text": "~J0(2.0)\tRiveting. ~E ",
+  "spoken": "[deadpan] Riveting."
+ },
+ {
+  "key": "MAP0_S01.25",
+  "xa": 25,
+  "speaker": "HARRY",
+  "orig": "~J0(3.0)\tHave_you_seen_a_little_girl? ",
+  "text": "~J0(3.0)\tHave_you_seen_a_little_girl? ",
+  "spoken": "Have you seen a little girl?"
+ },
+ {
+  "key": "MAP0_S01.26",
+  "xa": 8,
+  "speaker": "HARRY",
+  "orig": "~J0(4.0)\tJust_turned_seven_last_month... ~N\n\t\t\tShort,_black_hair... ",
+  "text": "~J0(4.0)\tJust_turned_seven_last_month. ~N\n\t\t\tShort,_black_hair,_scary_smart. ",
+  "spoken": "Just turned seven last month. Short, black hair, scary smart."
+ },
+ {
+  "key": "MAP0_S01.27",
+  "xa": 47,
+  "speaker": "HARRY",
+  "orig": "~J0(1.5)\tMy_daughter. ",
+  "text": "~J0(1.5)\tMy_kid. ",
+  "spoken": "My kid."
+ },
+ {
+  "key": "MAP0_S01.28",
+  "xa": 51,
+  "speaker": "CYBIL",
+  "orig": "~J0(1.0)\tSorry. ",
+  "text": "~J0(1.0)\tNope._Sorry. ",
+  "spoken": "Nope. Sorry."
+ },
+ {
+  "key": "MAP0_S01.29",
+  "xa": 21,
+  "speaker": "CYBIL",
+  "orig": "~J0(3.0)\tThe_only_person_I've_seen ~N\n\t\t\tin_this_town_is_you. ",
+  "text": "~J0(3.0)\tJust_you_so_far. ~N\n\t\t\tLucky_me. ",
+  "spoken": "Just you so far. [dry] Lucky me."
+ },
+ {
+  "key": "MAP0_S01.30",
+  "xa": 33,
+  "speaker": "HARRY",
+  "orig": "~J0(2.5)\tWhere_is_everybody? ",
+  "text": "~J0(2.5)\tIs_everyone_at_brunch? ",
+  "spoken": "Is everyone at brunch?"
+ },
+ {
+  "key": "MAP0_S01.31",
+  "xa": 24,
+  "speaker": "CYBIL",
+  "orig": "~J0(3.5)\tI'd_tell_you_if_I_knew,~N\n\t\t\tbelieve_me. ",
+  "text": "~J0(3.5)\tIf_I_knew,_I'd_say.~N\n\t\t\tTrust_me. ",
+  "spoken": "If I knew, I'd say. Trust me."
+ },
+ {
+  "key": "MAP0_S01.32",
+  "xa": 7,
+  "speaker": "CYBIL",
+  "orig": "~J0(5.5)\tBut,_from_what_I_can_tell, ~N\n\t\t\tsomething_bizarre_is_going_on. ",
+  "text": "~J0(5.5)\tBut_from_what_I_can_tell, ~N\n\t\t\tthis_town_is_seriously_messed_up. ",
+  "spoken": "But from what I can tell, this town is seriously messed up."
+ },
+ {
+  "key": "MAP0_S01.33",
+  "xa": 39,
+  "speaker": "CYBIL",
+  "orig": "~J0(2.5)\tThat's_all_I_know. ",
+  "text": "~J0(2.5)\tBriefing_over. ",
+  "spoken": "Briefing over."
+ },
+ {
+  "key": "MAP0_S01.34",
+  "xa": 38,
+  "speaker": "CYBIL",
+  "orig": "~J0(2.0)\tHmmm... ~E ",
+  "text": "~J0(2.0)\tHuh._Okay... ~E ",
+  "spoken": "[skeptical] Huh. Okay..."
+ },
+ {
+  "key": "MAP0_S01.35",
+  "xa": 46,
+  "speaker": "CYBIL",
+  "orig": "~J0(2.0)\tWhat's_your_name? ",
+  "text": "~J0(2.0)\tName? ",
+  "spoken": "Name?"
+ },
+ {
+  "key": "MAP0_S01.36",
+  "xa": 52,
+  "speaker": "HARRY",
+  "orig": "~J0(1.0)\tHarry... ",
+  "text": "~J0(1.0)\tHarry... ",
+  "spoken": "Harry..."
+ },
+ {
+  "key": "MAP0_S01.37",
+  "xa": 44,
+  "speaker": "HARRY",
+  "orig": "~J0(2.0)\tHarry_Mason. ",
+  "text": "~J0(2.0)\tHarry_Mason._Novelist. ",
+  "spoken": "[proudly] Harry Mason. Novelist."
+ },
+ {
+  "key": "MAP0_S01.38",
+  "xa": 45,
+  "speaker": "CYBIL",
+  "orig": "~J0(2.0)\tCybil_Bennett. ",
+  "text": "~J0(2.0)\tCybil_Bennett._Unimpressed. ",
+  "spoken": "[deadpan] Cybil Bennett. Unimpressed."
+ },
+ {
+  "key": "MAP0_S01.39",
+  "xa": 15,
+  "speaker": "CYBIL",
+  "orig": "~J0(4.0)\tI'm_a_police_officer ~N\n\t\t\tfrom_Brahms, ~N\n\t\t\tthe_next_town_over. ",
+  "text": "~J0(4.0)\tPolice._Brahms, ~N\n\t\t\tnext_town_over. ~N\n\t\t\tWe_have_actual_people. ",
+  "spoken": "Police. Brahms, next town over. We have actual people."
+ },
+ {
+  "key": "MAP0_S01.40",
+  "xa": 10,
+  "speaker": "CYBIL",
+  "orig": "~J0(3.0)\tThe_phones_are_all_dead, ~N\n\t\t\tand_the_radio,_too. ",
+  "text": "~J0(3.0)\tPhones_are_dead. ~N\n\t\t\tRadio_too._Everything's_dead. ",
+  "spoken": "Phones are dead. Radio too. Everything's dead."
+ },
+ {
+  "key": "MAP0_S01.41",
+  "xa": 22,
+  "speaker": "CYBIL",
+  "orig": "~J0(4.0)\tI'm_going_back_to_call ~N\n\t\t\tin_some_reinforcements. ",
+  "text": "~J0(4.0)\tI'm_going_for_backup. ~N\n\t\t\tReal_backup. ",
+  "spoken": "I'm going for backup. Real backup."
+ },
+ {
+  "key": "MAP0_S01.42",
+  "xa": 50,
+  "speaker": "HARRY",
+  "orig": "~J0(1.5)\tHmph. ~E ",
+  "text": "~J0(1.5)\tRude. ~E ",
+  "spoken": "[muttering] Rude."
+ },
+ {
+  "key": "MAP0_S01.44",
+  "xa": 18,
+  "speaker": "HARRY",
+  "orig": "~J0(4.0)\tMy_daughter... ~N\n\t\t\tI've_gotta_find_her! ~E ",
+  "text": "~J0(4.0)\tMy_daughter's_out_there! ~N\n\t\t\tI've_gotta_go! ~E ",
+  "spoken": "My daughter's out there! I've gotta go!"
+ },
+ {
+  "key": "MAP0_S01.45",
+  "xa": 43,
+  "speaker": "CYBIL",
+  "orig": "~D\t~J0(1.5)\tNo_way! ~E ",
+  "text": "~D\t~J0(1.5)\tLike_hell! ~E ",
+  "spoken": "[shouts] Like hell!"
+ },
+ {
+  "key": "MAP0_S01.46",
+  "xa": 26,
+  "speaker": "CYBIL",
+  "orig": "~J0(3.0)\tIt's_dangerous_out_there. ",
+  "text": "~J0(3.0)\tIt's_nasty_out_there. ",
+  "spoken": "It's nasty out there."
+ },
+ {
+  "key": "MAP0_S01.47",
+  "xa": 6,
+  "speaker": "HARRY",
+  "orig": "~J0(5.0)\tIn_that_case, ~N\n\t\t\tI_need_to_find_her_now! ~N\n\t\t\tCheryl's_my_little_girl. ",
+  "text": "~J0(5.0)\tThen_that_settles_it, ~N\n\t\t\tI'm_going_right_now! ~N\n\t\t\tCheryl's_my_little_girl. ",
+  "spoken": "Then that settles it, I'm going right now! Cheryl's my little girl."
+ },
+ {
+  "key": "MAP0_S01.48",
+  "xa": 20,
+  "speaker": "HARRY",
+  "orig": "~J0(3.0)\tI_can't_just_leave_her_out ~N\n\t\t\tthere_by_herself. ~E ",
+  "text": "~J0(3.0)\tShe's_alone_out_there. ~N\n\t\t\tNot_happening. ~E ",
+  "spoken": "She's alone out there. Not happening."
+ },
+ {
+  "key": "MAP0_S01.49",
+  "xa": 41,
+  "speaker": "CYBIL",
+  "orig": "~J0(2.5)\tHave_you_got_a_gun? ",
+  "text": "~J0(2.5)\tYou_packing? ",
+  "spoken": "You packing?"
+ },
+ {
+  "key": "MAP0_S01.50",
+  "xa": 32,
+  "speaker": "HARRY",
+  "orig": "~J0(3.0)\tUmmm..._no. ~E ",
+  "text": "~J0(3.0)\tUmmm..._a_pen? ~E ",
+  "spoken": "[sheepish] Ummm... a pen?"
+ },
+ {
+  "key": "MAP0_S01.51",
+  "xa": 11,
+  "speaker": "CYBIL",
+  "orig": "~J0(5.0)\tTake_this. ~N\n\t\t\tAnd_hope_you_don't ~N\n\t\t\thave_to_use_it. ",
+  "text": "~J0(5.0)\tTake_this. ~N\n\t\t\tLoud_end_faces ~N\n\t\t\tthe_bad_guys. ",
+  "spoken": "[sighs] Take this. Loud end faces the bad guys."
+ },
+ {
+  "key": "MAP0_S01.52",
+  "xa": 37,
+  "speaker": "CYBIL",
+  "orig": "~J0(1.5)\tNow_listen_to_me, ",
+  "text": "~J0(1.5)\tListen,_pal, ",
+  "spoken": "Listen, pal,"
+ },
+ {
+  "key": "MAP0_S01.53",
+  "xa": 14,
+  "speaker": "CYBIL",
+  "orig": "~J0(4.5)\tbefore_you_pull_the_trigger, ~N\n\t\t\tknow_who_you're_shooting. ",
+  "text": "~J0(4.5)\tbefore_you_shoot, ~N\n\t\t\tmake_sure_it's_not_a_mailman. ",
+  "spoken": "before you shoot, make sure it's not a mailman."
+ },
+ {
+  "key": "MAP0_S01.54",
+  "xa": 19,
+  "speaker": "CYBIL",
+  "orig": "~J0(3.0)\tAnd_don't_do_it ~N\n\t\t\tunless_you_have_to. ~E ",
+  "text": "~J0(3.0)\tAnd_don't_shoot ~N\n\t\t\tjust_because_it's_fun. ~E ",
+  "spoken": "And don't shoot just because it's fun."
+ },
+ {
+  "key": "MAP0_S01.55",
+  "xa": 17,
+  "speaker": "CYBIL",
+  "orig": "~J0(3.0)\tAnd_don't_go_blasting_me ~N\n\t\t\tby_mistake. ",
+  "text": "~J0(3.0)\tShoot_me_by_mistake, ~N\n\t\t\tI_shoot_back. ",
+  "spoken": "Shoot me by mistake, [deadpan] I shoot back."
+ },
+ {
+  "key": "MAP0_S01.56",
+  "xa": 49,
+  "speaker": "CYBIL",
+  "orig": "~J0(2.5)\tGot_it? ~E ",
+  "text": "~J0(2.5)\tCapiche? ~E ",
+  "spoken": "Capiche?"
+ },
+ {
+  "key": "MAP0_S01.57",
+  "xa": 28,
+  "speaker": "HARRY",
+  "orig": "~J0(2.5)\tYeah._Thanks. ~E ",
+  "text": "~J0(2.5)\tYeah._Thanks,_Mom. ~E ",
+  "spoken": "[sarcastic] Yeah. Thanks, Mom."
+ },
+ {
+  "key": "MAP0_S01.58",
+  "xa": 2,
+  "speaker": "CYBIL",
+  "orig": "~J0(5.0)\tYou'd_do_best_to_stay_nearby. ~N\n\t\t\tI'll_be_back_with ~N\n\t\t\thelp_as_quick_as_I_can. ~E ",
+  "text": "~J0(5.0)\tStay_close_and_stay_alive. ~N\n\t\t\tI'll_be_back_with_help ~N\n\t\t\tfast._Try_not_to_die. ~E ",
+  "spoken": "Stay close and stay alive. I'll be back with help fast. Try not to die."
+ },
+ {
+  "key": "MAP0_S01.62",
+  "xa": 42,
+  "speaker": "HARRY",
+  "orig": "~J0(1.1)\tWhat's_that? ~E ",
+  "text": "~J0(1.1)\tThe_hell? ~E ",
+  "spoken": "The hell?"
+ },
+ {
+  "key": "MAP0_S01.63",
+  "xa": 4,
+  "speaker": "HARRY",
+  "orig": "~J0(4.5)\tHuh?_Radio? ~N\n\t\t\tWhat's_going_on_with_that_radio? ~E ",
+  "text": "~J0(4.5)\tHuh?_The_radio? ~N\n\t\t\tWhy's_it_screaming_like_my_editor? ~E ",
+  "spoken": "Huh? The radio? Why's it screaming like my editor?"
+ },
+ {
+  "key": "MAP0_S01.68",
+  "xa": 5,
+  "speaker": "HARRY",
+  "orig": "~J0(4.3)\tThis_is_not_a_dream! ~N\n\tWhat's_happening_to_this_place!? ~E ",
+  "text": "~J0(4.3)\tOkay,_NOT_a_dream! ~N\n\tThis_town_owes_me_a_refund! ~E ",
+  "spoken": "[panting] Okay, NOT a dream! [shouts] This town owes me a refund!"
+ },
+ {
+  "key": "MAP1_S02.15",
+  "xa": 83,
+  "speaker": "HARRY",
+  "orig": "~J0(1.2)\tWhere_am_I? ~E ",
+  "text": "~J0(1.2)\tNow_where? ~E ",
+  "spoken": "[groggy] Now where?"
+ },
+ {
+  "key": "MAP1_S02.16",
+  "xa": 79,
+  "speaker": "HARRY",
+  "orig": "~J0(2.0)\tHave_I_been_here_before? ~E ",
+  "text": "~J0(2.0)\tWasn't_this_place_cleaner? ~E ",
+  "spoken": "Wasn't this place cleaner?"
+ },
+ {
+  "key": "MAP1_S02.17",
+  "xa": 61,
+  "speaker": "HARRY",
+  "orig": "~J0(3.8)\tI_don't_remember ~N\n\t\t\tthis_being_here_before... ~E ",
+  "text": "~J0(3.8)\tI_don't_remember ~N\n\t\t\tthe_rust-and-blood_decor... ~E ",
+  "spoken": "I don't remember the rust-and-blood decor..."
+ },
+ {
+  "key": "MAP1_S03.46",
+  "xa": 375,
+  "speaker": "HARRY",
+  "orig": "~J0(1.0)\tWhat? ~E ",
+  "text": "~J0(1.0)\tHuh? ~E ",
+  "spoken": "Huh?"
+ },
+ {
+  "key": "MAP1_S06.15",
+  "xa": 69,
+  "speaker": "HARRY",
+  "orig": "~J0(1.3)\t",
+  "text": "~J0(1.3)\tUgh...",
+  "spoken": "[groans] Ugh..."
+ },
+ {
+  "key": "MAP1_S06.16",
+  "xa": 72,
+  "speaker": "HARRY",
+  "orig": "~J2(1.5)\tWhat_was_that...? ~E ",
+  "text": "~J2(1.5)\tWhat_was_that..._a_dinosaur? ~E ",
+  "spoken": "What was that... a dinosaur?"
+ },
+ {
+  "key": "MAP2_S00.19",
+  "xa": 77,
+  "speaker": "HARRY",
+  "orig": "~J1(2.5)\n\tIsn't_this ~N\n\tCheryl's_sketchbook? ",
+  "text": "~J1(2.5)\n\tHey,_that's ~N\n\tCheryl's_sketchbook! ",
+  "spoken": "Hey, that's Cheryl's sketchbook!"
+ },
+ {
+  "key": "MAP2_S00.20",
+  "xa": 65,
+  "speaker": "HARRY",
+  "orig": "~J1(3.8)\n\tHmm... ~N\n\tShe's_at_the_school... ~E ",
+  "text": "~J1(3.8)\n\tHmm... ~N\n\tSo_she_went_to_school._Voluntarily. ~E ",
+  "spoken": "Hmm... So she went to school. Voluntarily."
+ },
+ {
+  "key": "MAP2_S01.15",
+  "xa": 78,
+  "speaker": "HARRY",
+  "orig": "~J1(1.9)\tWere_you_ringing_that_bell? ",
+  "text": "~J1(1.9)\tYou_ringing_that_bell,_lady? ",
+  "spoken": "You ringing that bell, lady?"
+ },
+ {
+  "key": "MAP2_S01.16",
+  "xa": 57,
+  "speaker": "DAHLIA",
+  "orig": "~J1(5.3)\tI've_been_expecting_you. ~N\n\t\t\tIt_was_foretold_by_Gyromancy. ",
+  "text": "~J1(5.3)\tI've_been_expecting_you,_Harry. ~N\n\t\t\tGyromancy_foretold_it._Spin,_spin. ",
+  "spoken": "[smug] I've been expecting you, Harry. Gyromancy foretold it. Spin, spin."
+ },
+ {
+  "key": "MAP2_S01.17",
+  "xa": 81,
+  "speaker": "HARRY",
+  "orig": "~J1(1.8)\tWhat_are_you_talking_about? ~E ",
+  "text": "~J1(1.8)\tAre_you_drunk? ~E ",
+  "spoken": "Are you drunk?"
+ },
+ {
+  "key": "MAP2_S01.18",
+  "xa": 76,
+  "speaker": "DAHLIA",
+  "orig": "~J1(2.2)\tI_knew_you'd_come. ",
+  "text": "~J1(2.2)\tThey_always_come_to_me. ",
+  "spoken": "[sinister] They always come to me."
+ },
+ {
+  "key": "MAP2_S01.19",
+  "xa": 71,
+  "speaker": "DAHLIA",
+  "orig": "~J1(2.4)\tYou_want_the_girl,_right? ",
+  "text": "~J1(2.4)\tYou're_after_the_girl,_hmm? ",
+  "spoken": "You're after the girl, hmm?"
+ },
+ {
+  "key": "MAP2_S01.20",
+  "xa": 85,
+  "speaker": "HARRY",
+  "orig": "~J1(0.9)\tThe_girl? ",
+  "text": "~J1(0.9)\tThe_girl? ",
+  "spoken": "The girl?"
+ },
+ {
+  "key": "MAP2_S01.21",
+  "xa": 80,
+  "speaker": "HARRY",
+  "orig": "~J1(1.7)\tYou're_talking_about_Cheryl? ",
+  "text": "~J1(1.7)\tYou_mean_Cheryl!? ",
+  "spoken": "You mean Cheryl!?"
+ },
+ {
+  "key": "MAP2_S01.22",
+  "xa": 70,
+  "speaker": "DAHLIA",
+  "orig": "~J1(2.8)\tI_see_everything. ~E ",
+  "text": "~J1(2.8)\tI_see_everything._Even_your_singing. ~E ",
+  "spoken": "I see everything. Even your singing."
+ },
+ {
+  "key": "MAP2_S01.23",
+  "xa": 73,
+  "speaker": "HARRY",
+  "orig": "~J0(2.1)\tYou_know_something!? ~N\n\t\t\tTell_me! ~E ",
+  "text": "~J0(2.1)\tYou_know_something!? ~N\n\t\t\tSpill_it,_grandma! ~E ",
+  "spoken": "You know something!? [shouts] Spill it, grandma!"
+ },
+ {
+  "key": "MAP2_S01.24",
+  "xa": 82,
+  "speaker": "DAHLIA",
+  "orig": "~J0(1.1)\tStay_back! ~E ",
+  "text": "~J0(1.1)\tBack,_heathen! ~E ",
+  "spoken": "Back, heathen!"
+ },
+ {
+  "key": "MAP2_S01.25",
+  "xa": 62,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.0)\tNothing_is_to_be_gained_from ~N\n\t\t\tfloundering_about_at_random.  ",
+  "text": "~J1(4.0)\tYou'll_get_nowhere ~N\n\t\t\tflailing_around_like_a_tourist.  ",
+  "spoken": "You'll get nowhere flailing around like a tourist."
+ },
+ {
+  "key": "MAP2_S01.26",
+  "xa": 75,
+  "speaker": "DAHLIA",
+  "orig": "~J1(2.3)\tYou_must_follow_the_path. ",
+  "text": "~J1(2.3)\tFollow_the_path,_Harry. ",
+  "spoken": "Follow the path, Harry."
+ },
+ {
+  "key": "MAP2_S01.27",
+  "xa": 60,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.0)\tThe_path_of_the_hermit, ~N\n\t\t\tconcealed_by_Flauros... ",
+  "text": "~J1(4.0)\tThe_path_of_the_hermit, ~N\n\t\t\tconcealed_by_Flauros._Spooky,_no? ",
+  "spoken": "The path of the hermit, concealed by Flauros. Spooky, no?"
+ },
+ {
+  "key": "MAP2_S01.28",
+  "xa": 66,
+  "speaker": "HARRY",
+  "orig": "~J1(3.6)\tWhat? ~N\n\t\t\tWhat_are_you_talking_about? ~E ",
+  "text": "~J1(3.6)\tWhat? ~N\n\t\t\tLady,_I_write_novels_and_I'm_lost. ~E ",
+  "spoken": "What? Lady, I write novels and I'm lost."
+ },
+ {
+  "key": "MAP2_S01.29",
+  "xa": 64,
+  "speaker": "DAHLIA",
+  "orig": "~J0(4.0)\tHere,_the_Flauros, ~N\n\t\t\ta_cage_of_peace. ",
+  "text": "~J0(4.0)\tHere._The_Flauros, ~N\n\t\t\ta_cage_of_peace._No_refunds. ",
+  "spoken": "Here. The Flauros, a cage of peace. No refunds."
+ },
+ {
+  "key": "MAP2_S01.30",
+  "xa": 67,
+  "speaker": "DAHLIA",
+  "orig": "~J0(3.3)\tIt_can_break_through ~N\n\t\t\tthe_walls_of_darkness, ",
+  "text": "~J0(3.3)\tIt_shatters_the ~N\n\t\t\twalls_of_darkness, ",
+  "spoken": "[theatrical] It shatters the walls of darkness,"
+ },
+ {
+  "key": "MAP2_S01.31",
+  "xa": 63,
+  "speaker": "DAHLIA",
+  "orig": "~J0(3.8)\tand_counteract_the_wrath_of ~N\n\t\t\tthe_underworld. ",
+  "text": "~J0(3.8)\tand_counteracts_the_wrath ~N\n\t\t\tof_the_underworld._Probably. ",
+  "spoken": "and counteracts the wrath of the underworld. [beat] Probably."
+ },
+ {
+  "key": "MAP2_S01.32",
+  "xa": 68,
+  "speaker": "DAHLIA",
+  "orig": "~J0(3.0)\tThese_will_help_you. ~E ",
+  "text": "~J0(3.0)\tThese_will_help_you._Mostly. ~E ",
+  "spoken": "These will help you. Mostly."
+ },
+ {
+  "key": "MAP2_S01.33",
+  "xa": 58,
+  "speaker": "DAHLIA",
+  "orig": "~J0(4.2)\tMake_haste_to_the_hospital ~N\n\t\t\tbefore_it's_too_late. ~E ",
+  "text": "~J0(4.2)\tNow_hurry_to_the_hospital, ~N\n\t\t\tbefore_it's_too_late._Chop_chop! ~E ",
+  "spoken": "Now hurry to the hospital, before it's too late. Chop chop!"
+ },
+ {
+  "key": "MAP2_S01.34",
+  "xa": 74,
+  "speaker": "HARRY",
+  "orig": "~J0(2.4)\tWait! ~N\n\t\t\tDon't_go_yet! ~E ",
+  "text": "~J0(2.4)\tWait! ~N\n\t\t\tUgh._Cultists_never_stay. ~E ",
+  "spoken": "Wait! [groans] Ugh. Cultists never stay."
+ },
+ {
+  "key": "MAP3_S00.15",
+  "xa": 252,
+  "speaker": "HARRY",
+  "orig": "~J0(1.0)\tHold_it... ~E ",
+  "text": "~J0(1.0)\tFreeze. ~E ",
+  "spoken": "Freeze."
+ },
+ {
+  "key": "MAP3_S00.16",
+  "xa": 255,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(0.6)\t~E ",
+  "text": "~J0(0.6)\tEek! ~E ",
+  "spoken": "[yelps] Eek!"
+ },
+ {
+  "key": "MAP3_S00.17",
+  "xa": 205,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(1.7)\tStop! ~N\n\t\t\tDon't_shoot! ",
+  "text": "~J0(1.7)\tStop! ~N\n\t\t\tNot_the_face! ",
+  "spoken": "[panicked] Stop! Not the face!"
+ },
+ {
+  "key": "MAP3_S00.18",
+  "xa": 186,
+  "speaker": "HARRY",
+  "orig": "~J0(2.4)\tWait..._I'm_not_here_to_fight. ",
+  "text": "~J0(2.4)\tRelax..._you're_not_ugly_enough. ",
+  "spoken": "Relax... you're not ugly enough."
+ },
+ {
+  "key": "MAP3_S00.19",
+  "xa": 115,
+  "speaker": "HARRY",
+  "orig": "~J0(3.4)\tMy_name_is_Harry_Mason. ~N\n\t\t\tI'm_in_town_on_vacation. ~E ",
+  "text": "~J0(3.4)\tName's_Harry_Mason. ~N\n\t\t\tI'm_on_vacation._Allegedly. ~E ",
+  "spoken": "Name's Harry Mason. I'm on vacation. Allegedly."
+ },
+ {
+  "key": "MAP3_S00.20",
+  "xa": 138,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.8)\tThank_God. ~N\n\t\t\tAnother_human_being. ",
+  "text": "~J1(2.8)\tThank_God. ~N\n\t\t\tA_human._With_a_gun._Wonderful. ",
+  "spoken": "Thank God. A human. With a gun. Wonderful."
+ },
+ {
+  "key": "MAP3_S00.21",
+  "xa": 236,
+  "speaker": "HARRY",
+  "orig": "~J1(1.5)\tDo_you_work_here? ",
+  "text": "~J1(1.5)\tYou_work_here? ",
+  "spoken": "You work here?"
+ },
+ {
+  "key": "MAP3_S00.22",
+  "xa": 118,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.6)\tI'm_Dr._Michael_Kaufmann. ~N\n\t\t\tI_work_at_this_hospital. ~E ",
+  "text": "~J1(3.6)\tDr._Michael_Kaufmann. ~N\n\t\t\tI_practically_run_this_hospital. ~E ",
+  "spoken": "[smug] Dr. Michael Kaufmann. I practically run this hospital."
+ },
+ {
+  "key": "MAP3_S00.23",
+  "xa": 155,
+  "speaker": "HARRY",
+  "orig": "~J1(2.5)\tSo_maybe_you_can_tell_me ~N\n\t\t\twhat's_going_on? ",
+  "text": "~J1(2.5)\tGreat,_then_explain ~N\n\t\t\twhat_the_hell's_going_on? ",
+  "spoken": "Great, then explain what the hell's going on?"
+ },
+ {
+  "key": "MAP3_S00.24",
+  "xa": 200,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(1.5)\tI_really_can't_say. ",
+  "text": "~J1(1.5)\tNot_a_clue._Honest. ",
+  "spoken": "[nervous] Not a clue. Honest."
+ },
+ {
+  "key": "MAP3_S00.25",
+  "xa": 92,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(4.5)\tI_was_taking_a_nap ~N\n\t\t\tin_the_staff_room. ~N\n\t\t\tWhen_I_woke_up,_it_was_like_this. ",
+  "text": "~J1(4.5)\tI_was_napping,_uh, ~N\n\t\t\tresting_my_eyes, ~N\n\t\t\tand_woke_up_to_this. ",
+  "spoken": "I was napping, uh, resting my eyes, and woke up to this."
+ },
+ {
+  "key": "MAP3_S00.26",
+  "xa": 165,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.3)\tEveryone_seems_to ~N\n\t\t\thave_disappeared. ",
+  "text": "~J1(2.3)\tEveryone's_vanished. ~N\n\t\t\tEven_my_billing_staff. ",
+  "spoken": "Everyone's vanished. Even my billing staff."
+ },
+ {
+  "key": "MAP3_S00.27",
+  "xa": 137,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.0)\tAnd_it's_snowing_out. ~N\n\t\t\tThis_time_of_year. ",
+  "text": "~J1(3.0)\tAnd_it's_snowing. ~N\n\t\t\tOff-season._Terrible_for_tourism. ",
+  "spoken": "And it's snowing. Off-season. Terrible for tourism."
+ },
+ {
+  "key": "MAP3_S00.28",
+  "xa": 141,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.6)\tSomething's_gone ~N\n\t\t\tseriously_wrong. ",
+  "text": "~J1(2.6)\tSomething's_gone_wrong. ~N\n\t\t\tNot_my_fault,_legally. ",
+  "spoken": "Something's gone wrong. Not my fault, legally."
+ },
+ {
+  "key": "MAP3_S00.29",
+  "xa": 192,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.2)\tDid_you_see_those_monsters? ",
+  "text": "~J1(2.2)\tYou_saw_those_monsters? ",
+  "spoken": "You saw those monsters?"
+ },
+ {
+  "key": "MAP3_S00.30",
+  "xa": 136,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.4)\tHave_you_ever_seen ~N\n\t\t\tsuch_aberrations? ",
+  "text": "~J1(2.4)\tEver_seen_anything ~N\n\t\t\tso_uninsurable? ",
+  "spoken": "Ever seen anything so uninsurable?"
+ },
+ {
+  "key": "MAP3_S00.31",
+  "xa": 181,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.0)\tEver_even_heard_of_such_things? ",
+  "text": "~J1(2.0)\tWho_would_even_believe_it? ",
+  "spoken": "Who would even believe it?"
+ },
+ {
+  "key": "MAP3_S00.32",
+  "xa": 114,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.5)\tYou_and_I_both_know, ~N\n\t\t\tcreatures_like_that_don't_exist! ",
+  "text": "~J1(3.5)\tRational_men_like_us_know ~N\n\t\t\tthose_things_don't_exist! ",
+  "spoken": "Rational men like us know those things don't exist!"
+ },
+ {
+  "key": "MAP3_S00.33",
+  "xa": 213,
+  "speaker": "HARRY",
+  "orig": "~J1(1.5)\tYeah... ~E ",
+  "text": "~J1(1.5)\tSure,_buddy... ~E ",
+  "spoken": "[skeptical] Sure, buddy..."
+ },
+ {
+  "key": "MAP3_S00.34",
+  "xa": 167,
+  "speaker": "HARRY",
+  "orig": "~J1(2.4)\tHave_you_seen ~N\n\t\t\ta_little_girl_anywhere? ",
+  "text": "~J1(2.4)\tHave_you_seen ~N\n\t\t\ta_little_girl_around? ",
+  "spoken": "Have you seen a little girl around?"
+ },
+ {
+  "key": "MAP3_S00.35",
+  "xa": 202,
+  "speaker": "HARRY",
+  "orig": "~J1(1.6)\tI'm_looking_for_my_daughter. ",
+  "text": "~J1(1.6)\tI'm_looking_for_my_daughter. ",
+  "spoken": "I'm looking for my daughter."
+ },
+ {
+  "key": "MAP3_S00.36",
+  "xa": 135,
+  "speaker": "HARRY",
+  "orig": "~J1(3.0)\tShe's_only_seven. ~N\n\t\t\tShort,_black_hair. ",
+  "text": "~J1(3.0)\tShe's_seven. ~N\n\t\t\tShort,_black_hair,_smarter_than_me. ",
+  "spoken": "She's seven. Short, black hair, smarter than me."
+ },
+ {
+  "key": "MAP3_S00.37",
+  "xa": 164,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.8)\tShe's_missing? ~N\n\t\t\tI'm_sorry. ",
+  "text": "~J1(2.8)\tShe's_missing? ~N\n\t\t\tOh._How_unfortunate. ",
+  "spoken": "She's missing? Oh. How unfortunate."
+ },
+ {
+  "key": "MAP3_S00.38",
+  "xa": 103,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(4.0)\tBut_with_all_those ~N\n\t\t\tmonsters_around, ~N\n\t\t\tI_highly_doubt_that_she's... ",
+  "text": "~J1(4.0)\tBut_with_all_those ~N\n\t\t\tmonsters_around,_frankly, ~N\n\t\t\ther_odds_of_being... ",
+  "spoken": "But with all those monsters around, frankly, her odds of being..."
+ },
+ {
+  "key": "MAP3_S00.39",
+  "xa": 217,
+  "speaker": "HARRY",
+  "orig": "~J1(1.7)\t",
+  "text": "~J1(1.7)\tExcuse_me?",
+  "spoken": "[menacing] Excuse me?"
+ },
+ {
+  "key": "MAP3_S00.40",
+  "xa": 163,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.8)\tSorry, ~N\n\t\t\tI_didn't_mean_to_alarm_you. ~E ",
+  "text": "~J1(2.8)\tSorry!_Sorry. ~N\n\t\t\tPlease_put_the_gun_down. ~E ",
+  "spoken": "[panicked] Sorry! Sorry. Please put the gun down."
+ },
+ {
+  "key": "MAP3_S00.41",
+  "xa": 182,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(2.6)\tYour_wife,_she's_here_with_you? ",
+  "text": "~J0(2.6)\tYour_wife_here_too?_Rich,_perhaps? ",
+  "spoken": "Your wife here too? Rich, perhaps?"
+ },
+ {
+  "key": "MAP3_S00.42",
+  "xa": 95,
+  "speaker": "HARRY",
+  "orig": "~J0(5.0)\tShe_died_four_years_ago. ~N\n\t\t\tNow,_it's_just_me_and_my_daughter. ",
+  "text": "~J0(5.0)\tShe_passed_four_years_ago. ~N\n\t\t\tIt's_just_me_and_Cheryl_now. ",
+  "spoken": "[quietly] She passed four years ago. It's just me and Cheryl now."
+ },
+ {
+  "key": "MAP3_S00.43",
+  "xa": 185,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(2.6)\tI_see... ~N\n\t\t\tI'm_sorry. ~E ",
+  "text": "~J0(2.6)\tOh... ~N\n\t\t\tCondolences._Anyway. ~E ",
+  "spoken": "Oh... Condolences. Anyway."
+ },
+ {
+  "key": "MAP3_S00.44",
+  "xa": 190,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(2.3)\tWell,_I'd_better_be_going. ",
+  "text": "~J0(2.3)\tWell!_Must_dash. ",
+  "spoken": "Well! Must dash."
+ },
+ {
+  "key": "MAP3_S00.45",
+  "xa": 158,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(2.7)\tI_can't_just_sit ~N\n\t\t\taround_here_doing_nothing. ",
+  "text": "~J0(2.7)\tI_can't_just_sit_around ~N\n\t\t\there._Unbillable_hours. ",
+  "spoken": "I can't just sit around here. Unbillable hours."
+ },
+ {
+  "key": "MAP3_S00.46",
+  "xa": 178,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(2.8)\tSo_long. ~N\n\t\t\tGood_luck_out_there. ~E ",
+  "text": "~J0(2.8)\tSo_long. ~N\n\t\t\tTry_not_to_get_eaten. ~E ",
+  "spoken": "So long. Try not to get eaten."
+ }
+]

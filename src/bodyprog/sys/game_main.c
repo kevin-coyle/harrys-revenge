@@ -2183,8 +2183,10 @@ void MainLoop(void) // 0x80032EE0
         {
             extern void Pc_Rando_Update(void);
             extern void Pc_Revenge_Update(void);
+            extern void Pc_Music_Update(void);
             Pc_Rando_Update();
             Pc_Revenge_Update();
+            Pc_Music_Update();
         }
         {
             extern void Pc_RandoLua_OnUpdate(void);

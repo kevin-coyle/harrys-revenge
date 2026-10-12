@@ -1,0 +1,1154 @@
+[
+ {
+  "key": "MAP7_S00.15",
+  "xa": 550,
+  "speaker": "HARRY",
+  "orig": "~J0(1.2)\t~E ",
+  "text": "~J0(1.2)\t~E ",
+  "spoken": "[gasps]"
+ },
+ {
+  "key": "MAP7_S00.16",
+  "xa": 559,
+  "speaker": "HARRY",
+  "orig": "~J1(1.2)\tLisa? ",
+  "text": "~J1(1.2)\tLisa?_Hey. ",
+  "spoken": "Lisa? Hey."
+ },
+ {
+  "key": "MAP7_S00.17",
+  "xa": 487,
+  "speaker": "HARRY",
+  "orig": "~J1(3.8)\tWhat_happened? ~N\n\t\t\tWhere's_Alessa_and_Dahlia? ",
+  "text": "~J1(3.8)\tLisa,_what_happened? ~N\n\t\t\tWhere'd_Dahlia_and_Alessa_run_off_to? ",
+  "spoken": "[confused] Lisa, what happened? Where'd Dahlia and Alessa run off to?"
+ },
+ {
+  "key": "MAP7_S00.18",
+  "xa": 547,
+  "speaker": "LISA",
+  "orig": "~J1(1.6)\tHarry,_listen. ",
+  "text": "~J1(1.6)\tHarry,_listen_up. ",
+  "spoken": "[nervous] Harry, listen up."
+ },
+ {
+  "key": "MAP7_S00.19",
+  "xa": 501,
+  "speaker": "LISA",
+  "orig": "~J1(2.8)\tSomething_you_said_before ~N\n\t\t\thas_been_bothering_me. ",
+  "text": "~J1(2.8)\tSomething_you_said_before ~N\n\t\t\tkeeps_bugging_me. ",
+  "spoken": "Something you said before keeps bugging me."
+ },
+ {
+  "key": "MAP7_S00.20",
+  "xa": 516,
+  "speaker": "LISA",
+  "orig": "~J1(2.6)\tI_just_can't_get_it_out_of_my_head. ",
+  "text": "~J1(2.6)\tLike_a_song,_but_creepier. ",
+  "spoken": "Like a song, but creepier."
+ },
+ {
+  "key": "MAP7_S00.21",
+  "xa": 540,
+  "speaker": "HARRY",
+  "orig": "~J1(1.6)\tWhat_is_it_Lisa? ",
+  "text": "~J1(1.6)\tSpit_it_out,_Lisa. ",
+  "spoken": "Spit it out, Lisa."
+ },
+ {
+  "key": "MAP7_S00.22",
+  "xa": 513,
+  "speaker": "LISA",
+  "orig": "~J1(2.5)\tSo_I_went_to_look ~N\n\t\t\tin_the_basement. ",
+  "text": "~J1(2.5)\tSo_I_checked_out ~N\n\t\t\tthe_basement. ",
+  "spoken": "So I checked out the basement."
+ },
+ {
+  "key": "MAP7_S00.23",
+  "xa": 504,
+  "speaker": "LISA",
+  "orig": "~J1(3.0)\tEven_though_I_was_scared ~N\n\t\t\tas_hell. ",
+  "text": "~J1(3.0)\tEven_though_I_nearly ~N\n\t\t\tpeed_myself. ",
+  "spoken": "[nervous] Even though I nearly peed myself."
+ },
+ {
+  "key": "MAP7_S00.24",
+  "xa": 496,
+  "speaker": "LISA",
+  "orig": "~J1(3.1)\tLike_you_said, ~N\n\t\t\tthere_were_these_creepy_rooms. ",
+  "text": "~J1(3.1)\tYou_were_right, ~N\n\t\t\ttotally_creepy_rooms. ",
+  "spoken": "You were right, totally creepy rooms."
+ },
+ {
+  "key": "MAP7_S00.25",
+  "xa": 503,
+  "speaker": "LISA",
+  "orig": "~J1(3.2) \tBut_nothing_really_unusual ~N\n\t\t\tdown_there. ",
+  "text": "~J1(3.2) \tBut_nothing_weird. ~N\n\t\t\tLike,_weird-weird. ",
+  "spoken": "But nothing weird. Like, weird-weird."
+ },
+ {
+  "key": "MAP7_S00.26",
+  "xa": 488,
+  "speaker": "LISA",
+  "orig": "~J1(3.6)\tBut_while_I_was_down_there, ~N\n\t\t\tI_got_this_weird_feeling. ",
+  "text": "~J1(3.6)\tBut_while_I_was_down_there, ~N\n\t\t\tI_got_this_really_weird_feeling. ",
+  "spoken": "But while I was down there, I got this really weird feeling."
+ },
+ {
+  "key": "MAP7_S00.27",
+  "xa": 509,
+  "speaker": "LISA",
+  "orig": "~J1(2.2)\tLike_I'd_been_there_before. ",
+  "text": "~J1(2.2)\tLike_a_bad_deja_vu. ",
+  "spoken": "Like a bad deja vu."
+ },
+ {
+  "key": "MAP7_S00.28",
+  "xa": 475,
+  "speaker": "LISA",
+  "orig": "~J1(5.0)\tLike_something_happened_there, ~N\n\t\t\tbut_I_can't_quite_remember ~N\n\t\t\tsomehow. ",
+  "text": "~J1(5.0)\tLike_something_happened_there, ~N\n\t\t\tbut_my_brain_won't_cough_it_up. ~N\n\t\t\tWeird,_huh? ",
+  "spoken": "Like something happened there, but my brain won't cough it up. Weird, huh?"
+ },
+ {
+  "key": "MAP7_S00.29",
+  "xa": 549,
+  "speaker": "HARRY",
+  "orig": "~J1(1.8)\tWhat_was_it? ~E ",
+  "text": "~J1(1.8)\tSuch_as? ~E ",
+  "spoken": "Such as?"
+ },
+ {
+  "key": "MAP7_S00.30",
+  "xa": 508,
+  "speaker": "LISA",
+  "orig": "~J0(2.4)\tHarry..._help_me... ",
+  "text": "~J0(2.4)\tHarry..._please_help_me... ",
+  "spoken": "[crying] Harry... please help me..."
+ },
+ {
+  "key": "MAP7_S00.31",
+  "xa": 497,
+  "speaker": "LISA",
+  "orig": "~J0(3.2)\tI'm_so_scared. ~N\n\t\t\tI_can't_take_this. ",
+  "text": "~J0(3.2)\tI'm_so_scared. ~N\n\t\t\tI_can't_do_this_anymore. ",
+  "spoken": "I'm so scared. I can't do this anymore."
+ },
+ {
+  "key": "MAP7_S00.32",
+  "xa": 528,
+  "speaker": "HARRY",
+  "orig": "~J0(2.0)\tIt's_only_a_temporary_thing. ",
+  "text": "~J0(2.0)\tRelax,_it's_temporary. ",
+  "spoken": "Relax, it's temporary."
+ },
+ {
+  "key": "MAP7_S00.33",
+  "xa": 507,
+  "speaker": "HARRY",
+  "orig": "~J0(2.7)\tYou're_in_shock_from ~N\n\t\t\twhen_you_were_knocked_out. ",
+  "text": "~J0(2.7)\tYou_got_knocked_out. ~N\n\t\t\tIt's_just_shock. ",
+  "spoken": "You got knocked out. It's just shock."
+ },
+ {
+  "key": "MAP7_S00.34",
+  "xa": 499,
+  "speaker": "HARRY",
+  "orig": "~J0(2.7)\tDon't_fret_about_it, ~N\n\t\t\tyou'll_remember_after_a_while... ~E ",
+  "text": "~J0(2.7)\tDon't_sweat_it, ~N\n\t\t\tit'll_come_back._Like_herpes. ~E ",
+  "spoken": "[reassuring] Don't sweat it, it'll come back. Like herpes."
+ },
+ {
+  "key": "MAP7_S00.35",
+  "xa": 558,
+  "speaker": "LISA",
+  "orig": "~J0(1.5)\tNo. ",
+  "text": "~J0(1.5)\tNo. ",
+  "spoken": "No."
+ },
+ {
+  "key": "MAP7_S00.36",
+  "xa": 532,
+  "speaker": "LISA",
+  "orig": "~J0(2.0)\tYou_don't_understand... ~E ",
+  "text": "~J0(2.0)\tYou_don't_get_it... ~E ",
+  "spoken": "[sad] You don't get it..."
+ },
+ {
+  "key": "MAP7_S00.37",
+  "xa": 505,
+  "speaker": "HARRY",
+  "orig": "~J0(2.8)\tWait! ~N\n\t\t\tWhere_do_you_think ~N\n\t\t\tyou're_going? ~E ",
+  "text": "~J0(2.8)\tHey! ~N\n\t\t\tWhere_you_going? ~N\n\t\t\tI_was_being_nice! ~E ",
+  "spoken": "[shouts] Hey! Where you going? I was being nice!"
+ },
+ {
+  "key": "MAP7_S00.42",
+  "xa": 502,
+  "speaker": "HARRY",
+  "orig": "~J0(2.4)\tI'm_being_summoned... ~E ",
+  "text": "~J0(2.4)\tGreat._Now_I'm_being_summoned. ~E ",
+  "spoken": "[sighs] Great. Now I'm being summoned."
+ },
+ {
+  "key": "MAP7_S00.43",
+  "xa": 492,
+  "speaker": "HARRY",
+  "orig": "~J0(2.1)\tWhat_happened_in_this_town? ",
+  "text": "~J0(2.1)\tWhat_the_hell_happened_to_this_town? ",
+  "spoken": "What the hell happened to this town?"
+ },
+ {
+  "key": "MAP7_S00.44",
+  "xa": 491,
+  "speaker": "HARRY",
+  "orig": "~J0(2.7)\tWhat_could_be_making_things ~N\n\t\t\tlike_this? ",
+  "text": "~J0(2.7)\tWho_decorated_this_place, ~N\n\t\t\tSatan's_interior_designer? ",
+  "spoken": "[sarcastic] Who decorated this place, Satan's interior designer?"
+ },
+ {
+  "key": "MAP7_S00.45",
+  "xa": 474,
+  "speaker": "HARRY",
+  "orig": "~J0(4.3)\tI_have_a_feeling_if_I_take ~N\n\t\t\tthe_elevator_down_I'll_find_it. ~E ",
+  "text": "~J0(4.3)\tSomething_tells_me_the_answer's ~N\n\t\t\tat_the_bottom_of_that_elevator. ~E ",
+  "spoken": "Something tells me the answer's at the bottom of that elevator."
+ },
+ {
+  "key": "MAP7_S00.46",
+  "xa": 512,
+  "speaker": "HARRY",
+  "orig": "~J0(1.5)\t_ ~E ",
+  "text": "~J0(1.5)\t_ ~E ",
+  "spoken": "[sighs]"
+ },
+ {
+  "key": "MAP7_S01.15",
+  "xa": 569,
+  "speaker": "HARRY",
+  "orig": "~J0(5.5)\t",
+  "text": "~J0(5.5)\t",
+  "spoken": "[breathing heavily]"
+ },
+ {
+  "key": "MAP7_S01.16",
+  "xa": 587,
+  "speaker": "HARRY",
+  "orig": "~J0(2.8)\tDamn! ~N\n\t\t\tWhat's_that? ~E ",
+  "text": "~J0(2.8)\tOh_hell! ~N\n\t\t\tWhat_now? ~E ",
+  "spoken": "Oh hell! What now?"
+ },
+ {
+  "key": "MAP7_S01.17",
+  "xa": 594,
+  "speaker": "LISA",
+  "orig": "~J0(1.2)\tHarry? ~E ",
+  "text": "~J0(1.2)\tHarry? ~E ",
+  "spoken": "[weakly] Harry?"
+ },
+ {
+  "key": "MAP7_S01.18",
+  "xa": 581,
+  "speaker": "HARRY",
+  "orig": "~J1(2.6)\tLisa... ~N\n\t\t\tWhat's_the_matter_with_you? ",
+  "text": "~J1(2.6)\tLisa... ~N\n\t\t\tYou're_bleeding._Like,_a_lot. ",
+  "spoken": "[concerned] Lisa... You're bleeding. Like, a lot."
+ },
+ {
+  "key": "MAP7_S01.19",
+  "xa": 590,
+  "speaker": "LISA",
+  "orig": "~J1(1.8)\tI_get_it_now... ",
+  "text": "~J1(1.8)\tI_get_it_now... ",
+  "spoken": "[quietly] I get it now..."
+ },
+ {
+  "key": "MAP7_S01.20",
+  "xa": 574,
+  "speaker": "LISA",
+  "orig": "~J1(4.0)\tWhy_I'm_still_alive_even ~N\n\t\t\tthough_everyone_else's_dead. ",
+  "text": "~J1(4.0)\tWhy_I'm_still_alive ~N\n\t\t\twhen_everybody_else_is_dead. ",
+  "spoken": "Why I'm still alive when everybody else is dead."
+ },
+ {
+  "key": "MAP7_S01.21",
+  "xa": 573,
+  "speaker": "LISA",
+  "orig": "~J1(4.0)\tI'm_not_the_only_one ~N\n\t\t\twho's_still_walking_around. ",
+  "text": "~J1(4.0)\tI'm_not_the_only_one ~N\n\t\t\tstill_walking_around. ",
+  "spoken": "I'm not the only one still walking around."
+ },
+ {
+  "key": "MAP7_S01.22",
+  "xa": 589,
+  "speaker": "LISA",
+  "orig": "~J1(1.7)\tI'm_the_same_as_them. ",
+  "text": "~J1(1.7)\tI'm_one_of_them. ",
+  "spoken": "I'm one of them."
+ },
+ {
+  "key": "MAP7_S01.23",
+  "xa": 583,
+  "speaker": "LISA",
+  "orig": "~J1(2.8)\tI_just_hadn't_noticed_it_before. ~E ",
+  "text": "~J1(2.8)\tI_just_never_noticed_before. ~E ",
+  "spoken": "[crying] I just never noticed before."
+ },
+ {
+  "key": "MAP7_S01.24",
+  "xa": 593,
+  "speaker": "HARRY",
+  "orig": "~J1(1.3)\tLisa? ",
+  "text": "~J1(1.3)\tLisa? ",
+  "spoken": "Lisa?"
+ },
+ {
+  "key": "MAP7_S01.25",
+  "xa": 576,
+  "speaker": "LISA",
+  "orig": "~J1(3.6)\tStay_by_me,_Harry. ~N\n\t\t\tPlease. ",
+  "text": "~J1(3.6)\tStay_with_me,_Harry. ~N\n\t\t\tPlease. ",
+  "spoken": "Stay with me, Harry. Please."
+ },
+ {
+  "key": "MAP7_S01.26",
+  "xa": 577,
+  "speaker": "LISA",
+  "orig": "~J1(3.3)\tI'm_so_scared. ~N\n\t\t\tHelp_me... ~E ",
+  "text": "~J1(3.3)\tI'm_so_scared. ~N\n\t\t\tHelp_me... ~E ",
+  "spoken": "[crying] I'm so scared. Help me..."
+ },
+ {
+  "key": "MAP7_S01.27",
+  "xa": 586,
+  "speaker": "LISA",
+  "orig": "~J0(2.4)\tSave_me_from_them. ",
+  "text": "~J0(2.4)\tSave_me_from_them. ",
+  "spoken": "Save me from them."
+ },
+ {
+  "key": "MAP7_S01.28",
+  "xa": 575,
+  "speaker": "LISA",
+  "orig": "~J0(4.0)\tPlease...__Harry... ~E ",
+  "text": "~J0(4.0)\tPlease..._Harry... ~E ",
+  "spoken": "[sobbing] Please... Harry..."
+ },
+ {
+  "key": "MAP7_S02.32",
+  "xa": 564,
+  "speaker": "LISA",
+  "orig": "~J0(0.7)\t_ ",
+  "text": "~J0(0.7)\t_ ",
+  "spoken": ""
+ },
+ {
+  "key": "MAP7_S02.47",
+  "xa": 616,
+  "speaker": "DAHLIA",
+  "orig": "~J1(6.4)\tEverything_is_going ~N\n\t\t\taccording_to_plan. ~N\n\t\t\tSheltered_in_the_womb. ",
+  "text": "~J1(6.4)\tEverything's_going_exactly ~N\n\t\t\taccording_to_my_plan. ~N\n\t\t\tSnug_as_a_bug_in_a_womb. ",
+  "spoken": "[smug] Everything's going exactly according to my plan. Snug as a bug in a womb."
+ },
+ {
+  "key": "MAP7_S02.48",
+  "xa": 698,
+  "speaker": "DAHLIA",
+  "orig": "~J1(1.8)\tBut_it's_not_done_yet. ",
+  "text": "~J1(1.8)\tBut_it's_not_cooked_yet. ",
+  "spoken": "But it's not cooked yet."
+ },
+ {
+  "key": "MAP7_S02.49",
+  "xa": 632,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.5)\tHalf_the_soul_is_lost. ~N\n\t\t\tThat_is_why_the_seed ~N\n\t\t\tlies_dormant. ",
+  "text": "~J1(4.5)\tHalf_her_soul_went_missing. ~N\n\t\t\tSo_the_seed_is_just ~N\n\t\t\tsitting_there,_napping. ",
+  "spoken": "Half her soul went missing. So the seed is just sitting there, napping."
+ },
+ {
+  "key": "MAP7_S02.50",
+  "xa": 655,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.6)\tAnd_what_soul_remains ~N\n\t\t\tcaptured_in_that_husk, ",
+  "text": "~J1(3.6)\tAnd_what's_left_of_her_soul, ~N\n\t\t\tlocked_in_that_broken_body, ",
+  "spoken": "And what's left of her soul, locked in that broken body,"
+ },
+ {
+  "key": "MAP7_S02.51",
+  "xa": 637,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.7)\tis_buried_deep_down ~N\n\t\t\tin_the_subconscious. ",
+  "text": "~J1(3.7)\tis_hiding_way_down ~N\n\t\t\tin_her_subconscious. ",
+  "spoken": "is hiding way down in her subconscious."
+ },
+ {
+  "key": "MAP7_S02.52",
+  "xa": 671,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.6)\tAre_you_trying_to_say ~N\n\t\t\tit_won't_work!? ",
+  "text": "~J1(2.6)\tAre_you_telling_me ~N\n\t\t\tthis_won't_work!? ",
+  "spoken": "[panicked] Are you telling me this won't work!?"
+ },
+ {
+  "key": "MAP7_S02.53",
+  "xa": 682,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.0)\tThat_wasn't_our_agreement! ",
+  "text": "~J1(2.0)\tThat's_not_what_I_paid_for! ",
+  "spoken": "[whiny] That's not what I paid for!"
+ },
+ {
+  "key": "MAP7_S02.54",
+  "xa": 643,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.0)\tNo,_no. ~N\n\t\t\tThese_are_just_stalling_tactics. ",
+  "text": "~J1(4.0)\tNo,_no._Calm_down. ~N\n\t\t\tIt's_just_a_minor_delay. ",
+  "spoken": "No, no. Calm down. It's just a minor delay."
+ },
+ {
+  "key": "MAP7_S02.55",
+  "xa": 622,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.4)\tIf_we_lend_a_hand, ~N\n\t\t\twe_will_be_able_to_get_power. ",
+  "text": "~J1(4.4)\tIf_we_give_it_a_nudge, ~N\n\t\t\twe'll_still_get_our_power. ",
+  "spoken": "If we give it a nudge, we'll still get our power."
+ },
+ {
+  "key": "MAP7_S02.56",
+  "xa": 625,
+  "speaker": "DAHLIA",
+  "orig": "~J1(5.4)\tNever_fear. ~N\n\t\t\tThe_promise_shall_not_be_broken. ",
+  "text": "~J1(5.4)\tRelax,_doctor. ~N\n\t\t\tYou'll_get_your_little_payday. ",
+  "spoken": "[condescending] Relax, doctor. You'll get your little payday."
+ },
+ {
+  "key": "MAP7_S02.57",
+  "xa": 623,
+  "speaker": "DAHLIA",
+  "orig": "~J1(5.0)\tBut_the_power_we_could ~N\n\t\t\tdraw_now_would_be ~N\n\t\t\tvery_weak;_almost_nothing. ",
+  "text": "~J1(5.0)\tBut_the_power_we'd_get ~N\n\t\t\tright_now_would_be ~N\n\t\t\tpathetic._Like_you. ",
+  "spoken": "But the power we'd get right now would be pathetic. Like you."
+ },
+ {
+  "key": "MAP7_S02.58",
+  "xa": 673,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.2)\tUnless_we_get_the_other ~N\n\t\t\thalf_of_the_soul... ",
+  "text": "~J1(3.2)\tUnless_we_find_the ~N\n\t\t\tother_half_of_her_soul... ",
+  "spoken": "Unless we find the other half of her soul..."
+ },
+ {
+  "key": "MAP7_S02.59",
+  "xa": 669,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.1)\tWe'll_use_a_magical_spell. ",
+  "text": "~J1(3.1)\tWe'll_use_a_little_magic_spell. ",
+  "spoken": "[sinister] We'll use a little magic spell."
+ },
+ {
+  "key": "MAP7_S02.60",
+  "xa": 618,
+  "speaker": "DAHLIA",
+  "orig": "~J1(6.0)\tFeeling_this_child's_pain, ~N\n\t\t\tit's_sure_to_come. ",
+  "text": "~J1(6.0)\tFeeling_this_child's_pain, ~N\n\t\t\tthe_other_half_will_come_home. ",
+  "spoken": "Feeling this child's pain, the other half will come home."
+ },
+ {
+  "key": "MAP7_S02.61",
+  "xa": 678,
+  "speaker": "DAHLIA",
+  "orig": "~J1(2.8)\tBut_that_will_take_time... ~E ",
+  "text": "~J1(2.8)\tBut_that_takes_time._Patience. ~E ",
+  "spoken": "But that takes time. Patience."
+ },
+ {
+  "key": "MAP7_S02.62",
+  "xa": 672,
+  "speaker": "ALESSA",
+  "orig": "~J0(2.9)\t",
+  "text": "~J0(2.9)\t",
+  "spoken": "[crying]"
+ },
+ {
+  "key": "MAP7_S02.63",
+  "xa": 680,
+  "speaker": "ALESSA",
+  "orig": "~J0(3.0)\tNo! ~N\n\t\t\tI_don't_want_to! ",
+  "text": "~J0(3.0)\tNo! ~N\n\t\t\tI_don't_want_to! ",
+  "spoken": "No! I don't want to!"
+ },
+ {
+  "key": "MAP7_S02.64",
+  "xa": 681,
+  "speaker": "DAHLIA",
+  "orig": "~J0(2.7)\tDo_what_mommy_tells_you,_now. ",
+  "text": "~J0(2.7)\tDo_what_mommy_says,_sweetie. ",
+  "spoken": "[sweetly] Do what mommy says, sweetie."
+ },
+ {
+  "key": "MAP7_S02.65",
+  "xa": 605,
+  "speaker": "DAHLIA",
+  "orig": "~J0(6.3)\tI_just_want_you_to_lend_me ~N\n\t\t\ta_teeny_bit_of_your_power. ~N\n\t\t\tThat's_all. ",
+  "text": "~J0(6.3)\tI_just_want_to_borrow ~N\n\t\t\ta_teeny_bit_of_your_power. ~N\n\t\t\tThat's_all,_I_promise. ",
+  "spoken": "I just want to borrow a teeny bit of your power. That's all, I promise."
+ },
+ {
+  "key": "MAP7_S02.66",
+  "xa": 692,
+  "speaker": "ALESSA",
+  "orig": "~J2(1.2)\tNo! ~E ",
+  "text": "~J2(1.2)\tNo! ~E ",
+  "spoken": "No!"
+ },
+ {
+  "key": "MAP7_S02.67",
+  "xa": 617,
+  "speaker": "ALESSA",
+  "orig": "~J0(2.0)\tI_don't_want_to_do_it! ~E ",
+  "text": "~J0(2.0)\tI_don't_want_to_do_it! ~E ",
+  "spoken": "[crying] I don't want to do it!"
+ },
+ {
+  "key": "MAP7_S02.68",
+  "xa": 649,
+  "speaker": "DAHLIA",
+  "orig": "~J1(5.8)\tIt_will_make_everyone_happy... ~N\n\t\t\tand_it's_for_your_own_good,_too. ",
+  "text": "~J1(5.8)\tIt'll_make_everyone_happy... ~N\n\t\t\tand_mommy_most_of_all. ",
+  "spoken": "It'll make everyone happy... and mommy most of all."
+ },
+ {
+  "key": "MAP7_S02.69",
+  "xa": 646,
+  "speaker": "ALESSA",
+  "orig": "~J1(4.3)\tOh,_but_mommy. ~N\n\t\t\tI_just_want_to_be_with_you. ",
+  "text": "~J1(4.3)\tBut_mommy... ~N\n\t\t\tI_just_want_to_be_with_you. ",
+  "spoken": "But mommy... I just want to be with you."
+ },
+ {
+  "key": "MAP7_S02.70",
+  "xa": 607,
+  "speaker": "ALESSA",
+  "orig": "~J1(4.3)\tJust_two_of_us. ~N\n\t\t\tPlease_understand. ~E ",
+  "text": "~J1(4.3)\tJust_us_two. ~N\n\t\t\tPlease_understand. ~E ",
+  "spoken": "Just us two. Please understand."
+ },
+ {
+  "key": "MAP7_S02.71",
+  "xa": 713,
+  "speaker": "DAHLIA",
+  "orig": "~J1(7.1)\tOh,_yes,_I_see... ~N\n\t\t\tMaybe_mommy_has_been_wrong. ",
+  "text": "~J1(7.1)\tOh,_yes,_I_see... ~N\n\t\t\tMaybe_mommy_was_wrong. ",
+  "spoken": "Oh, yes, I see... Maybe mommy was wrong."
+ },
+ {
+  "key": "MAP7_S02.72",
+  "xa": 624,
+  "speaker": "ALESSA",
+  "orig": "~J1(1.3)\tMommy... ",
+  "text": "~J1(1.3)\tMommy... ",
+  "spoken": "Mommy..."
+ },
+ {
+  "key": "MAP7_S02.73",
+  "xa": 608,
+  "speaker": "DAHLIA",
+  "orig": "~J1(5.3)\tWhy_didn't_I_see_this_before? ~N\n\t\t\tThere's_no_reason_to_wait... ",
+  "text": "~J1(5.3)\tWhy_didn't_I_see_it_sooner? ~N\n\t\t\tNo_reason_to_wait_at_all... ",
+  "spoken": "[sinister] Why didn't I see it sooner? No reason to wait at all..."
+ },
+ {
+  "key": "MAP7_S02.74",
+  "xa": 636,
+  "speaker": "DAHLIA",
+  "orig": "~J1(7.2)\tHerein_lies_the_mother's_womb, ~N\n\t\t\tcontaining_the_power ~N\n\t\t\tto_create_life. ",
+  "text": "~J1(7.2)\tHere_lies_the_mother's_womb, ~N\n\t\t\tholding_the_power ~N\n\t\t\tto_create_life. ",
+  "spoken": "Here lies the mother's womb, holding the power to create life."
+ },
+ {
+  "key": "MAP7_S02.75",
+  "xa": 710,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.2)\tI_could_have_done_it_all_myself. ",
+  "text": "~J1(4.2)\tI_could_have_done_it_all_myself. ",
+  "spoken": "[smug] I could have done it all myself."
+ },
+ {
+  "key": "MAP7_S03.15",
+  "xa": 628,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.9)\tI_was_shocked_to_realize ~N\n\t\t\tthe_talisman_of_Metraton ~N\n\t\t\twas_being_used. ",
+  "text": "~J1(4.9)\tImagine_my_shock_when ~N\n\t\t\tsomeone_used_the ~N\n\t\t\ttalisman_of_Metatron. ",
+  "spoken": "[annoyed] Imagine my shock when someone used the talisman of Metatron."
+ },
+ {
+  "key": "MAP7_S03.16",
+  "xa": 654,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.0)\tIn_spite_of_the_lost_soul ~N\n\t\t\treturning_at_last, ",
+  "text": "~J1(4.0)\tJust_as_the_lost_half ~N\n\t\t\tof_her_soul_came_home, ",
+  "spoken": "Just as the lost half of her soul came home,"
+ },
+ {
+  "key": "MAP7_S03.17",
+  "xa": 627,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.3)\tJust_a_little_longer_and_all ~N\n\t\t\twould_have_been_for_naught. ",
+  "text": "~J1(4.3)\tA_little_longer_and ~N\n\t\t\tall_my_hard_work_would_be_wasted. ",
+  "spoken": "A little longer and all my hard work would be wasted."
+ },
+ {
+  "key": "MAP7_S03.18",
+  "xa": 610,
+  "speaker": "DAHLIA",
+  "orig": "~J1(7.0)\tIt's_all_because_of_that_man. ~N\n\t\t\tWe_must_be_thankful_to_him. ",
+  "text": "~J1(7.0)\tAnd_it's_all_thanks_to_that_man. ~N\n\t\t\tRemind_me_to_send_a_fruit_basket. ",
+  "spoken": "[smug] And it's all thanks to that man. Remind me to send a fruit basket."
+ },
+ {
+  "key": "MAP7_S03.19",
+  "xa": 668,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.2)\tEven_though_Alessa ~N\n\t\t\thas_been_stopped, ",
+  "text": "~J1(3.2)\tEven_though_Alessa ~N\n\t\t\thas_been_stopped, ",
+  "spoken": "Even though Alessa has been stopped,"
+ },
+ {
+  "key": "MAP7_S03.20",
+  "xa": 604,
+  "speaker": "DAHLIA",
+  "orig": "~J1(8.5)\this_little_girl_still_has_to_go. ~N\n\t\t\tWhat_a_pity... ~E ",
+  "text": "~J1(8.5)\this_little_girl_still_has_to_go. ~N\n\t\t\tSuch_a_shame._Not_really. ~E ",
+  "spoken": "[sinister] his little girl still has to go. Such a shame. Not really."
+ },
+ {
+  "key": "MAP7_S03.21",
+  "xa": 700,
+  "speaker": "HARRY",
+  "orig": "~J0(1.2)\tFreeze! ~E ",
+  "text": "~J0(1.2)\tFreeze,_lady! ~E ",
+  "spoken": "[shouts] Freeze, lady!"
+ },
+ {
+  "key": "MAP7_S03.22",
+  "xa": 679,
+  "speaker": "HARRY",
+  "orig": "~J0(2.6)\tWhat_in_the_devil's_name...! ~E ",
+  "text": "~J0(2.6)\tWhat_in_the_hell_is_going_on...! ~E ",
+  "spoken": "What in the hell is going on...!"
+ },
+ {
+  "key": "MAP7_S03.23",
+  "xa": 711,
+  "speaker": "HARRY",
+  "orig": "~J0(1.1)\t~E ",
+  "text": "~J0(1.1)\t~E ",
+  "spoken": "[gasps]"
+ },
+ {
+  "key": "MAP7_S03.24",
+  "xa": 715,
+  "speaker": "HARRY",
+  "orig": "~J1(1.1)\tDahlia! ",
+  "text": "~J1(1.1)\tRadio_lady! ",
+  "spoken": "Radio lady!"
+ },
+ {
+  "key": "MAP7_S03.25",
+  "xa": 621,
+  "speaker": "DAHLIA",
+  "orig": "~J1(5.6)\tWell,_well,_well. ~N\n\t\t\tTo_think_you'd_make_it_this_far. ",
+  "text": "~J1(5.6)\tWell,_well,_well._My_radio_pal. ~N\n\t\t\tDidn't_think_you'd_make_it. ",
+  "spoken": "[smug] Well, well, well. My radio pal. Didn't think you'd make it."
+ },
+ {
+  "key": "MAP7_S03.26",
+  "xa": 677,
+  "speaker": "HARRY",
+  "orig": "~J1(2.5)\tWhere's_Cheryl!? ~N\n\t\t\tWhat_have_you_done_to_her!? ",
+  "text": "~J1(2.5)\tWhere's_Cheryl!? ~N\n\t\t\tWhat'd_you_do_to_her,_you_hag!? ",
+  "spoken": "[shouts] Where's Cheryl!? What'd you do to her, you hag!?"
+ },
+ {
+  "key": "MAP7_S03.27",
+  "xa": 691,
+  "speaker": "DAHLIA",
+  "orig": "~J1(2.0)\tWhat_are_you_talking_about? ",
+  "text": "~J1(2.0)\tWhatever_do_you_mean? ",
+  "spoken": "Whatever do you mean?"
+ },
+ {
+  "key": "MAP7_S03.28",
+  "xa": 629,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.8)\tYou've_seen_her_many_times. ~N\n\t\t\tRestored_to_her_former_self. ",
+  "text": "~J1(4.8)\tYou've_seen_her_lots_of_times. ~N\n\t\t\tAll_grown_back_to_her_old_self. ",
+  "spoken": "You've seen her lots of times. All grown back to her old self."
+ },
+ {
+  "key": "MAP7_S03.29",
+  "xa": 687,
+  "speaker": "HARRY",
+  "orig": "~J1(2.4)\tI'm_in_no_mood_for_jokes. ~E ",
+  "text": "~J1(2.4)\tI_make_the_jokes_here,_lady. ~E ",
+  "spoken": "[deadpan] I make the jokes here, lady."
+ },
+ {
+  "key": "MAP7_S03.30",
+  "xa": 665,
+  "speaker": "DAHLIA",
+  "orig": "~J0(3.4)\tDon't_you_see? ~N\n\t\t\tShe's_right_there. ~E ",
+  "text": "~J0(3.4)\tDon't_you_see? ~N\n\t\t\tShe's_right_there._Keep_up. ~E ",
+  "spoken": "Don't you see? She's right there. Keep up."
+ },
+ {
+  "key": "MAP7_S03.31",
+  "xa": 708,
+  "speaker": "HARRY",
+  "orig": "~J1(1.8)\tThat's_absurd. ",
+  "text": "~J1(1.8)\tOh,_that's_crazy. ",
+  "spoken": "Oh, that's crazy."
+ },
+ {
+  "key": "MAP7_S03.32",
+  "xa": 640,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.5)\tYou_are_the_only_one ~N\n\t\t\twho_thinks_so. ",
+  "text": "~J1(4.5)\tYou're_the_only_one ~N\n\t\t\twho_thinks_so,_sweetie. ",
+  "spoken": "You're the only one who thinks so, sweetie."
+ },
+ {
+  "key": "MAP7_S03.33",
+  "xa": 717,
+  "speaker": "HARRY",
+  "orig": "~J1(1.4)\tWhy? ",
+  "text": "~J1(1.4)\tBut_why? ",
+  "spoken": "But why?"
+ },
+ {
+  "key": "MAP7_S03.34",
+  "xa": 709,
+  "speaker": "HARRY",
+  "orig": "~J1(2.2)\tWhy_are_you_doing_this? ~E ",
+  "text": "~J1(2.2)\tWhat's_your_deal,_lady? ~E ",
+  "spoken": "What's your deal, lady?"
+ },
+ {
+  "key": "MAP7_S03.35",
+  "xa": 652,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.8)\tIt's_been_a_long_seven_years... ",
+  "text": "~J1(3.8)\tOh,_it's_been_a_long_seven_years... ",
+  "spoken": "[sighs] Oh, it's been a long seven years..."
+ },
+ {
+  "key": "MAP7_S03.36",
+  "xa": 634,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.4)\tFor_the_seven_years ~N\n\t\t\tsince_that_terrible_day, ",
+  "text": "~J1(4.4)\tFor_seven_long_years ~N\n\t\t\tsince_that_awful_day, ",
+  "spoken": "For seven long years since that awful day,"
+ },
+ {
+  "key": "MAP7_S03.37",
+  "xa": 667,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.2)\tAlessa_has_been_kept_alive, ",
+  "text": "~J1(3.2)\tAlessa_has_been_kept_alive, ",
+  "spoken": "Alessa has been kept alive,"
+ },
+ {
+  "key": "MAP7_S03.38",
+  "xa": 642,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.9)\tsuffering_a_fate_worse ~N\n\t\t\tthan_death. ",
+  "text": "~J1(3.9)\tsuffering_a_fate_worse ~N\n\t\t\tthan_death._Or_dinner_theater. ",
+  "spoken": "suffering a fate worse than death. Or dinner theater."
+ },
+ {
+  "key": "MAP7_S03.39",
+  "xa": 611,
+  "speaker": "DAHLIA",
+  "orig": "~J1(6.5)\tAlessa_has_been_trapped ~N\n\t\t\tin_an_endless_nightmare ~N\n\t\t\tfrom_which_she_never_wakens. ",
+  "text": "~J1(6.5)\tAlessa's_been_trapped ~N\n\t\t\tin_an_endless_nightmare ~N\n\t\t\tshe_can_never_wake_up_from. ",
+  "spoken": "Alessa's been trapped in an endless nightmare she can never wake up from."
+ },
+ {
+  "key": "MAP7_S03.40",
+  "xa": 648,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.0)\tHe_has_been_nurtured ~N\n\t\t\tby_that_nightmare. ",
+  "text": "~J1(4.0)\tAnd_He_has_grown_fat ~N\n\t\t\ton_that_nightmare. ",
+  "spoken": "And He has grown fat on that nightmare."
+ },
+ {
+  "key": "MAP7_S03.41",
+  "xa": 658,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.6)\tWaiting_for ~N\n\t\t\tthe_day_to_be_born. ",
+  "text": "~J1(3.6)\tWaiting_for ~N\n\t\t\tHis_big_birthday. ",
+  "spoken": "Waiting for His big birthday."
+ },
+ {
+  "key": "MAP7_S03.42",
+  "xa": 641,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.6)\tThat_day_has_finally_come. ",
+  "text": "~J1(3.6)\tAnd_that_day_is_finally_here. ",
+  "spoken": "And that day is finally here."
+ },
+ {
+  "key": "MAP7_S03.43",
+  "xa": 670,
+  "speaker": "DAHLIA",
+  "orig": "~J1(2.9)\tThe_time_is_neigh. ~E ",
+  "text": "~J1(2.9)\tThe_time_is_nigh,_Harry. ~E ",
+  "spoken": "[sinister] The time is nigh, Harry."
+ },
+ {
+  "key": "MAP7_S03.44",
+  "xa": 619,
+  "speaker": "DAHLIA",
+  "orig": "~J1(5.1)\tEveryone_will_be_released, ~N\n\t\t\tfrom_pain_and_suffering. ",
+  "text": "~J1(5.1)\tEveryone_will_be_freed ~N\n\t\t\tfrom_pain_and_suffering. ",
+  "spoken": "Everyone will be freed from pain and suffering."
+ },
+ {
+  "key": "MAP7_S03.45",
+  "xa": 661,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.1)\tOur_salvation_is_at_hand. ",
+  "text": "~J1(3.1)\tSalvation_is_at_hand._Act_now! ",
+  "spoken": "[excited] Salvation is at hand. Act now!"
+ },
+ {
+  "key": "MAP7_S03.46",
+  "xa": 664,
+  "speaker": "DAHLIA",
+  "orig": "~J1(2.8)\tThis_is_the_day_of_reckoning. ",
+  "text": "~J1(2.8)\tThis_is_the_day_of_reckoning. ",
+  "spoken": "This is the day of reckoning."
+ },
+ {
+  "key": "MAP7_S03.47",
+  "xa": 631,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.7)\tWhen_all_our_sorrows ~N\n\t\t\twill_be_washed_away. ",
+  "text": "~J1(4.7)\tWhen_all_our_sorrows ~N\n\t\t\twill_be_washed_away. ",
+  "spoken": "When all our sorrows will be washed away."
+ },
+ {
+  "key": "MAP7_S03.48",
+  "xa": 630,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.8)\tWhen_we_return_to ~N\n\t\t\tthe_true_paradise!  ~E ",
+  "text": "~J1(4.8)\tWhen_we_return_to ~N\n\t\t\tparadise!_No_refunds!  ~E ",
+  "spoken": "[shouts] When we return to paradise! No refunds!"
+ },
+ {
+  "key": "MAP7_S03.49",
+  "xa": 613,
+  "speaker": "DAHLIA",
+  "orig": "~J0(6.2)\tMy_daughter_will_be ~N\n\t\t\tthe_mother_of_God! ~E ",
+  "text": "~J0(6.2)\tMy_daughter_will_be ~N\n\t\t\tthe_mother_of_God!_Beat_that. ~E ",
+  "spoken": "[laughs] My daughter will be the mother of God! Beat that."
+ },
+ {
+  "key": "MAP7_S03.51",
+  "xa": 690,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(1.7)\tQuit_screwing_around! ",
+  "text": "~J1(1.7)\tCut_the_crap,_Dahlia! ",
+  "spoken": "[shouts] Cut the crap, Dahlia!"
+ },
+ {
+  "key": "MAP7_S03.52",
+  "xa": 686,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(2.4)\tReturn_things_to_how ~N\n\t\t\tthey_were_before! ",
+  "text": "~J1(2.4)\tPut_everything_back ~N\n\t\t\tthe_way_it_was! ",
+  "spoken": "Put everything back the way it was!"
+ },
+ {
+  "key": "MAP7_S03.53",
+  "xa": 716,
+  "speaker": "DAHLIA",
+  "orig": "~J1(1.0)\tKaufmann! ",
+  "text": "~J1(1.0)\tOh._Kaufmann. ",
+  "spoken": "[unimpressed] Oh. Kaufmann."
+ },
+ {
+  "key": "MAP7_S03.54",
+  "xa": 706,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(1.9)\tDid_I_ask_for_this! ",
+  "text": "~J1(1.9)\tDid_I_sign_up_for_this! ",
+  "spoken": "Did I sign up for this!"
+ },
+ {
+  "key": "MAP7_S03.55",
+  "xa": 705,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(1.9)\tNobody_uses_me! ",
+  "text": "~J1(1.9)\tNobody_plays_me! ",
+  "spoken": "Nobody plays me!"
+ },
+ {
+  "key": "MAP7_S03.56",
+  "xa": 697,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.0)\tYou_won't_get_away ~N\n\t\t\twith_this! ~E ",
+  "text": "~J1(3.0)\tYou_won't_get_away ~N\n\t\t\twith_this,_lady! ~E ",
+  "spoken": "You won't get away with this, lady!"
+ },
+ {
+  "key": "MAP7_S03.57",
+  "xa": 633,
+  "speaker": "DAHLIA",
+  "orig": "~J1(4.7)\tYour_role_is_over. ~N\n\t\t\tWe_don't_need_you_anymore. ",
+  "text": "~J1(4.7)\tYour_part_is_over. ~N\n\t\t\tWe_don't_need_you,_doctor. ",
+  "spoken": "Your part is over. We don't need you, doctor."
+ },
+ {
+  "key": "MAP7_S03.58",
+  "xa": 656,
+  "speaker": "DAHLIA",
+  "orig": "~J1(3.6)\tWhat_do_you_think_you_can ~N\n\t\t\taccomplish_by_coming_here? ",
+  "text": "~J1(3.6)\tWhat_exactly_do_you_plan ~N\n\t\t\tto_accomplish_here,_Kaufmann? ",
+  "spoken": "What exactly do you plan to accomplish here, Kaufmann?"
+ },
+ {
+  "key": "MAP7_S03.59",
+  "xa": 685,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.5)\tMy,_aren't_we_getting_cocky? ",
+  "text": "~J1(3.5)\tMy,_aren't_we_cocky_today? ",
+  "spoken": "[smug] My, aren't we cocky today?"
+ },
+ {
+  "key": "MAP7_S03.60",
+  "xa": 675,
+  "speaker": "KAUFMANN",
+  "orig": "~J1(3.2)\tBet_you_can't_see_this ~N\n\t\t\tand_keep_your_cool.  ~E ",
+  "text": "~J1(3.2)\tLet's_see_you_keep ~N\n\t\t\tyour_cool_after_this.  ~E ",
+  "spoken": "Let's see you keep your cool after this."
+ },
+ {
+  "key": "MAP7_S03.61",
+  "xa": 645,
+  "speaker": "DAHLIA",
+  "orig": "~J0(3.5)\tAglaophotis! ~N\n\t\t\tI_thought_I_got_rid_of_that! ",
+  "text": "~J0(3.5)\tAglaophotis! ~N\n\t\t\tI_thought_I_got_rid_of_that! ",
+  "spoken": "[panicked] Aglaophotis! I thought I got rid of that!"
+ },
+ {
+  "key": "MAP7_S03.62",
+  "xa": 663,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(3.2)\tAll_I_had_to_do_was_plant_it ~N\n\t\t\tsomewhere_for_you_to_find, ",
+  "text": "~J0(3.2)\tI_just_left_it_lying_around ~N\n\t\t\twhere_people_would_find_it, ",
+  "spoken": "I just left it lying around where people would find it,"
+ },
+ {
+  "key": "MAP7_S03.63",
+  "xa": 653,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(3.9)\tYou_all,_well, ~N\n\t\t\tit_kept_you_busy. ",
+  "text": "~J0(3.9)\tand_you_idiots,_well, ~N\n\t\t\tyou_took_the_bait. ",
+  "spoken": "and you idiots, well, you took the bait."
+ },
+ {
+  "key": "MAP7_S03.64",
+  "xa": 704,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(1.7)\tYou're_easy! ",
+  "text": "~J0(1.7)\tYou're_so_easy! ",
+  "spoken": "[laughs] You're so easy!"
+ },
+ {
+  "key": "MAP7_S03.65",
+  "xa": 689,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(2.4)\tAnd_there's_more ~N\n\t\t\twhere_this_came_from! ~E ",
+  "text": "~J0(2.4)\tAnd_there's_plenty ~N\n\t\t\tmore_where_that_came_from! ~E ",
+  "spoken": "And there's plenty more where that came from!"
+ },
+ {
+  "key": "MAP7_S03.66",
+  "xa": 696,
+  "speaker": "DAHLIA",
+  "orig": "~J0(1.7)\tStop_it!!  ~E ",
+  "text": "~J0(1.7)\tStop_it,_you_twit!!  ~E ",
+  "spoken": "[shouts] Stop it, you twit!!"
+ },
+ {
+  "key": "MAP7_S03.68",
+  "xa": 676,
+  "speaker": "DAHLIA",
+  "orig": "~J0(1.4)\t",
+  "text": "~J0(1.4)\t",
+  "spoken": "[screams]"
+ },
+ {
+  "key": "MAP7_S03.69",
+  "xa": 601,
+  "speaker": "KAUFMANN",
+  "orig": "~J2(1.2)\tWhat_the!? ~E ",
+  "text": "~J2(1.2)\tWhat_the_hell!? ~E ",
+  "spoken": "[panicked] What the hell!?"
+ },
+ {
+  "key": "MAP7_S03.70",
+  "xa": 674,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(10.4)\t~E ",
+  "text": "~J0(10.4)\t~E ",
+  "spoken": "[screams]"
+ },
+ {
+  "key": "MAP7_S03.71",
+  "xa": 703,
+  "speaker": "KAUFMANN",
+  "orig": "~J0(3.0)\tWhat_on_earth? ~N\n\t\t\tThat's_not_supposed_to... ~E ",
+  "text": "~J0(3.0)\tWhat_the? ~N\n\t\t\tThat's_not_in_the_brochure... ~E ",
+  "spoken": "What the? That's not in the brochure..."
+ },
+ {
+  "key": "MAP7_S03.74",
+  "xa": 660,
+  "speaker": "DAHLIA",
+  "orig": "~J0(3.4)\tIt's_awakening! ~N\n\t\t\tIt's_awake! ",
+  "text": "~J0(3.4)\tIt's_waking_up! ~N\n\t\t\tIt's_awake! ",
+  "spoken": "[excited] It's waking up! It's awake!"
+ },
+ {
+  "key": "MAP7_S03.75",
+  "xa": 662,
+  "speaker": "DAHLIA",
+  "orig": "~J0(3.0)\tNow_no_one_can_interfere! ~E ",
+  "text": "~J0(3.0)\tNow_no_one_can_stop_us! ~E ",
+  "spoken": "Now no one can stop us!"
+ },
+ {
+  "key": "MAP7_S03.76",
+  "xa": 695,
+  "speaker": "HARRY",
+  "orig": "~J0(1.2)\tCheryl!! ",
+  "text": "~J0(1.2)\tCheryl!! ",
+  "spoken": "[shouts] Cheryl!!"
+ },
+ {
+  "key": "MAP7_S03.77",
+  "xa": 644,
+  "speaker": "DAHLIA",
+  "orig": "~J0(3.5)\tGive_up! ~N\n\t\t\tThat_person_no_longer_exists. ~E ",
+  "text": "~J0(3.5)\tGive_up,_Harry! ~N\n\t\t\tThat_girl_doesn't_exist_anymore. ~E ",
+  "spoken": "Give up, Harry! That girl doesn't exist anymore."
+ },
+ {
+  "key": "MAP7_S03.78",
+  "xa": 609,
+  "speaker": "DAHLIA",
+  "orig": "~J0(2.0)\tThis_is_a_God! ",
+  "text": "~J0(2.0)\tThis_is_a_God! ",
+  "spoken": "[shouts] This is a God!"
+ },
+ {
+  "key": "MAP7_S03.79",
+  "xa": 599,
+  "speaker": "DAHLIA",
+  "orig": "~J2(4.9)\tDescended_among_us_to_reach_out ~N\n\t\t\tand_save_us! ~E ",
+  "text": "~J2(4.9)\tCome_down_among_us_to_reach_out ~N\n\t\t\tand_save_us_all! ~E ",
+  "spoken": "Come down among us to reach out and save us all!"
+ },
+ {
+  "key": "MAP7_S03.82",
+  "xa": 712,
+  "speaker": "ALESSA",
+  "orig": "~J0(1.3)\t_",
+  "text": "~J0(1.3)\t_",
+  "spoken": ""
+ },
+ {
+  "key": "MAP7_S03.83",
+  "xa": 707,
+  "speaker": "ALESSA",
+  "orig": "~J0(1.1)\t_ ~E ",
+  "text": "~J0(1.1)\t_ ~E ",
+  "spoken": ""
+ },
+ {
+  "key": "MAP7_S03.84",
+  "xa": 694,
+  "speaker": "ALESSA",
+  "orig": "~J0(1.6)\tThank_you_daddy. ",
+  "text": "~J0(1.6)\tThank_you,_daddy. ",
+  "spoken": "[softly] Thank you, daddy."
+ },
+ {
+  "key": "MAP7_S03.85",
+  "xa": 714,
+  "speaker": "ALESSA",
+  "orig": "~J0(1.4)\tGoodbye. ~E ",
+  "text": "~J0(1.4)\tGoodbye. ~E ",
+  "spoken": "Goodbye."
+ },
+ {
+  "key": "MAP7_S03.86",
+  "xa": 683,
+  "speaker": "HARRY",
+  "orig": "~J0(3.0)\tCheryl...? ~E ",
+  "text": "~J0(3.0)\tCheryl...? ~E ",
+  "spoken": "Cheryl...?"
+ },
+ {
+  "key": "MAP7_S03.87",
+  "xa": 702,
+  "speaker": "HARRY",
+  "orig": "~J0(2.3)\tCan't_be? ",
+  "text": "~J0(2.3)\tNo_way... ",
+  "spoken": "No way..."
+ },
+ {
+  "key": "MAP7_S03.88",
+  "xa": 693,
+  "speaker": "HARRY",
+  "orig": "~J0(2.2)\tYou_can't_leave_like_this... ",
+  "text": "~J0(2.2)\tYou_can't_leave_like_this... ",
+  "spoken": "You can't leave like this..."
+ },
+ {
+  "key": "MAP7_S03.89",
+  "xa": 659,
+  "speaker": "HARRY",
+  "orig": "~J0(3.2)\tThis_can't_be_happening! ~N\n\t\t\tCheryl!? ~E ",
+  "text": "~J0(3.2)\tThis_can't_be_happening! ~N\n\t\t\tCheryl!? ~E ",
+  "spoken": "[desperate] This can't be happening! Cheryl!?"
+ },
+ {
+  "key": "MAP7_S03.90",
+  "xa": 701,
+  "speaker": "HARRY",
+  "orig": "~J0(1.4)\t...Cheryl!! ~E ",
+  "text": "~J0(1.4)\t...Cheryl!! ~E ",
+  "spoken": "[shouts] ...Cheryl!!"
+ },
+ {
+  "key": "MAP7_S03.98",
+  "xa": 718,
+  "speaker": "ALESSA",
+  "orig": "~J0(1.4)\tHarry. ",
+  "text": "~J0(1.4)\tHarry. ",
+  "spoken": "Harry."
+ },
+ {
+  "key": "MAP7_S03.99",
+  "xa": 719,
+  "speaker": "ALESSA",
+  "orig": "~J0(1.0)\tGo. ~E ",
+  "text": "~J0(1.0)\tGo. ~E ",
+  "spoken": "Go."
+ }
+]

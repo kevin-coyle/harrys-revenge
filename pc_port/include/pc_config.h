@@ -264,6 +264,7 @@ typedef struct {
     int revengeSwearing;        /* revenge_swearing: mix in the salty takes */
     int revengeRage;            /* revenge_rage: kills fill a meter that triggers slow motion + triple damage */
     int revengeRadio;           /* revenge_radio: a voice taunts Harry through the radio static */
+    int revengeMusic;           /* revenge_music: combat music volume 0..100, 0 = off */
     int randomizer;         /* 1 = randomizer gamemode: New Game always opens in map2_s04, every door leads
                              * somewhere random, monsters/items are rerolled per area, and the run ends at the
                              * map7_s03 boss with a score-picked ending. Forces global_chara_pool on and
