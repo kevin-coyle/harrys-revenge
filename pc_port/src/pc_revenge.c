@@ -85,6 +85,7 @@ static q19_12 s_areaBarkIn   = -1;
 static q19_12 s_time;
 static q19_12 s_runFor;
 static void   apply_capacity(void);
+static void   count_wave_deaths(void);
 
 #define REVENGE_RUN_SPEED Q12(3.0f)  /* run speeds are 3.5-5.0; a walk is under 2 */
 #define REVENGE_RUN_QUIP  Q12(14.0f) /* this long running without a break */
@@ -350,6 +351,7 @@ void Pc_Revenge_Update(void)
     s_rng  += (u32)g_DeltaTimeRaw;
     s_time += g_DeltaTimeRaw;
     apply_capacity();
+    count_wave_deaths();
 
     /* A long run earns Harry a complaint about his cardio. */
     if (g_SysWork.sysState == SysState_Gameplay &&
@@ -634,6 +636,17 @@ int Pc_Revenge_IsWaveMonster(int slot)
 {
     return slot >= 0 && slot < NPC_COUNT_MAX && s_isWave[slot] &&
            g_SysWork.npcs[slot].model.charaId != Chara_None;
+}
+
+/* Some deaths never reach the kill hook (a finisher, a scripted kill), so a
+ * wave monster at zero health counts as killed however it got there. */
+static void count_wave_deaths(void)
+{
+    int i;
+    for (i = 0; i < NPC_COUNT_MAX; i++)
+        if (s_isWave[i] && !s_waveKilled[i] && g_SysWork.npcs[i].model.charaId != Chara_None &&
+            g_SysWork.npcs[i].health <= Q12(0.0f))
+            Pc_Revenge_OnKillSlot(i);
 }
 
 int Pc_Revenge_WaveMonstersAlive(void)
