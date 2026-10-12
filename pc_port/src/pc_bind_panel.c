@@ -92,6 +92,7 @@ static const BpRow s_rows[] = {
     { "Change Camera",  { "key_change_cam",    NULL,             "pad_change_cam",    NULL },             0 },
     { "Swap Shoulder",  { "key_swap_shoulder", NULL,             "pad_swap_shoulder", NULL },             BPF_GLOBAL | BPF_MOUSE },
     { "Quick Options",  { "key_quick_options", NULL,             "pad_quick_options", NULL },             BPF_GLOBAL },
+    { "Merchant",       { "key_merchant",      NULL,             "pad_merchant",      NULL },             BPF_GLOBAL },
     { "Quick Save",     { "key_quicksave",     NULL,             NULL,                NULL },             BPF_GLOBAL },
     { "Quick Load",     { "key_quickload",     NULL,             NULL,                NULL },             BPF_GLOBAL },
 };

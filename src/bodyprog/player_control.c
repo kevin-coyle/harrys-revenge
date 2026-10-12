@@ -11758,6 +11758,10 @@ void GameFs_WeaponInfoUpdate(void) // 0x8007EBBC
                (int)HARRY_BASE_ANIM_INFOS[ANIM_STATUS(HarryAnim_HandgunRecoil, false)].endKeyframeIdx,
                (int)D_800AF626);
     }
+    {
+        extern void Pc_Revenge_OnWeaponAnimsLoaded(void);
+        Pc_Revenge_OnWeaponAnimsLoaded();
+    }
 #endif
 
     if (g_SysWork.playerCombat.weaponAttack != NO_VALUE && g_Player_LastWeaponSelected != g_SysWork.playerCombat.weaponAttack)
@@ -12154,6 +12158,10 @@ void Player_Controller(void) // 0x8007F32C
     }
 }
 
+#ifdef SH_PC_PORT
+extern int Pc_Revenge_Kickable(int slot);
+#endif
+
 bool func_8007F95C(void) // 0x8007F95C
 {
     VECTOR3         pos0;
@@ -12204,8 +12212,22 @@ bool func_8007F95C(void) // 0x8007F95C
                 pos1.vy = curNpc0->position.vy;
                 pos1.vz = curNpc0->position.vz + curNpc0->collision.shapeOffsets.box.vz;
 
+#ifdef SH_PC_PORT
+                /* Harry's Revenge: a staggered enemy can be kicked like a downed
+                 * one, from a little further away since it is still standing. */
+                {
+                    if (Pc_Revenge_Kickable(i) && !(curNpc0->flags & CharaFlag_Unk2))
+                    {
+                        radius += Q12(0.45f);
+                    }
+                }
+#endif
                 if (!Math_Distance2dCheck(&pos0, &pos1, radius) && ABS(pos1.vy - pos0.vy) < Q12(0.3f) &&
-                    curNpc0->health > Q12(0.0f) && (curNpc0->flags & CharaFlag_Unk2))
+                    curNpc0->health > Q12(0.0f) && ((curNpc0->flags & CharaFlag_Unk2)
+#ifdef SH_PC_PORT
+                    || Pc_Revenge_Kickable(i)
+#endif
+                    ))
                 {
                     Math_ShortestAngleGet(g_SysWork.playerWork.player.rotation.vy,
                                           Q12_ANGLE_NORM_U(ratan2(pos1.vx - pos0.vx, pos1.vz - pos0.vz) + Q12_ANGLE(360.0f)),

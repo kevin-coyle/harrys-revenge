@@ -13,6 +13,8 @@
 
 #include "game.h"
 #include "bodyprog/bodyprog.h"
+#include "bodyprog/anim.h"
+#include "maps/characters/harry.h"
 #include "bodyprog/chara/chara.h"
 #include "bodyprog/collision/collision.h"
 #include "bodyprog/items.h"
@@ -24,7 +26,9 @@
 #include "bodyprog/sound/sound_system.h"
 #include "bodyprog/screen/screen_data.h" /* g_DeltaTimeRaw */
 
+#include "dbg_overlay.h"
 #include "pc_config.h"
+#include "pc_merchant.h"
 #include "pc_revenge.h"
 #include "sh_log.h"
 
@@ -33,6 +37,8 @@
 #include <sys/stat.h>
 
 extern u8 g_PcNpcDebugSpawned[NPC_COUNT_MAX];
+extern u8 g_Items_GunsMaxLoadAmmo[36];
+extern s_AnimInfo HARRY_BASE_ANIM_INFOS[256];
 extern const char* PcPort_GetGameDataPath(void);
 extern int         XaPlayer_PlayFile(const char* path);
 extern int         Pc_MsgVoice_Holding(void);
@@ -65,12 +71,15 @@ static const s_Invader INVADERS[] = {
 };
 
 #define REVENGE_BARK_COOLDOWN Q12(6.0f)
-#define REVENGE_BARK_TAKES    8
+#define REVENGE_BARK_TAKES    16
 #define REVENGE_AREA_DELAY    Q12(2.5f) /* let the area fade in before Harry speaks */
 
 static u8     s_isClone[NPC_COUNT_MAX];
 static q19_12 s_barkCooldown = 0;
 static q19_12 s_areaBarkIn   = -1;
+
+static q19_12 s_time;
+static void   apply_capacity(void);
 static q19_12 s_sinceHit = 0;
 static u32    s_rng      = 0x9E3779B9u;
 
@@ -91,14 +100,14 @@ static int chance(int pct) { return (int)(rnd() % 100u) < pct; }
  * while a disc line is playing, so Harry never talks over a cutscene. */
 static int bark_takes(const char* event)
 {
-    static struct { const char* event; int takes; } cache[8];
+    static struct { const char* event; int takes; } cache[24];
     static int cached = 0;
     char       path[512];
     struct stat st;
     int        i, n;
 
     for (i = 0; i < cached; i++)
-        if (cache[i].event == event)
+        if (strcmp(cache[i].event, event) == 0)
             return cache[i].takes;
 
     for (n = 0; n < REVENGE_BARK_TAKES; n++)
@@ -116,13 +125,13 @@ static int bark_takes(const char* event)
     return n;
 }
 
-static void bark(const char* event, int pct)
+static void play_line(const char* event, int force)
 {
     char path[512];
     int  takes;
 
-    if (!Pc_Revenge_Active() || !g_PcConfig.revengeBarks || s_barkCooldown > 0 ||
-        Pc_MsgVoice_Holding() || !chance(pct))
+    if (!Pc_Revenge_Active() || !g_PcConfig.revengeBarks || Pc_MsgVoice_Holding() ||
+        (!force && s_barkCooldown > 0))
         return;
 
     takes = bark_takes(event);
@@ -133,6 +142,23 @@ static void bark(const char* event, int pct)
              (int)(rnd() % (u32)takes) + 1);
     if (XaPlayer_PlayFile(path))
         s_barkCooldown = REVENGE_BARK_COOLDOWN;
+}
+
+static void bark(const char* event, int pct)
+{
+    if (chance(pct))
+        play_line(event, 0);
+}
+
+/* Merchant lines answer the player directly, so no cooldown or dice roll. */
+void Pc_Revenge_Voice(const char* event)
+{
+    play_line(event, 1);
+}
+
+u32 Pc_Revenge_Rand(void)
+{
+    return rnd();
 }
 
 void Pc_Revenge_OnReload(void)
@@ -185,7 +211,9 @@ void Pc_Revenge_Update(void)
     if (!Pc_Revenge_Active() || g_GameWork.gameState != GameState_InGame)
         return;
 
-    s_rng += (u32)g_DeltaTimeRaw;
+    s_rng  += (u32)g_DeltaTimeRaw;
+    s_time += g_DeltaTimeRaw;
+    apply_capacity();
 
     if (s_barkCooldown > 0)
         s_barkCooldown -= g_DeltaTimeRaw;
@@ -337,6 +365,8 @@ void Pc_Revenge_OnNativeSpawn(int row, int slot)
 
         SH_DBG("[REVENGE] row %d -> clone npc[%d] charaId=%d%s", row, c, charaId,
                charaId != parent->model.charaId ? " (invader)" : "");
+        if (charaId != parent->model.charaId)
+            bark("invader", 60);
     }
 }
 
@@ -376,17 +406,17 @@ void Pc_Revenge_OnEnemyKilled(void)
      * inventory slot the player never chose to fill. */
     if (has_item(InvItemId_Handgun) && chance(45))
     {
-        Inventory_AddSpecialItem(InvItemId_HandgunBullets, (u8)(4 + rnd() % 4u));
+        Pc_Revenge_GiveItem(InvItemId_HandgunBullets, (u8)(4 + rnd() % 4u));
         dropped = 1;
     }
     if (has_item(InvItemId_Shotgun) && chance(20))
     {
-        Inventory_AddSpecialItem(InvItemId_ShotgunShells, 3);
+        Pc_Revenge_GiveItem(InvItemId_ShotgunShells, 3);
         dropped = 1;
     }
     if (has_item(InvItemId_HuntingRifle) && chance(15))
     {
-        Inventory_AddSpecialItem(InvItemId_RifleShells, 2);
+        Pc_Revenge_GiveItem(InvItemId_RifleShells, 2);
         dropped = 1;
     }
     if (dropped)
@@ -394,5 +424,173 @@ void Pc_Revenge_OnEnemyKilled(void)
         Sd_PlaySfx(Sfx_MenuConfirm, 0, 48);
         bark("ammo", 50);
     }
+    bark("money", 12);
     bark("kill", 35);
+}
+
+/* ------------------------------------------------------------------ combat */
+
+#define REVENGE_KICK_WINDOW Q12(1.5f) /* how long a staggered enemy stays kickable */
+
+static q19_12 s_kickableUntil[NPC_COUNT_MAX];
+static q19_12 s_lastStaggerAt[NPC_COUNT_MAX];
+
+static int merchant_weapon(int weaponAttack)
+{
+    switch (weaponAttack)
+    {
+        case WEAPON_ATTACK(EquippedWeaponId_Handgun, AttackInputType_Tap):      return MERCHANT_WPN_HANDGUN;
+        case WEAPON_ATTACK(EquippedWeaponId_Shotgun, AttackInputType_Tap):      return MERCHANT_WPN_SHOTGUN;
+        case WEAPON_ATTACK(EquippedWeaponId_HuntingRifle, AttackInputType_Tap): return MERCHANT_WPN_RIFLE;
+    }
+    /* Packed melee attacks are 0..29 (id + input * 10); the kick and stomp are
+     * Harry's own, not the weapon he holds. */
+    if (weaponAttack >= 0 && weaponAttack < 30 &&
+        WEAPON_ATTACK_ID_GET(weaponAttack) != EquippedWeaponId_Kick &&
+        WEAPON_ATTACK_ID_GET(weaponAttack) != EquippedWeaponId_Stomp)
+        return MERCHANT_WPN_MELEE;
+    return -1;
+}
+
+/* Push the enemy past its own flinch threshold rather than setting its state:
+ * each AI's states assume their own animations and keyframes. */
+static void force_stagger(s_SubCharacter* npc)
+{
+    switch (npc->model.charaId)
+    {
+        case Chara_Stalker:
+        case Chara_GreyChild:
+        case Chara_Mumbler:
+            npc->properties.stalker.timer_10C += Q12(200.0f);
+            break;
+        case Chara_PuppetNurse:
+        case Chara_PuppetDoctor:
+            npc->properties.puppetNurse.field_114 += Q12(1000.0f);
+            break;
+        case Chara_Groaner:
+        case Chara_Wormhead:
+            /* A charging dog ignores hits; let this one stop it. */
+            npc->properties.groaner.flags.val16[0] &= ~(1 << 10);
+            break;
+        default:
+            /* Romper, Creeper, Hanged Scratcher and the fliers react to any
+             * solid hit already. */
+            break;
+    }
+}
+
+void Pc_Revenge_OnHit(struct _SubCharacter* attackerV, struct _SubCharacter* targetV, int weaponAttack,
+                      const void* hitPosV, s32* damage, u32* knockback)
+{
+    s_SubCharacter* attacker = (s_SubCharacter*)attackerV;
+    s_SubCharacter* target   = (s_SubCharacter*)targetV;
+    const VECTOR3*  hit      = (const VECTOR3*)hitPosV;
+    int             slot, weapon, stagger = 0, kick;
+
+    if (!Pc_Revenge_Active() || attacker != &g_SysWork.playerWork.player)
+        return;
+    slot = (int)(target - g_SysWork.npcs);
+    if (slot < 0 || slot >= NPC_COUNT_MAX)
+        return;
+
+    weapon = merchant_weapon(weaponAttack);
+    kick   = weaponAttack == WEAPON_ATTACK(EquippedWeaponId_Kick, AttackInputType_Tap);
+
+    if (weapon >= 0)
+        *damage = scale(*damage, 100 + 20 * Pc_Merchant_Level(weapon, MERCHANT_STAT_DAMAGE));
+
+    if (weapon == MERCHANT_WPN_HANDGUN || weapon == MERCHANT_WPN_SHOTGUN || weapon == MERCHANT_WPN_RIFLE)
+    {
+        /* Free aim has no body parts, only where the bullet trace met the
+         * enemy's cylinder. Y grows downwards and box.top is the head offset. */
+        q19_12 feet   = target->position.vy;
+        q19_12 height = -(q19_12)target->collision.box.top;
+
+        if (hit != NULL && height > Q12(0.4f))
+        {
+            q19_12 up   = feet - hit->vy;
+            int    frac = (int)(((s64)up * 100) / height);
+
+            if (frac >= 78)
+            {
+                *damage = scale(*damage, 200);
+                stagger = 1;
+                DbgOverlay_ToastLine("HEADSHOT");
+            }
+            else if (frac <= 30)
+                stagger = 1;
+        }
+        /* The heavy guns stagger wherever they land. */
+        if (weapon != MERCHANT_WPN_HANDGUN)
+            stagger = 1;
+    }
+    else if (kick || weapon == MERCHANT_WPN_MELEE)
+    {
+        stagger = 1;
+        if (*knockback != 0)
+            *knockback *= 2;
+    }
+
+    /* Every shotgun pellet is its own call in the same frame. */
+    if (stagger && s_lastStaggerAt[slot] != s_time)
+    {
+        s_lastStaggerAt[slot] = s_time;
+        force_stagger(target);
+        /* A kick lands on a staggered enemy; it must not open a new window, or
+         * one stagger would chain kicks forever. */
+        if (!kick)
+            s_kickableUntil[slot] = s_time + REVENGE_KICK_WINDOW;
+    }
+}
+
+int Pc_Revenge_Kickable(int slot)
+{
+    return Pc_Revenge_Active() && slot >= 0 && slot < NPC_COUNT_MAX &&
+           s_time < s_kickableUntil[slot] && g_SysWork.npcs[slot].health > Q12(0.0f);
+}
+
+/* Clip sizes live in one table every reader indexes by weapon id, so writing
+ * it is all an upgrade needs. The HUD draws two digits: stay below 100. */
+static void apply_capacity(void)
+{
+    int on = Pc_Revenge_Active() && g_SavegamePtr != NULL;
+
+    g_Items_GunsMaxLoadAmmo[EquippedWeaponId_Handgun] =
+        (u8)(15 + (on ? 3 * Pc_Merchant_Level(MERCHANT_WPN_HANDGUN, MERCHANT_STAT_CAPACITY) : 0));
+    g_Items_GunsMaxLoadAmmo[EquippedWeaponId_Shotgun] =
+        (u8)(6 + (on ? 2 * Pc_Merchant_Level(MERCHANT_WPN_SHOTGUN, MERCHANT_STAT_CAPACITY) : 0));
+    g_Items_GunsMaxLoadAmmo[EquippedWeaponId_HuntingRifle] =
+        (u8)(6 + (on ? 2 * Pc_Merchant_Level(MERCHANT_WPN_RIFLE, MERCHANT_STAT_CAPACITY) : 0));
+}
+
+/* The reload is HARRY_BASE_ANIM_INFOS[63], re-copied from the weapon's table
+ * on every equip. Its keyframe rate scales with the upgrade; reload completion
+ * and its sound are keyed to keyframes, so they stay in step. */
+static q19_12 s_reloadBase;
+static int    s_reloadWeapon = -1;
+
+static void apply_reload_speed(void)
+{
+    s_AnimInfo* reload = &HARRY_BASE_ANIM_INFOS[ANIM_STATUS(HarryAnim_HandgunRecoil, true)];
+    int         lv;
+
+    if (s_reloadWeapon < 0 || reload->hasVariableDuration)
+        return;
+    lv = Pc_Revenge_Active() ? Pc_Merchant_Level(s_reloadWeapon, MERCHANT_STAT_RELOAD) : 0;
+    reload->duration.constant = scale(s_reloadBase, 100 + 15 * lv);
+}
+
+void Pc_Revenge_OnWeaponAnimsLoaded(void)
+{
+    s_reloadWeapon = merchant_weapon(g_SysWork.playerCombat.weaponAttack);
+    if (s_reloadWeapon == MERCHANT_WPN_MELEE)
+        s_reloadWeapon = -1;
+    s_reloadBase = HARRY_BASE_ANIM_INFOS[ANIM_STATUS(HarryAnim_HandgunRecoil, true)].duration.constant;
+    apply_reload_speed();
+}
+
+void Pc_Revenge_ApplyUpgrades(void)
+{
+    apply_capacity();
+    apply_reload_speed();
 }

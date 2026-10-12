@@ -39,4 +39,26 @@ void Pc_Revenge_OnEnemyKilled(void);
 void Pc_Revenge_OnReload(void);
 void Pc_Revenge_OnMapLoad(void);
 
+/* A voice line played now (merchant), and the module's RNG. */
+void Pc_Revenge_Voice(const char* event);
+u32  Pc_Revenge_Rand(void);
+
+/* func_8008B714, before damage is applied: weapon upgrades, head and leg
+ * shots, staggers. `attacker` and `target` are s_SubCharacter*. */
+struct _SubCharacter;
+void Pc_Revenge_OnHit(struct _SubCharacter* attacker, struct _SubCharacter* target, int weaponAttack,
+                      const void* hitPos, s32* damage, u32* knockback);
+
+/* A recently staggered enemy can be kicked like a downed one. */
+int  Pc_Revenge_Kickable(int slot);
+
+/* GameFs_WeaponInfoUpdate copied the equipped weapon's animations. */
+void Pc_Revenge_OnWeaponAnimsLoaded(void);
+
+/* Re-apply clip sizes and reload speed after a purchase. */
+void Pc_Revenge_ApplyUpgrades(void);
+
+/* Give an item without counting it as a pickup for the ranking. */
+void Pc_Revenge_GiveItem(u8 id, u8 count);
+
 #endif /* PC_REVENGE_H */

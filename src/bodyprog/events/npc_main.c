@@ -26,6 +26,7 @@ extern int g_DebugAnimKfView;
 extern int g_DebugViewNpcSlot;
 void Pc_KeyframeViewerPoseNpc(s_AnmHeader* anmHdr, GsCOORDINATE2* boneCoords);
 #include "pc_pick.h"
+#include "pc_merchant.h"
 #include "pc_revenge.h"
 #endif
 
@@ -87,6 +88,7 @@ void func_80037E78(s_SubCharacter* chara) // 0x80037E78
             extern void Pc_Revenge_OnEnemyKilled(void);
             Pc_Rando_OnEnemyKilled();
             Pc_Revenge_OnEnemyKilled();
+            Pc_Merchant_OnKill(chara->model.charaId);
         }
 #endif
 

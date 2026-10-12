@@ -1755,6 +1755,15 @@ s32 func_8008B714(s_SubCharacter* attacker, s_SubCharacter* target, VECTOR3* arg
                (int)((sp14 & sp10) != 0), target->model.charaId);
 #endif
 
+#ifdef SH_PC_PORT
+    /* Harry's Revenge: upgrades, head and leg shots, staggers. Player hits only. */
+    {
+        extern void Pc_Revenge_OnHit(struct _SubCharacter* attacker, struct _SubCharacter* target,
+                                     int weaponAttack, const void* hitPos, s32* damage, u32* knockback);
+        Pc_Revenge_OnHit(attacker, target, weaponAttack, arg2, &damageAmount, &var_s7);
+    }
+#endif
+
     if (damageAmount != Q12(0.0f))
     {
 #ifdef SH_PC_PORT

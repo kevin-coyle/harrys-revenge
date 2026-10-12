@@ -1,4 +1,6 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
+#include "control_style.h"
+#include "pc_quick_options.h"
 #include "game.h"
 
 #ifdef SH_PC_PORT
@@ -1835,6 +1837,34 @@ void DbgOverlay_Update(void)
             Pc_QuickOptions_Toggle();
         }
         s_prevQuick = curQuick;
+    }
+
+    /* key_merchant / pad_merchant: the Harry's Revenge shop. */
+    {
+        extern int  PsyX_LookupGameControllerMapping(const char* str, int default_value);
+        extern bool PC_RawControllerButtonClicked(int sdlButton);
+        static SDL_Scancode s_scShop   = SDL_SCANCODE_UNKNOWN;
+        static int          s_padShop  = -1;
+        static int          s_shopRes  = 0;
+        static int          s_prevShop = 0;
+        int curShop, padShop;
+
+        if (s_shopRes != g_PcBindsGen + 1) {
+            s_scShop  = SDL_GetScancodeFromName(g_PcConfig.keyMerchant);
+            s_padShop = (g_PcConfig.padMerchant[0] != '\0')
+                      ? (int)PsyX_LookupGameControllerMapping(g_PcConfig.padMerchant, -1)
+                      : -1;
+            s_shopRes = g_PcBindsGen + 1;
+        }
+        curShop = (s_scShop != SDL_SCANCODE_UNKNOWN) ? ks[s_scShop] : 0;
+        padShop = (s_padShop >= 0) && PC_RawControllerButtonClicked(s_padShop) &&
+                  g_ControlStyle != ControlStyle_Classic;
+        if (((curShop && !s_prevShop && !ctrlHeld) || padShop) && !g_PcConsoleInputActive &&
+            g_GameWork.gameState == GameState_InGame && !Pc_QuickOptions_IsOpen()) {
+            extern void Pc_Merchant_TryOpen(void);
+            Pc_Merchant_TryOpen();
+        }
+        s_prevShop = curShop;
     }
 
     /* F2 cycles the full-screen post-process look (0=Off..8). Like F1/PGXP this

@@ -32,6 +32,7 @@
 #include "pc_mouse_click_icons.h"
 #include "pc_dpad_icons.h"
 #include "pc_bind_panel.h"
+#include "pc_merchant.h"
 #include "pc_mouse_cursor.h"
 #include "pc_config.h"
 #include "lang_text.h"
@@ -92,7 +93,8 @@ extern void        PcOpt_QuickViewReset(int mode);
 /* ROW_ACTION fires from Confirm/click ONLY -- unlike every other row kind,
  * Left/Right must not trigger it, or scrolling past "Reset View Settings"
  * with the arrows would undo the player's tuning. */
-enum { ROW_OPT = 0, ROW_EXTRA, ROW_PAGE, ROW_CLOSE, ROW_CHEAT, ROW_ACTION };
+/* ROW_SHOP is a merchant item (extra = item); confirm-only like ROW_ACTION. */
+enum { ROW_OPT = 0, ROW_EXTRA, ROW_PAGE, ROW_CLOSE, ROW_CHEAT, ROW_ACTION, ROW_SHOP };
 enum { QO_A_VIEWRESET = 0, QO_A_KEYBINDS };
 
 typedef struct
@@ -104,7 +106,7 @@ typedef struct
     int         cpage;  /* ROW_CHEAT: PC_CHEATS_PAGE_* */
 } QoRowDef;
 
-#define QO_IS_VALUE_ROW(k) ((k) == ROW_OPT || (k) == ROW_EXTRA || (k) == ROW_CHEAT)
+#define QO_IS_VALUE_ROW(k) ((k) == ROW_OPT || (k) == ROW_EXTRA || (k) == ROW_CHEAT || (k) == ROW_SHOP)
 
 /* ROW_PAGE's label is only a placeholder: the row draws "Previous / Next" with
  * the neighbouring pages' names, which depend on where the page sits. */
@@ -359,8 +361,45 @@ enum { QO_PG_GFX1 = 0, QO_PG_GFX2, QO_PG_HUD, QO_PG_AUDIO, QO_PG_VIEW,
 
 #define QO_TABLE(t) (*count = (int)(sizeof(t) / sizeof((t)[0])), (t))
 
+/* Harry's Revenge merchant: its pages sit after the QO_PAGES cycle and page
+ * only among themselves while the shop is open. */
+#define QO_PG_SHOP QO_PAGES
+static int s_merchant;
+static int s_pageBeforeShop;
+
+static int qo_wrap_page(int page)
+{
+    int first = s_merchant ? QO_PG_SHOP : 0;
+    int span  = s_merchant ? MERCHANT_PAGES : QO_PAGES;
+    return first + (((page - first) % span) + span) % span;
+}
+
+static const QoRowDef* qo_shop_page(int shopPage, int* count)
+{
+    static QoRowDef rows[MERCHANT_PAGES][QO_MAX_ROWS];
+    static int      built[MERCHANT_PAGES];
+    QoRowDef*       out = rows[shopPage];
+
+    if (!built[shopPage])
+    {
+        int n = Pc_Merchant_PageCount(shopPage), i, k = 0;
+        for (i = 0; i < n && k < QO_MAX_ROWS - 2; i++, k++)
+        {
+            out[k].kind  = ROW_SHOP;
+            out[k].extra = Pc_Merchant_PageItem(shopPage, i);
+        }
+        out[k].kind = ROW_PAGE;  out[k].label = "Previous / Next"; k++;
+        out[k].kind = ROW_CLOSE; out[k].label = "Close";           k++;
+        built[shopPage] = k;
+    }
+    *count = built[shopPage];
+    return out;
+}
+
 static const QoRowDef* qo_page_rows(int page, int* count)
 {
+    if (page >= QO_PG_SHOP)
+        return qo_shop_page(page - QO_PG_SHOP, count);
     switch (page)
     {
         case QO_PG_GFX2:     return QO_TABLE(s_pageGfx2);
@@ -378,9 +417,10 @@ static const QoRowDef* qo_page_rows(int page, int* count)
 
 /* The title, and the Previous / Next row's destinations. No slashes in these:
  * the row already separates its two destinations with one. */
-static const char* const s_pageNames[QO_PAGES] = {
+static const char* const s_pageNames[QO_PAGES + MERCHANT_PAGES] = {
     "Graphics", "Lighting & Effects", "HUD", "Audio", "View",
-    "Cheats", "Cheat Actions", "Debug", "Debug Actions", "Controls" };
+    "Cheats", "Cheat Actions", "Debug", "Debug Actions", "Controls",
+    "Supplies", "Handgun & Shotgun", "Rifle & Melee" };
 
 /* ------------------------------------------------------------------ */
 /* State                                                               */
@@ -1149,8 +1189,8 @@ static void qo_bake_nav(int page, int px, float avail)
     int  pass, i;
 
     snprintf(dest, sizeof(dest), "(%s  /  %s)",
-             Pc_LangQuick(s_pageNames[(page + QO_PAGES - 1) % QO_PAGES]),
-             Pc_LangQuick(s_pageNames[(page + 1) % QO_PAGES]));
+             Pc_LangQuick(s_pageNames[qo_wrap_page(page - 1)]),
+             Pc_LangQuick(s_pageNames[qo_wrap_page(page + 1)]));
 
     for (pass = 0; pass < 2; pass++)
     {
@@ -1345,6 +1385,8 @@ static void qo_row_name(const QoRowDef* r, char* out, int n)
     }
     else if (r->kind == ROW_CHEAT)
         src = Pc_LangQuick(Pc_Cheats_Name(r->cpage, r->extra));
+    else if (r->kind == ROW_SHOP)
+        src = Pc_Merchant_ItemName(r->extra);
     else
         src = Pc_LangQuick(r->label);
 
@@ -1377,6 +1419,10 @@ static void qo_row_value(const QoRowDef* r, char* out, int n)
     else if (r->kind == ROW_CHEAT)
     {
         snprintf(out, (size_t)n, "%s", Pc_Cheats_Label(r->cpage, r->extra, buf, (int)sizeof(buf)));
+    }
+    else if (r->kind == ROW_SHOP)
+    {
+        snprintf(out, (size_t)n, "%s", Pc_Merchant_ItemLabel(r->extra, buf, (int)sizeof(buf)));
     }
 }
 
@@ -1425,12 +1471,26 @@ void Pc_QuickOptions_Close(void)
     s_ddRow = -1;
     if (s_phase == QO_CLOSED || s_phase == QO_CLOSING)
         return;
+    if (s_merchant)
+        Pc_Merchant_OnClose();
     /* The keybind panel opened from here gets its input only through this
      * menu's Update, so closing the menu under it left it on screen with
      * nothing able to close it. Whatever closes the menu closes it too. */
     Pc_BindPanel_Close();
     s_phase      = QO_CLOSING;
     s_phaseStart = SDL_GetTicks();
+}
+
+void Pc_QuickOptions_OpenMerchant(void)
+{
+    if (Pc_BindPanel_IsOpen() || s_phase == QO_OPENING || s_phase == QO_SHOWN)
+        return;
+    if (!s_merchant)
+        s_pageBeforeShop = s_page;
+    s_merchant = 1;
+    s_page     = QO_PG_SHOP;
+    s_ddRow    = -1;
+    qo_open();
 }
 
 void Pc_QuickOptions_Toggle(void)
@@ -1440,7 +1500,15 @@ void Pc_QuickOptions_Toggle(void)
     if (Pc_BindPanel_IsOpen())
         return;
     if (s_phase == QO_CLOSED || s_phase == QO_CLOSING)
+    {
+        /* The menu, not the shop: back to the page it was left on. */
+        if (s_merchant)
+        {
+            s_merchant = 0;
+            s_page     = s_pageBeforeShop;
+        }
         qo_open();
+    }
     else
     {
         qo_beep(Sfx_MenuCancel);
@@ -1497,7 +1565,7 @@ static void qo_set_page(int page)
 {
     int n;
     s_ddRow = -1;
-    s_page = (page + QO_PAGES) % QO_PAGES;
+    s_page = qo_wrap_page(page);
     qo_page_rows(s_page, &n);
     if (s_sel >= n) s_sel = n - 1;
     if (s_sel < 0)  s_sel = 0;
@@ -1540,6 +1608,7 @@ static void qo_activate(const QoRowDef* r, int dir)
         case ROW_PAGE:  qo_beep(Sfx_MenuMove); qo_set_page(s_page + (dir < 0 ? -1 : +1)); qo_select_nav_row(); break;
         case ROW_CLOSE: qo_beep(Sfx_MenuCancel); Pc_QuickOptions_Close(); break;
         case ROW_ACTION: break; /* confirm-only; see the ROW_ACTION comment */
+        case ROW_SHOP:   break; /* confirm-only: an arrow press must not spend money */
         default: break;
     }
 }
@@ -1811,6 +1880,8 @@ static void qo_confirm(const QoRowDef* r)
 {
     if (r->kind == ROW_CHEAT)
         Pc_Cheats_Confirm(r->cpage, r->extra);
+    else if (r->kind == ROW_SHOP)
+        Pc_Merchant_Buy(r->extra);
     else if (r->kind == ROW_ACTION)
     {
         if (r->extra == QO_A_VIEWRESET)
@@ -2021,8 +2092,13 @@ void Pc_QuickOptions_Draw(void)
         /* The View page (2) titles by the active camera, which can change while
          * the page is open, so key the bake on it too and re-bake on a switch. */
         int viewMode = (s_page == QO_PG_VIEW) ? qo_view_cam_mode() : -1;
-        if (s_bakedForPx != px || s_bakedForPage != s_page || s_bakedForViewMode != viewMode)
+        /* The shop's title carries the money, so a purchase re-bakes it. */
+        static int s_bakedForMoney = -1;
+        int        money = s_merchant ? Pc_Merchant_Money() : -1;
+        if (s_bakedForPx != px || s_bakedForPage != s_page || s_bakedForViewMode != viewMode ||
+            s_bakedForMoney != money)
         {
+            s_bakedForMoney    = money;
             qo_free_text();
             s_bakedForPx       = px;
             s_bakedForPage     = s_page;
@@ -2043,6 +2119,8 @@ void Pc_QuickOptions_Draw(void)
                                   (m == QO_CAM_OTS) ? "Over-the-Shoulder" :
                                   (m == QO_CAM_TPS) ? "Thirdperson" : "Classic"));
         }
+        else if (s_merchant)
+            snprintf(titleBuf, sizeof(titleBuf), "MERCHANT  -  %s      $%d", name, Pc_Merchant_Money());
         else
             snprintf(titleBuf, sizeof(titleBuf), "%s  -  %s", Pc_LangQuick("QUICK OPTIONS"), name);
         s_texTitle = qo_bake(titleBuf, (float)(int)(titleH * 0.46f), &s_titleW, &s_titleH);

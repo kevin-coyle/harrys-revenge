@@ -14,7 +14,8 @@ import sys
 import urllib.request
 import wave
 
-VOICE_ID = "SOYHLrjzK2X1ezoPC6cr"  # "Harry - Fierce Warrior" (ElevenLabs stock voice)
+VOICE_ID = "SOYHLrjzK2X1ezoPC6cr"     # "Harry - Fierce Warrior" (ElevenLabs stock voice)
+MERCHANT_VOICE_ID = "N2lVS1w4EtoT3dr4eOWO"  # "Callum - Husky Trickster"
 MODEL_ID = "eleven_v4"
 RATE = 24000
 
@@ -26,28 +27,88 @@ BARKS = {
         "[exhales] Who's next?",
         "You picked the wrong man.",
         "[through gritted teeth] Not today.",
+        "[smug] And stay down. I've got a daughter to find.",
+        "[deadpan] Should've stayed in the fog.",
+        "[sarcastic] Welcome to Silent Hill. Population... one less.",
+        "[dryly] I'm a writer. I've had harsher critics.",
+        "[chuckles] I've had worse dates.",
+        "[muttering] Somebody call animal control.",
+        "[exasperated] Cheryl is so grounded after this.",
     ],
     "hurt": [
         "[strained] I'm not done yet...",
         "[panting] Just a scratch. Keep moving.",
         "[grunts] Still standing.",
         "[groans] Is that all you've got?",
+        "[groans] My chiropractor is going to hear about this.",
+        "[wincing] Okay. Ow. Noted.",
+        "[through gritted teeth] That's going to leave a mark. And a lawsuit.",
     ],
     "reload": [
         "[muttering] Reloading.",
         "[quickly] Come on, come on...",
         "[calm] Fresh rounds.",
+        "[annoyed] Hold that thought, I'm reloading.",
+        "[indignant] Very rude to attack a man while he's reloading.",
     ],
     "area": [
         "[determined] Cheryl... I'm coming.",
         "[low] Whatever's in here... it's not leaving.",
         "[quietly] Let's finish this.",
         "[angry] This town took my daughter. Now I take it back.",
+        "[sighs] Great. Another creepy hallway. Love that for me.",
+        "[dryly] Note to self. Never vacation here again.",
+        "[sarcastic] Lovely fog. Real tourist trap.",
     ],
     "ammo": [
         "[satisfied] Ammo. Good.",
         "I'll take that.",
         "[grim] More rounds. Perfect.",
+        "[pleased] Ooh, bullets. Don't mind if I do.",
+        "[cheerfully] Free ammo. This town isn't all bad.",
+    ],
+    "money": [
+        "[pleased] Cha-ching.",
+        "[puzzled] Where do monsters even keep their wallets?",
+        "That's going in the Cheryl fund.",
+        "[satisfied] Thanks for the tip.",
+    ],
+    "invader": [
+        "[confused] Wait... you're not from around here.",
+        "[annoyed] Who invited you?",
+        "[sighs] Oh good, they brought friends.",
+    ],
+    "buy": [
+        "Pleasure doing business. I think.",
+        "[satisfied] Worth every penny.",
+        "[muttering] Should've asked for a receipt.",
+    ],
+    "broke": [
+        "[sighs] I'm broke. Story of my life.",
+        "[dryly] Can't afford it. Writing doesn't pay.",
+    ],
+    # The merchant (MERCHANT_VOICE_ID).
+    "merchant_hello": [
+        "[creepy whisper] Ah... a customer. What're you buyin', stranger?",
+        "[chuckles] The fog brings me all sorts. What'll it be?",
+        "[gleefully] Still breathing? Good for business!",
+    ],
+    "merchant_buy": [
+        "[delighted] Heh heh heh... thank you.",
+        "[smooth] A fine choice, stranger.",
+        "[gleefully] Pleasure doin' business.",
+    ],
+    "merchant_upgrade": [
+        "[gleeful] Ooh, she'll hit harder now.",
+        "[admiring] Now that's a weapon worth dyin' for. Or killin' for.",
+    ],
+    "merchant_poor": [
+        "[tsk] Not enough, stranger. Not nearly enough.",
+        "[chuckles] Come back when you're a little... richer.",
+    ],
+    "merchant_bye": [
+        "[ominous] Come back... alive, preferably.",
+        "[whispering] The fog will be waiting.",
     ],
 }
 
@@ -67,9 +128,9 @@ MESSAGES = {
 }
 
 
-def tts(key, text):
+def tts(key, text, voice=VOICE_ID):
     req = urllib.request.Request(
-        f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}?output_format=pcm_{RATE}",
+        f"https://api.elevenlabs.io/v1/text-to-speech/{voice}?output_format=pcm_{RATE}",
         data=json.dumps({"text": text, "model_id": MODEL_ID}).encode(),
         headers={"xi-api-key": key, "Content-Type": "application/json"},
     )
@@ -96,14 +157,15 @@ def main():
     jobs = []
     for event, lines in BARKS.items():
         for i, text in enumerate(lines, 1):
-            jobs.append((os.path.join(root, "revenge", f"bark_{event}_{i}.wav"), text))
+            voice = MERCHANT_VOICE_ID if event.startswith("merchant_") else VOICE_ID
+            jobs.append((os.path.join(root, "revenge", f"bark_{event}_{i}.wav"), text, voice))
     for msg, text in MESSAGES.items():
-        jobs.append((os.path.join(root, "load", "XA", f"msg_{msg.replace('.', '_')}.wav"), text))
+        jobs.append((os.path.join(root, "load", "XA", f"msg_{msg.replace('.', '_')}.wav"), text, VOICE_ID))
 
-    for path, text in jobs:
+    for path, text, voice in jobs:
         if os.path.exists(path) and not force:
             continue
-        write_wav(path, tts(key, text))
+        write_wav(path, tts(key, text, voice))
         print(f"{os.path.relpath(path, root)}  {text}")
 
 

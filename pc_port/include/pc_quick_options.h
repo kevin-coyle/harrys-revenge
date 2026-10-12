@@ -17,6 +17,8 @@
 
 /* 1 while the panel owns input (open or animating shut). */
 int  Pc_QuickOptions_IsOpen(void);
+/* The quick options panel as the Harry's Revenge shop (pc_merchant.c). */
+void Pc_QuickOptions_OpenMerchant(void);
 /* Same as IsOpen, as a plain global for the freeze sites (game_main.c,
  * control_style.c, pc_combat.c) that already read g_PcConsoleInputActive. */
 extern int g_PcQuickOptionsActive;
