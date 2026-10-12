@@ -97,6 +97,7 @@ s_PcConfig g_PcConfig = {
     .revengeInvaderPct      = 35,
     .revengeAmmoDrops       = 1,
     .revengeBarks           = 1,
+    .revengeSwearing        = 1,
     .controllerMovement = 2, /* 0=analog, 1=dpad, 2=both */
     .movementOriginal = 1,   /* 1 = PSX lower-body movement machine (default); 0 = legacy PC shim */
 
@@ -1366,6 +1367,10 @@ else if (strcmp(key, "enable_plugins") == 0)
         else if (strcmp(key, "revenge_voice") == 0)
         {
             g_PcConfig.revengeBarks = (atoi(value) != 0);
+        }
+        else if (strcmp(key, "revenge_swearing") == 0)
+        {
+            g_PcConfig.revengeSwearing = (atoi(value) != 0);
         }
         else if (strcmp(key, "randomizer") == 0)
         {

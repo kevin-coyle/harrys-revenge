@@ -100,7 +100,7 @@ static int chance(int pct) { return (int)(rnd() % 100u) < pct; }
  * while a disc line is playing, so Harry never talks over a cutscene. */
 static int bark_takes(const char* event)
 {
-    static struct { const char* event; int takes; } cache[24];
+    static struct { char event[48]; int takes; } cache[32];
     static int cached = 0;
     char       path[512];
     struct stat st;
@@ -118,7 +118,7 @@ static int bark_takes(const char* event)
     }
     if (cached < (int)ARRAY_SIZE(cache))
     {
-        cache[cached].event = event;
+        snprintf(cache[cached].event, sizeof(cache[cached].event), "%s", event);
         cache[cached].takes = n;
         cached++;
     }
@@ -134,12 +134,25 @@ static void play_line(const char* event, int force)
         (!force && s_barkCooldown > 0))
         return;
 
-    takes = bark_takes(event);
-    if (takes == 0)
-        return;
+    {
+        /* The salty takes (bark_<event>_salty_<n>) join the pool when swearing is on. */
+        char salty[48];
+        int  clean, dirty, pick;
 
-    snprintf(path, sizeof(path), "%s/revenge/bark_%s_%d.wav", PcPort_GetGameDataPath(), event,
-             (int)(rnd() % (u32)takes) + 1);
+        snprintf(salty, sizeof(salty), "%s_salty", event);
+        clean = bark_takes(event);
+        dirty = g_PcConfig.revengeSwearing ? bark_takes(salty) : 0;
+        takes = clean + dirty;
+        if (takes == 0)
+            return;
+
+        pick = (int)(rnd() % (u32)takes);
+        if (pick < clean)
+            snprintf(path, sizeof(path), "%s/revenge/bark_%s_%d.wav", PcPort_GetGameDataPath(), event, pick + 1);
+        else
+            snprintf(path, sizeof(path), "%s/revenge/bark_%s_%d.wav", PcPort_GetGameDataPath(), salty,
+                     pick - clean + 1);
+    }
     if (XaPlayer_PlayFile(path))
         s_barkCooldown = REVENGE_BARK_COOLDOWN;
 }

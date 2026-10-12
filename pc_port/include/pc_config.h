@@ -261,6 +261,7 @@ typedef struct {
     int revengeInvaderPct;      /* revenge_invaders: percent of extra monsters drawn from other areas */
     int revengeAmmoDrops;       /* revenge_ammo_drops */
     int revengeBarks;           /* revenge_voice: Harry's combat lines */
+    int revengeSwearing;        /* revenge_swearing: mix in the salty takes */
     int randomizer;         /* 1 = randomizer gamemode: New Game always opens in map2_s04, every door leads
                              * somewhere random, monsters/items are rerolled per area, and the run ends at the
                              * map7_s03 boss with a score-picked ending. Forces global_chara_pool on and

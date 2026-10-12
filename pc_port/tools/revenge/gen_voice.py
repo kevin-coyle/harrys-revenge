@@ -87,6 +87,50 @@ BARKS = {
         "[sighs] I'm broke. Story of my life.",
         "[dryly] Can't afford it. Writing doesn't pay.",
     ],
+    # Salty takes, mixed in when revenge_swearing = 1 (pc_revenge.c).
+    # The user's limit: mild swearing, the F-word at most, never the C-word.
+    "kill_salty": [
+        "[growls] Eat lead, you ugly son of a bitch.",
+        "[spits] Stay dead, asshole.",
+        "[shouts] Hell yeah! Next!",
+        "[disgusted] Piece of shit.",
+        "[smug] Go to hell. Oh wait... you're already here.",
+        "[breathing hard] Damn right. Damn right!",
+    ],
+    "hurt_salty": [
+        "[groans] Son of a bitch!",
+        "[shouts] Goddammit, that hurts!",
+        "[wincing] Ow! Shit, shit, shit.",
+        "[shouts] Get the fuck off me!",
+    ],
+    "reload_salty": [
+        "[muttering] Come on, you piece of crap...",
+        "[frantic] Shit, reloading!",
+    ],
+    "area_salty": [
+        "[sighs] What the hell is this place?",
+        "[annoyed] This whole damn town can kiss my ass.",
+        "[exhausted] Fuck this town.",
+    ],
+    "ammo_salty": [
+        "[pleased] Hell yes. Ammo.",
+    ],
+    "money_salty": [
+        "[delighted] Hot damn, cash.",
+    ],
+    "invader_salty": [
+        "[confused] Oh, what the hell are you?",
+        "[annoyed] Where the hell did you come from?",
+    ],
+    "broke_salty": [
+        "[frustrated] Damn it. Broke again.",
+    ],
+    "merchant_poor_salty": [
+        "[scoffs] No money, no goods. Now piss off, stranger.",
+    ],
+    "merchant_bye_salty": [
+        "[cackles] Don't die out there, ya poor bastard.",
+    ],
     # The merchant (MERCHANT_VOICE_ID).
     "merchant_hello": [
         "[creepy whisper] Ah... a customer. What're you buyin', stranger?",
