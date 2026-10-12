@@ -29,6 +29,7 @@
 #include "dbg_overlay.h"
 #include "pc_config.h"
 #include "pc_merchant.h"
+#include "pc_quick_options.h"
 #include "pc_rage.h"
 #include "pc_revenge.h"
 #include "sh_log.h"
@@ -133,6 +134,14 @@ static void play_line(const char* event, int force)
 
     if (!Pc_Revenge_Active() || !g_PcConfig.revengeBarks || Pc_MsgVoice_Holding() ||
         (!force && s_barkCooldown > 0))
+        return;
+    /* Only in free play, and never while the game's own voice task is busy:
+     * a scripted scene waits on that task, and a file played into the middle
+     * of it changes when the scene sees its line finish. The merchant panel
+     * pauses play but is not scripted, so its lines are allowed through. */
+    if (Sd_AudioStreamingCheck() ||
+        (g_SysWork.sysFlags & (SysFlag_CutsceneActive | SysFlag_DemoActive)) ||
+        (g_SysWork.sysState != SysState_Gameplay && !Pc_QuickOptions_IsOpen()))
         return;
 
     {
