@@ -4600,6 +4600,12 @@ static void Pc_FreeAimGunUpperBody(s_SubCharacter* player, s_PlayerExtra* extra,
                     s32 tot = g_SysWork.playerCombat.totalWeaponAmmo;
                     s32 i;
                     Items_AmmoReloadCalculation(&cur, &tot, g_SysWork.playerCombat.weaponAttack);
+#ifdef SH_PC_PORT
+                    {
+                        extern void Pc_Revenge_OnReload(void);
+                        Pc_Revenge_OnReload();
+                    }
+#endif
                     g_SysWork.playerCombat.currentWeaponAmmo = cur;
                     g_SysWork.playerCombat.totalWeaponAmmo   = tot;
                     for (i = 0; i < INV_ITEM_COUNT_MAX; i++)
@@ -6700,6 +6706,12 @@ bool Player_UpperBodyMainUpdate(s_SubCharacter* player, s_PlayerExtra* extra) //
                     totalAmmoVar   = g_SysWork.playerCombat.totalWeaponAmmo;
 
                     Items_AmmoReloadCalculation(&currentAmmoVar, &totalAmmoVar, g_SysWork.playerCombat.weaponAttack);
+#ifdef SH_PC_PORT
+                    {
+                        extern void Pc_Revenge_OnReload(void);
+                        Pc_Revenge_OnReload();
+                    }
+#endif
 
                     g_SysWork.playerCombat.currentWeaponAmmo = currentAmmoVar;
                     g_SysWork.playerCombat.totalWeaponAmmo   = totalAmmoVar;
@@ -6853,6 +6865,12 @@ void Player_CombatStateUpdate(s_SubCharacter* player, s_PlayerExtra* extra) // 0
                             totalAmmoVar   = g_SysWork.playerCombat.totalWeaponAmmo;
 
                             Items_AmmoReloadCalculation(&currentAmmoVar, &totalAmmoVar, g_SysWork.playerCombat.weaponAttack);
+#ifdef SH_PC_PORT
+                            {
+                                extern void Pc_Revenge_OnReload(void);
+                                Pc_Revenge_OnReload();
+                            }
+#endif
 
                             g_SysWork.playerCombat.currentWeaponAmmo = currentAmmoVar;
                             g_SysWork.playerCombat.totalWeaponAmmo   = totalAmmoVar;
@@ -10453,6 +10471,12 @@ void Player_ReceiveDamage(s_SubCharacter* player, s_PlayerExtra* extra) // 0x800
                     break;
             }
 
+#ifdef SH_PC_PORT
+            {
+                extern s32 Pc_Revenge_ScaleDamageTaken(s32 damageAmount);
+                player->damage.amount = Pc_Revenge_ScaleDamageTaken(player->damage.amount);
+            }
+#endif
             player->health -= player->damage.amount;
         }
 
@@ -10467,7 +10491,9 @@ void Player_ReceiveDamage(s_SubCharacter* player, s_PlayerExtra* extra) // 0x800
          * difficulty scaling above. No-op unless a run is live. */
         {
             extern void Pc_Rando_OnDamageTaken(s32 amount);
+            extern void Pc_Revenge_OnDamageTaken(void);
             Pc_Rando_OnDamageTaken(player->damage.amount);
+            Pc_Revenge_OnDamageTaken();
         }
 #endif
 

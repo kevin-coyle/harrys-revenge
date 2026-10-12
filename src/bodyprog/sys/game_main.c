@@ -2182,7 +2182,9 @@ void MainLoop(void) // 0x80032EE0
          * No-op unless a run is live. */
         {
             extern void Pc_Rando_Update(void);
+            extern void Pc_Revenge_Update(void);
             Pc_Rando_Update();
+            Pc_Revenge_Update();
         }
         {
             extern void Pc_RandoLua_OnUpdate(void);

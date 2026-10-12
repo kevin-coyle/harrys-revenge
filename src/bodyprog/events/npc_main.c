@@ -26,6 +26,7 @@ extern int g_DebugAnimKfView;
 extern int g_DebugViewNpcSlot;
 void Pc_KeyframeViewerPoseNpc(s_AnmHeader* anmHdr, GsCOORDINATE2* boneCoords);
 #include "pc_pick.h"
+#include "pc_revenge.h"
 #endif
 
 void Savegame_EnemyStateUpdate(s_SubCharacter* chara) // 0x80037DC4
@@ -83,7 +84,9 @@ void func_80037E78(s_SubCharacter* chara) // 0x80037E78
          * exactly once per corpse. No-op unless a run is live. */
         {
             extern void Pc_Rando_OnEnemyKilled(void);
+            extern void Pc_Revenge_OnEnemyKilled(void);
             Pc_Rando_OnEnemyKilled();
+            Pc_Revenge_OnEnemyKilled();
         }
 #endif
 
@@ -330,6 +333,7 @@ void Game_NpcRoomInitSpawn(bool cond) // 0x80037F24
             {
                 extern u8 g_PcNpcDebugSpawned[NPC_COUNT_MAX];
                 g_PcNpcDebugSpawned[npcIdx] = 0;
+                Pc_Revenge_SlotReset(npcIdx);
             }
 #endif
 
@@ -365,6 +369,9 @@ void Game_NpcRoomInitSpawn(bool cond) // 0x80037F24
 
             chara                    = &g_SysWork.npcs[npcIdx];
             chara->model.anim.flags |= AnimFlag_Visible;
+#ifdef SH_PC_PORT
+            Pc_Revenge_OnNativeSpawn(i, npcIdx);
+#endif
         }
     }
 
@@ -611,8 +618,13 @@ void Game_NpcUpdate(void) // 0x80038354
                 {
                     npc->model.charaId = Chara_None;
                     SysWork_NpcFlagClear(k);
+#ifdef SH_PC_PORT
+                    /* A clone shares its parent row's field_40. */
+                    if (!Pc_Revenge_IsClone(k))
+#endif
                     CLEAR_FLAG(g_SysWork.field_228C, npc->field_40);
 #ifdef SH_PC_PORT
+                    Pc_Revenge_SlotReset(k);
                     /* Slot freed: drop any debug-spawn flag with it (its own
                      * Savegame_EnemyStateUpdate already ran at kill time). */
                     {

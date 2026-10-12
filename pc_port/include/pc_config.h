@@ -252,6 +252,15 @@ typedef struct {
     int glVerbose;       /* 1 = log GL/GLSL details and shader info logs even on success, for driver-specific bug reports (config key: gl_verbose). Shader FAILURES are always logged regardless. */
     int allowDebugControls; /* 1 = enable dev/cheat keys (numpad, top-row digits, ~, kill-Harry, etc.); 0 = off (default) */
     int unlimitedEnemies;   /* 1 = raise the per-room concurrent-NPC cap to NPC_COUNT_MAX (config key: unlimited_enemies) */
+    /* Harry's Revenge (pc_revenge.c); revenge_mode = 0 turns every one of these off. */
+    int revengeMode;            /* revenge_mode */
+    int revengeWeaponDamagePct; /* revenge_weapon_damage: Harry's damage, percent */
+    int revengeDamageTakenPct;  /* revenge_damage_taken: damage to Harry, percent */
+    int revengeRegenCap;        /* revenge_regen: heal to this percent of health between fights, 0 = off */
+    int revengeEnemyMultiplier; /* revenge_enemies: monsters per natural spawn, 1..4 */
+    int revengeInvaderPct;      /* revenge_invaders: percent of extra monsters drawn from other areas */
+    int revengeAmmoDrops;       /* revenge_ammo_drops */
+    int revengeBarks;           /* revenge_voice: Harry's combat lines */
     int randomizer;         /* 1 = randomizer gamemode: New Game always opens in map2_s04, every door leads
                              * somewhere random, monsters/items are rerolled per area, and the run ends at the
                              * map7_s03 boss with a score-picked ending. Forces global_chara_pool on and

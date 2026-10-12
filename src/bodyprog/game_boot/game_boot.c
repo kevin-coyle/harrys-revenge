@@ -330,7 +330,9 @@ void GameBoot_MapLoad(s32 mapIdx) // 0x8003521C
      * unless the mode is running. */
     {
         extern void Pc_Rando_OnMapLoad(s32 mapIdx);
+        extern void Pc_Revenge_OnMapLoad(void);
         Pc_Rando_OnMapLoad(mapIdx);
+        Pc_Revenge_OnMapLoad();
     }
     /* Run this level's script (gamedata/scripts/<name>.lua) after the randomizer
      * has finished rewriting the header, so a script sees the live tables. */

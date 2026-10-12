@@ -147,6 +147,16 @@ void Chara_ModelCharaIdClear(s_SubCharacter* chara, s32 unused0, s32 unuse1) // 
 
     if (chara->model.charaId <= Chara_MonsterCybil)
     {
+#ifdef SH_PC_PORT
+        /* A clone shares its parent row's field_40. */
+        extern int  Pc_Revenge_IsClone(int slot);
+        extern void Pc_Revenge_SlotReset(int slot);
+        int slot = (int)(chara - g_SysWork.npcs);
+
+        if (Pc_Revenge_IsClone(slot))
+            Pc_Revenge_SlotReset(slot);
+        else
+#endif
         CLEAR_FLAG(g_SysWork.field_228C, chara->field_40);
     }
 

@@ -1761,6 +1761,10 @@ s32 func_8008B714(s_SubCharacter* attacker, s_SubCharacter* target, VECTOR3* arg
         {
             extern s32 Pc_Rando_ScaleWeaponDamage(s32 damageAmount, int targetIsPlayer);
             damageAmount = Pc_Rando_ScaleWeaponDamage(damageAmount, target == &g_SysWork.playerWork.player);
+            {
+                extern s32 Pc_Revenge_ScaleWeaponDamage(s32 damageAmount, int targetIsPlayer);
+                damageAmount = Pc_Revenge_ScaleWeaponDamage(damageAmount, target == &g_SysWork.playerWork.player);
+            }
         }
 #endif
         target->damage.amount += damageAmount;

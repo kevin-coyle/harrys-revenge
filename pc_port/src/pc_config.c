@@ -46,7 +46,7 @@ s_PcConfig g_PcConfig = {
     .imageAdjustScope = 1, /* world frames only; menus and FMVs left alone */
     .widescreenMode  = 1, /* 0=pillarbox, 1=Hor+ (default, no bars + correct proportions), 2=stretch */
     .menuPillarbox   = 1, /* 1=pillarbox 2D screens (black bars), 0=stretch to fill */
-    .allowLooseFiles = 0, /* 0=disc image only, 1=scan gamedata/load/ first */
+    .allowLooseFiles = 1, /* 0=disc image only, 1=scan gamedata/load/ first (the added voice files) */
     .residentTextures = 1, /* 1=expanded chunk-texture pool w/ per-slot GL textures (whole map textured), 0=vanilla 8+2 VRAM pool */
     .texturePacks = 1, /* 1=scan gamedata/texturemods/ for DuckStation texture packs (loose dirs or .zip) */
     .texpackCacheMb = 2048, /* composed-canvas cache RAM cap; kills pack re-compose stutter on chunk churn */
@@ -89,6 +89,14 @@ s_PcConfig g_PcConfig = {
     .enableDebugLog = 0, /* 0=no SilentHill.log, 1=write SilentHill.log (debug builds) */
     .glVerbose      = 0, /* 1 = log GL/GLSL details + shader info logs on success; failures always log */
     .allowDebugControls = 0, /* 0=off (default), 1=enable dev/cheat keys */
+    .revengeMode            = 1,
+    .revengeWeaponDamagePct = 175,
+    .revengeDamageTakenPct  = 50,
+    .revengeRegenCap        = 60,
+    .revengeEnemyMultiplier = 2,
+    .revengeInvaderPct      = 35,
+    .revengeAmmoDrops       = 1,
+    .revengeBarks           = 1,
     .controllerMovement = 2, /* 0=analog, 1=dpad, 2=both */
     .movementOriginal = 1,   /* 1 = PSX lower-body movement machine (default); 0 = legacy PC shim */
 
@@ -1318,6 +1326,43 @@ else if (strcmp(key, "enable_plugins") == 0)
         else if (strcmp(key, "unlimited_enemies") == 0)
         {
             g_PcConfig.unlimitedEnemies = (atoi(value) != 0);
+        }
+        else if (strcmp(key, "revenge_mode") == 0)
+        {
+            g_PcConfig.revengeMode = (atoi(value) != 0);
+        }
+        else if (strcmp(key, "revenge_weapon_damage") == 0)
+        {
+            int v = atoi(value);
+            g_PcConfig.revengeWeaponDamagePct = v < 10 ? 10 : v > 1000 ? 1000 : v;
+        }
+        else if (strcmp(key, "revenge_damage_taken") == 0)
+        {
+            int v = atoi(value);
+            g_PcConfig.revengeDamageTakenPct = v < 0 ? 0 : v > 400 ? 400 : v;
+        }
+        else if (strcmp(key, "revenge_regen") == 0)
+        {
+            int v = atoi(value);
+            g_PcConfig.revengeRegenCap = v < 0 ? 0 : v > 100 ? 100 : v;
+        }
+        else if (strcmp(key, "revenge_enemies") == 0)
+        {
+            int v = atoi(value);
+            g_PcConfig.revengeEnemyMultiplier = v < 1 ? 1 : v > 4 ? 4 : v;
+        }
+        else if (strcmp(key, "revenge_invaders") == 0)
+        {
+            int v = atoi(value);
+            g_PcConfig.revengeInvaderPct = v < 0 ? 0 : v > 100 ? 100 : v;
+        }
+        else if (strcmp(key, "revenge_ammo_drops") == 0)
+        {
+            g_PcConfig.revengeAmmoDrops = (atoi(value) != 0);
+        }
+        else if (strcmp(key, "revenge_voice") == 0)
+        {
+            g_PcConfig.revengeBarks = (atoi(value) != 0);
         }
         else if (strcmp(key, "randomizer") == 0)
         {
