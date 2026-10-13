@@ -246,9 +246,9 @@ void Pc_Scooter_Update(void)
  * device, read at a variable rate so the pitch follows the speed: an idle
  * burble when stopped, revving up as Harry moves. Gain and rate are set from
  * the game thread and only read by the audio callback. */
-#define ENGINE_IDLE_RATE  0.72f
-#define ENGINE_FULL_RATE  1.18f
-#define ENGINE_GAIN       0.55f
+#define ENGINE_IDLE_RATE  0.80f
+#define ENGINE_FULL_RATE  1.10f
+#define ENGINE_GAIN       0.25f
 #define ENGINE_FADE       0.08f /* per frame toward the target gain */
 
 static SDL_AudioDeviceID s_engDev;
