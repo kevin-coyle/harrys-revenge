@@ -13,7 +13,7 @@
  * normals, so the shading follows the scooter as it turns; the area's ambient
  * tint and fog ramp are applied the way the game colours its own geometry.
  *
- * "scooter" (https://skfb.ly/onqTr) by TiqKai, CC BY 4.0.
+ * "Low-Poly scooter" (https://skfb.ly/oIXJA) by supakorn.pim, CC BY 4.0.
  */
 
 #include "game.h"

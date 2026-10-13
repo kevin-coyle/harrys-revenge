@@ -1,8 +1,8 @@
 Harry's Revenge -- third-party content
 
-"scooter" (https://skfb.ly/onqTr) by TiqKai is licensed under Creative Commons
-Attribution 4.0 (http://creativecommons.org/licenses/by/4.0/). Changes: reduced
-from 278,036 to about 5,100 triangles, recoloured to flat material colours and
-rescaled (pc_port/tools/revenge/make_scooter.py, decimate_scooter.py).
+"Low-Poly scooter" (https://skfb.ly/oIXJA) by supakorn.pim is licensed under
+Creative Commons Attribution 4.0 (http://creativecommons.org/licenses/by/4.0/).
+Changes: display base removed, rescaled, converted to flat-coloured triangles
+(pc_port/tools/revenge/make_scooter.py).
 
 Voice lines and music were generated with ElevenLabs (eleven_v4, Eleven Music).
