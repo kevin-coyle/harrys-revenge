@@ -6,7 +6,7 @@
  * without it, it stands a couple of metres from where he arrived, and walking
  * up to it claims it (saved with the game). From then on, in the open streets
  * a double tap of Run (or key_scooter) hops on and off. Riding, Harry moves at
- * SCOOTER_CRUISE whenever he moves at all; aiming, taking a hit or leaving the
+ * revenge_scooter_speed percent of his run whenever he moves at all; aiming, taking a hit or leaving the
  * streets puts him back on foot.
  *
  * The model (scooter_mesh.h, from tools/revenge/make_scooter.py) is drawn the
@@ -43,9 +43,9 @@
 
 #include "scooter_mesh.h"
 
-#define SCOOTER_CRUISE      Q12(7.5f) /* units per second; Harry's run is 3.5-5.0 */
+#define SCOOTER_RUN_REF     Q12(4.0f) /* Harry's typical run, units per second (3.5-5.0) */
 #define SCOOTER_MOVING      Q12(0.3f)
-#define SCOOTER_SPEED_CAP   400       /* percent: walking starts well below run speed */
+#define SCOOTER_SPEED_CAP   900       /* percent: walking starts well below run speed */
 #define SCOOTER_DOUBLE_TAP  350u      /* ms between the two taps of Run */
 #define SCOOTER_OT_SHIFT   1          /* OT0's own scale (see pc_decals.c) */
 
@@ -100,7 +100,7 @@ int Pc_Scooter_SpeedPct(void)
 
     if (!s_riding || speed < SCOOTER_MOVING)
         return 100;
-    pct = (int)(((s64)SCOOTER_CRUISE * 100) / speed);
+    pct = (int)(((s64)SCOOTER_RUN_REF * g_PcConfig.revengeScooterSpeed) / speed);
     return pct < 100 ? 100 : pct > SCOOTER_SPEED_CAP ? SCOOTER_SPEED_CAP : pct;
 }
 

@@ -104,6 +104,7 @@ s_PcConfig g_PcConfig = {
     .revengeRage            = 1,
     .revengeRadio           = 1,
     .revengeMusic           = 40,
+    .revengeScooterSpeed    = 250,
     .controllerMovement = 2, /* 0=analog, 1=dpad, 2=both */
     .movementOriginal = 1,   /* 1 = PSX lower-body movement machine (default); 0 = legacy PC shim */
 
@@ -1405,6 +1406,11 @@ else if (strcmp(key, "enable_plugins") == 0)
         else if (strcmp(key, "revenge_radio") == 0)
         {
             g_PcConfig.revengeRadio = (atoi(value) != 0);
+        }
+        else if (strcmp(key, "revenge_scooter_speed") == 0)
+        {
+            int v = atoi(value);
+            g_PcConfig.revengeScooterSpeed = v < 100 ? 100 : v > 400 ? 400 : v;
         }
         else if (strcmp(key, "revenge_music") == 0)
         {
