@@ -5,8 +5,9 @@
  * Found parked: the first time Harry comes out into an open-street area
  * without it, it stands a couple of metres from where he arrived, and walking
  * up to it claims it (saved with the game). From then on, in the open streets
- * Harry hops on when he sprints with no monster on top of him, rides at
- * SCOOTER_SPEED_PCT, and hops off when he stops, aims or a monster closes in.
+ * a double tap of Run (or key_scooter) hops on and off. Riding, Harry moves at
+ * SCOOTER_CRUISE whenever he moves at all; aiming, taking a hit or leaving the
+ * streets puts him back on foot.
  *
  * The model (scooter_mesh.h, from tools/revenge/make_scooter.py) is drawn the
  * way pc_decals.c draws bullet holes: vertices as Q8 offsets from the world-
@@ -18,6 +19,10 @@
  * "Low-Poly scooter" (https://skfb.ly/oIXJA) by supakorn.pim, CC BY 4.0.
  */
 
+#include <SDL.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "game.h"
 #include "bodyprog/bodyprog.h"
 #include "bodyprog/chara/chara.h"
@@ -25,25 +30,27 @@
 #include "bodyprog/math/math.h"
 #include "bodyprog/screen/screen_data.h"
 #include "bodyprog/view/vw_calc.h"
+#include "main/fileinfo.h"
+#include "main/fsqueue.h"
 
 #include "dbg_overlay.h"
 #include "pc_config.h"
 #include "pc_merchant.h"
+#include "pc_quick_options.h"
 #include "pc_revenge.h"
 #include "pc_scooter.h"
 #include "sh_log.h"
 
 #include "scooter_mesh.h"
 
-#define SCOOTER_SPEED_PCT  190
-#define SCOOTER_RUN_SPEED  Q12(3.0f) /* run speeds are 3.5-5.0 */
-#define SCOOTER_STOP_SPEED Q12(0.6f)
-#define SCOOTER_MOUNT_RUN  Q12(0.5f) /* sprinting this long hops on */
-#define SCOOTER_DISMOUNT   Q12(0.6f) /* stopped this long hops off */
-#define SCOOTER_CLEARANCE  Q12(4.0f) /* a monster this close keeps Harry on foot */
+#define SCOOTER_CRUISE      Q12(7.5f) /* units per second; Harry's run is 3.5-5.0 */
+#define SCOOTER_MOVING      Q12(0.3f)
+#define SCOOTER_SPEED_CAP   400       /* percent: walking starts well below run speed */
+#define SCOOTER_DOUBLE_TAP  350u      /* ms between the two taps of Run */
 #define SCOOTER_OT_SHIFT   1          /* OT0's own scale (see pc_decals.c) */
 
 extern int  Pc_BloodFogKeep(s32 z);
+extern int  g_PcBindsGen;
 extern s_WorldEnvWork g_WorldEnvWork;
 extern void Pc_Revenge_ScooterLine(int mounting);
 
@@ -51,8 +58,8 @@ extern void Pc_Revenge_ScooterLine(int mounting);
 #define SCOOTER_PARK_SIDE   Q12(2.2f) /* parked this far beside the arrival point */
 
 static int    s_riding;
-static q19_12 s_runFor;
-static q19_12 s_stopFor;
+static q19_12 s_lastHp;
+static Uint32 s_lastRunTap;
 
 /* Parked, waiting to be found: where, which way it faces, and on which map. */
 static int    s_parkedMap = -1;
@@ -85,18 +92,24 @@ int Pc_Scooter_Riding(void)
     return s_riding;
 }
 
+/* Riding, any movement at all becomes the scooter's cruising speed. */
 int Pc_Scooter_SpeedPct(void)
 {
-    return s_riding ? SCOOTER_SPEED_PCT : 100;
+    q19_12 speed = g_SysWork.playerWork.player.moveSpeed;
+    int     pct;
+
+    if (!s_riding || speed < SCOOTER_MOVING)
+        return 100;
+    pct = (int)(((s64)SCOOTER_CRUISE * 100) / speed);
+    return pct < 100 ? 100 : pct > SCOOTER_SPEED_CAP ? SCOOTER_SPEED_CAP : pct;
 }
 
 static void set_riding(int on)
 {
     if (on == s_riding)
         return;
-    s_riding  = on;
-    s_runFor  = 0;
-    s_stopFor = 0;
+    s_riding = on;
+    s_lastHp = g_SysWork.playerWork.player.health;
     Pc_Revenge_ScooterLine(on);
     SH_DBG("[SCOOTER] %s", on ? "on" : "off");
 }
@@ -161,14 +174,48 @@ static void update_parked(void)
         Pc_Merchant_GiveScooter();
         s_parkedMap = -1;
         Pc_Revenge_Voice("scooter_found");
-        DbgOverlay_ToastLine("Found a scooter! Sprint in the open streets to ride it.");
+        DbgOverlay_ToastLine("Found a scooter! Double-tap Run in the open streets to ride.");
     }
+}
+
+/* A double tap of the game's own Run control (Square, or L1 on the alternate
+ * cameras), whichever scheme is live, or key_scooter on the keyboard. */
+static int toggle_pressed(void)
+{
+    static SDL_Scancode s_sc = SDL_SCANCODE_UNKNOWN;
+    static int          s_res, s_prevKey;
+    const Uint8*        ks = SDL_GetKeyboardState(NULL);
+    u16                 runBtn = g_GameWorkPtr->config.controllerConfig.run;
+    int                 key, hit = 0;
+    Uint32              now = SDL_GetTicks();
+
+    if (s_res != g_PcBindsGen + 1)
+    {
+        s_sc  = SDL_GetScancodeFromName(g_PcConfig.keyScooter);
+        s_res = g_PcBindsGen + 1;
+    }
+    key = (s_sc != SDL_SCANCODE_UNKNOWN && ks) ? ks[s_sc] : 0;
+    if (key && !s_prevKey)
+        hit = 1;
+    s_prevKey = key;
+
+    if (g_Controller0 != NULL && (g_Controller0->clickedBtnFlags & runBtn))
+    {
+        if (s_lastRunTap != 0 && now - s_lastRunTap < SCOOTER_DOUBLE_TAP)
+        {
+            hit          = 1;
+            s_lastRunTap = 0;
+        }
+        else
+            s_lastRunTap = now;
+    }
+    return hit;
 }
 
 void Pc_Scooter_Update(void)
 {
     s_SubCharacter* player = &g_SysWork.playerWork.player;
-    int             can;
+    int             can, pressed;
 
     if (Pc_Revenge_Active() && g_GameWork.gameState == GameState_InGame)
         update_parked();
@@ -176,25 +223,83 @@ void Pc_Scooter_Update(void)
     can = Pc_Revenge_Active() && Pc_Merchant_HasScooter() && outdoors() &&
           g_GameWork.gameState == GameState_InGame && g_SysWork.sysState == SysState_Gameplay &&
           !(g_SysWork.sysFlags & SysFlag_CutsceneActive) && player->health > Q12(0.0f) &&
-          !g_SysWork.playerCombat.isAiming;
+          !g_SysWork.playerCombat.isAiming && !Pc_QuickOptions_IsOpen();
+    pressed = can && toggle_pressed();
 
-    if (!can || Pc_Revenge_MonstersWithin(SCOOTER_CLEARANCE) > 0)
+    if (!can || (s_riding && player->health < s_lastHp))
     {
-        set_riding(0);
+        set_riding(0); /* aiming, a hit, a door or a scene puts him on foot */
         return;
     }
+    if (pressed)
+        set_riding(!s_riding);
+    s_lastHp = player->health;
+}
 
-    if (!s_riding)
+/* ------------------------------------------------------------------ seat */
+
+/* Harry has no riding animation; the cafe intro sits him in a booth. Its file
+ * (HB_M0S01.ANM) is raw keyframes that continue HB_BASE's numbering from 676,
+ * so a copy of HB_BASE's header (bind poses included) followed by the seated
+ * keyframes makes an anim whose keyframe 0 is the seat. Read straight off the
+ * disc image, not through the game's file queue, so riding can never disturb
+ * a read the map has in flight. */
+#define SEAT_FILE_FIRST_KF 676 /* map anim files start at this keyframe */
+#define SEAT_HDR_BYTES     404 /* HB_BASE header + bind poses (dataOffset) */
+#define SEAT_KF_BYTES      156 /* one Harry keyframe */
+#define SEAT_KF_FIRST      827 /* the cafe's seated range */
+#define SEAT_KF_COUNT      90
+#define SEAT_KF            914 /* sitting upright, after the slumped frames */
+#define SEAT_LIFT          Q12(0.30f) /* drawn this much higher, onto the seat */
+
+extern unsigned char* Pc_LangReadDiscFile(unsigned int sector, unsigned int size);
+
+static u8* s_seatAnm;
+static int s_seatTried;
+
+static int seat_load(void)
+{
+    const s_FileInfo* fe = &g_FileTable[FILE_ANIM_HB_M0S01_ANM];
+    unsigned int      size, need;
+    u8*               file;
+
+    if (s_seatAnm != NULL || s_seatTried)
+        return s_seatAnm != NULL;
+    s_seatTried = 1;
+
+    size = (unsigned int)fe->blockCount << 8;
+    need = (SEAT_KF_FIRST - SEAT_FILE_FIRST_KF + SEAT_KF_COUNT) * SEAT_KF_BYTES;
+    if (size < need)
+        return 0;
+    file = Pc_LangReadDiscFile(fe->startSector, size);
+    if (file == NULL)
+        return 0;
+
+    s_seatAnm = (u8*)malloc(SEAT_HDR_BYTES + SEAT_KF_COUNT * SEAT_KF_BYTES);
+    if (s_seatAnm != NULL)
     {
-        s_runFor = (player->moveSpeed >= SCOOTER_RUN_SPEED) ? s_runFor + g_DeltaTimeRaw : 0;
-        if (s_runFor >= SCOOTER_MOUNT_RUN)
-            set_riding(1);
-        return;
+        memcpy(s_seatAnm, (const void*)FS_BUFFER_0, SEAT_HDR_BYTES);
+        memcpy(s_seatAnm + SEAT_HDR_BYTES, file + (SEAT_KF_FIRST - SEAT_FILE_FIRST_KF) * SEAT_KF_BYTES,
+               SEAT_KF_COUNT * SEAT_KF_BYTES);
+        SH_DBG("[SCOOTER] seat pose loaded");
     }
+    free(file);
+    return s_seatAnm != NULL;
+}
 
-    s_stopFor = (player->moveSpeed < SCOOTER_STOP_SPEED) ? s_stopFor + g_DeltaTimeRaw : 0;
-    if (s_stopFor >= SCOOTER_DISMOUNT)
-        set_riding(0);
+/* Player_Update, after every other pose write: hold the seat while riding and
+ * lift the drawn body onto it. The state machines and anim timers run on
+ * underneath untouched, so dismounting simply hands the pose back. */
+void Pc_Scooter_PoseHarry(GsCOORDINATE2* coords)
+{
+    const int kf = SEAT_KF;
+
+    if (!s_riding || !seat_load())
+        return;
+
+    g_SysWork.playerWork.extra.disabledAnimBones = 0;
+    Anim_BoneUpdate((s_AnmHeader*)s_seatAnm, coords, kf - SEAT_KF_FIRST, kf - SEAT_KF_FIRST, Q12(0.0f));
+    coords[0].coord.t[1] = Q12_TO_Q8(g_SysWork.playerWork.player.position.vy - SEAT_LIFT);
 }
 
 static u8 shade(s32 base, s32 light, s32 tint, s32 fogKeep, s32 fogCol)

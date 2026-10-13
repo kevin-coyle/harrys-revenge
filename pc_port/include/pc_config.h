@@ -390,6 +390,7 @@ typedef struct {
     char keyMerchant[24];     /* Harry's Revenge shop (config key: key_merchant); default M */
     char padMerchant[24];     /* pad_merchant; default rightshoulder, ignored on the Classic camera where R1 sidesteps */
     char keyRage[24];         /* key_rage: unleash a full rage meter; default G */
+    char keyScooter[24];      /* key_scooter: hop on/off the scooter (a double tap of Run also does); default B */
     char padRage[24];         /* pad_rage; default x (Square), ignored on the Classic camera where Square runs */
     char keySwapShoulder[24]; /* PC-only: swap OTS shoulder side (default Mouse3) */
     char padSwapShoulder[24]; /* PC-only: controller bind for the same (config key: pad_swap_shoulder); unbound by default */

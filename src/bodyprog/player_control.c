@@ -1066,6 +1066,13 @@ void Player_Update(s_SubCharacter* player, s_AnmHeader* anmHdr, GsCOORDINATE2* c
     }
 
 #ifdef SH_PC_PORT
+    /* Harry's Revenge scooter: seated while riding. Outside the delta-time gate
+     * for the same reason as the play-as tick below. */
+    {
+        extern void Pc_Scooter_PoseHarry(GsCOORDINATE2* coords);
+        Pc_Scooter_PoseHarry(coords);
+    }
+
     /* Play-as: re-assert the swapped character's own bone offsets and keep
      * Lisa's rigid hair coords composed against the freshly-animated head.
      * OUTSIDE the delta-time gate above: a frame that advances no time still
