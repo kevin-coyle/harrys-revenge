@@ -2,9 +2,11 @@
 /*
  * pc_scooter.c - Harry's Revenge: Harry's scooter.
  *
- * Bought from the merchant. In the open streets Harry hops on when he sprints
- * with no monster on top of him, rides at REVENGE_SCOOTER_SPEED, and hops off
- * when he stops, aims or a monster closes in.
+ * Found parked: the first time Harry comes out into an open-street area
+ * without it, it stands a couple of metres from where he arrived, and walking
+ * up to it claims it (saved with the game). From then on, in the open streets
+ * Harry hops on when he sprints with no monster on top of him, rides at
+ * SCOOTER_SPEED_PCT, and hops off when he stops, aims or a monster closes in.
  *
  * The model (scooter_mesh.h, from tools/revenge/make_scooter.py) is drawn the
  * way pc_decals.c draws bullet holes: vertices as Q8 offsets from the world-
@@ -24,6 +26,7 @@
 #include "bodyprog/screen/screen_data.h"
 #include "bodyprog/view/vw_calc.h"
 
+#include "dbg_overlay.h"
 #include "pc_config.h"
 #include "pc_merchant.h"
 #include "pc_revenge.h"
@@ -44,9 +47,19 @@ extern int  Pc_BloodFogKeep(s32 z);
 extern s_WorldEnvWork g_WorldEnvWork;
 extern void Pc_Revenge_ScooterLine(int mounting);
 
+#define SCOOTER_CLAIM_RANGE Q12(1.4f)
+#define SCOOTER_PARK_SIDE   Q12(2.2f) /* parked this far beside the arrival point */
+
 static int    s_riding;
 static q19_12 s_runFor;
 static q19_12 s_stopFor;
+
+/* Parked, waiting to be found: where, which way it faces, and on which map. */
+static int    s_parkedMap = -1;
+static int    s_parkPending;
+static int    s_lastMap = -1;
+static q19_12 s_parkX, s_parkY, s_parkZ;
+static s16    s_parkYaw;
 
 /* Light from above and slightly in front, in game space (y grows downwards). */
 static const s32 LIGHT_X = 1229, LIGHT_Y = -3482, LIGHT_Z = 1638; /* ~ (0.3, -0.85, 0.4) Q12 */
@@ -88,10 +101,77 @@ static void set_riding(int on)
     SH_DBG("[SCOOTER] %s", on ? "on" : "off");
 }
 
+/* Beside Harry's arrival point, on walkable ground: his right, then his left,
+ * then ahead. Facing the way he faces, so it reads as parked for him. */
+static void park_near_harry(void)
+{
+    s_SubCharacter* player = &g_SysWork.playerWork.player;
+    s16             yaw    = player->rotation.vy;
+    static const s16 OFFSETS[] = { Q12_ANGLE(90.0f), Q12_ANGLE(-90.0f), 0 };
+    int             i;
+
+    for (i = 0; i < (int)ARRAY_SIZE(OFFSETS); i++)
+    {
+        s16    a = (s16)(yaw + OFFSETS[i]);
+        q19_12 x = player->position.vx + (q19_12)(((s64)SCOOTER_PARK_SIDE * Math_Sin(a)) >> 12);
+        q19_12 z = player->position.vz + (q19_12)(((s64)SCOOTER_PARK_SIDE * Math_Cos(a)) >> 12);
+
+        if (func_800808AC(x, z) != 0)
+        {
+            s_parkX     = x;
+            s_parkY     = player->position.vy;
+            s_parkZ     = z;
+            s_parkYaw   = yaw;
+            s_parkedMap = g_SavegamePtr->mapIdx;
+            SH_DBG("[SCOOTER] parked on map %d", s_parkedMap);
+            return;
+        }
+    }
+}
+
+static void update_parked(void)
+{
+    s_SubCharacter* player = &g_SysWork.playerWork.player;
+    s64             dx, dz;
+
+    if (Pc_Merchant_HasScooter())
+    {
+        s_parkedMap = -1;
+        return;
+    }
+    if (g_SavegamePtr->mapIdx != s_lastMap)
+    {
+        s_lastMap     = g_SavegamePtr->mapIdx;
+        s_parkPending = outdoors() && s_parkedMap < 0;
+    }
+    if (g_SysWork.sysState != SysState_Gameplay || (g_SysWork.sysFlags & SysFlag_CutsceneActive))
+        return;
+    if (s_parkPending)
+    {
+        s_parkPending = 0;
+        park_near_harry();
+    }
+    if (s_parkedMap != g_SavegamePtr->mapIdx)
+        return;
+
+    dx = (s64)player->position.vx - s_parkX;
+    dz = (s64)player->position.vz - s_parkZ;
+    if (dx * dx + dz * dz < (s64)SCOOTER_CLAIM_RANGE * SCOOTER_CLAIM_RANGE)
+    {
+        Pc_Merchant_GiveScooter();
+        s_parkedMap = -1;
+        Pc_Revenge_Voice("scooter_found");
+        DbgOverlay_ToastLine("Found a scooter! Sprint in the open streets to ride it.");
+    }
+}
+
 void Pc_Scooter_Update(void)
 {
     s_SubCharacter* player = &g_SysWork.playerWork.player;
     int             can;
+
+    if (Pc_Revenge_Active() && g_GameWork.gameState == GameState_InGame)
+        update_parked();
 
     can = Pc_Revenge_Active() && Pc_Merchant_HasScooter() && outdoors() &&
           g_GameWork.gameState == GameState_InGame && g_SysWork.sysState == SysState_Gameplay &&
@@ -125,23 +205,19 @@ static u8 shade(s32 base, s32 light, s32 tint, s32 fogKeep, s32 fogCol)
     return (u8)(c < 0 ? 0 : c > 255 ? 255 : c);
 }
 
-void Pc_Scooter_Draw(GsOT* ot)
+static void draw_at(GsOT* ot, q19_12 px, q19_12 py, q19_12 pz, s16 yaw)
 {
     static s16 sx[SCOOTER_VERT_COUNT], sy[SCOOTER_VERT_COUNT];
     static s32 sz[SCOOTER_VERT_COUNT];
     static u8  col[SCOOTER_VERT_COUNT][3];
-    s_SubCharacter* player = &g_SysWork.playerWork.player;
     POLY_G3*        poly;
     MATRIX          mat;
     s32             c, s, tr, tg, tb;
     int             i;
 
-    if (!s_riding)
-        return;
-
     /* Model front is +z; heading 0 faces +z and grows towards +x. */
-    c = Math_Cos(player->rotation.vy);
-    s = Math_Sin(player->rotation.vy);
+    c = Math_Cos(yaw);
+    s = Math_Sin(yaw);
 
     tr = Q12_MULT(g_WorldEnvWork.worldTintColor.r, g_WorldEnvWork.field_20);
     tg = Q12_MULT(g_WorldEnvWork.worldTintColor.g, g_WorldEnvWork.field_20);
@@ -150,7 +226,7 @@ void Pc_Scooter_Draw(GsOT* ot)
     tg = tg < 24 ? 24 : tg > 160 ? 160 : tg;
     tb = tb < 24 ? 24 : tb > 160 ? 160 : tb;
 
-    Vw_WorldScreenMatrixAtPositionGet(&mat, player->position.vx, player->position.vy, player->position.vz);
+    Vw_WorldScreenMatrixAtPositionGet(&mat, px, py, pz);
     SetRotMatrix(&mat);
     SetTransMatrix(&mat);
 
@@ -209,4 +285,14 @@ void Pc_Scooter_Draw(GsOT* ot)
         poly++;
     }
     GsOUT_PACKET_P = (PACKET*)poly;
+}
+
+void Pc_Scooter_Draw(GsOT* ot)
+{
+    s_SubCharacter* player = &g_SysWork.playerWork.player;
+
+    if (s_riding)
+        draw_at(ot, player->position.vx, player->position.vy, player->position.vz, player->rotation.vy);
+    else if (s_parkedMap >= 0 && s_parkedMap == g_SavegamePtr->mapIdx)
+        draw_at(ot, s_parkX, s_parkY, s_parkZ, s_parkYaw);
 }

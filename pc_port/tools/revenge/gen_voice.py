@@ -284,6 +284,10 @@ BARKS = {
     "scooter_on_salty": [
         "[laughing] Hell yeah, wheels!",
     ],
+    "scooter_found": [
+        "[delighted] Is that a scooter? Finally, something in this town is on my side.",
+        "[laughing] Keys in it and everything. This town's not all bad.",
+    ],
     "scooter_off": [
         "[sighs] Back on foot. Great.",
         "[dryly] Parking's free, at least.",
@@ -302,9 +306,6 @@ BARKS = {
     "merchant_upgrade": [
         "[gleeful] Ooh, she'll hit harder now.",
         "[admiring] Now that's a weapon worth dyin' for. Or killin' for.",
-    ],
-    "merchant_scooter": [
-        "[chuckles] A scooter, stranger? Mind the fog. And the monsters.",
     ],
     "merchant_poor": [
         "[tsk] Not enough, stranger. Not nearly enough.",

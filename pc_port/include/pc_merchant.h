@@ -20,6 +20,7 @@ int  Pc_Merchant_Money(void);
 void Pc_Merchant_AddMoney(int amount);
 int  Pc_Merchant_Level(int weapon, int stat);
 int  Pc_Merchant_HasScooter(void);
+void Pc_Merchant_GiveScooter(void);
 
 /* Money for a kill, by monster type. */
 void Pc_Merchant_OnKill(int charaId);

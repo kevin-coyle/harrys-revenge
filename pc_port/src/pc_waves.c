@@ -285,7 +285,7 @@ void Pc_Waves_Draw(void)
         snprintf(line, sizeof(line), "AREA_CLEAR");
     if (line[0])
     {
-        Gfx_StringSetPosition(10, 220);
+        Gfx_StringSetPosition(10, 197); /* under the rage bar (pc_rage.c) */
         Gfx_StringSetColor(StringColorId_LightGrey);
         Gfx_StringDraw(line, 99);
     }

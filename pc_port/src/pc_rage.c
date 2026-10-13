@@ -316,7 +316,9 @@ void Pc_Rage_Draw(void)
     static DR_TPAGE s_tp[2];
     extern int      g_PsxCutsceneActive;
     extern int      g_PsxPresentLastFrame;
-    const int       x = -150, y = 100, w = 80, h = 5;
+    /* Clear of the bottom edge: the widescreen view crops the PSX frame's
+     * lowest rows, and the wave status (pc_waves.c) sits below this. */
+    const int       x = -150, y = 75, w = 80, h = 5;
     int             buf, fillW, flash;
     u8              r, g, b;
 
