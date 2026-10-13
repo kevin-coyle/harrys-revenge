@@ -697,6 +697,16 @@ void Player_MovementStateReset(s_SubCharacter* player, e_PlayerLowerBodyState lo
 
 bool Player_FootstepSfxPlay(s32 animStatus, s_SubCharacter* player, s32 keyframe0, s32 keyframe1, s32 sfx, s8 pitch)
 {
+#ifdef SH_PC_PORT
+    /* Riding the Harry's Revenge scooter: the engine, not his feet. */
+    {
+        extern int Pc_Scooter_Riding(void);
+        if (Pc_Scooter_Riding())
+        {
+            return false;
+        }
+    }
+#endif
     if (player->model.anim.status != animStatus)
     {
         return false;

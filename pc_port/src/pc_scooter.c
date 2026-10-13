@@ -20,6 +20,7 @@
  */
 
 #include <SDL.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -51,6 +52,7 @@
 
 extern int  Pc_BloodFogKeep(s32 z);
 extern int  g_PcBindsGen;
+extern const char* PcPort_GetGameDataPath(void);
 extern s_WorldEnvWork g_WorldEnvWork;
 extern void Pc_Revenge_ScooterLine(int mounting);
 
@@ -58,6 +60,7 @@ extern void Pc_Revenge_ScooterLine(int mounting);
 #define SCOOTER_PARK_SIDE   Q12(2.2f) /* parked this far beside the arrival point */
 
 static int    s_riding;
+static void   engine_update(void);
 static q19_12 s_lastHp;
 static Uint32 s_lastRunTap;
 
@@ -219,6 +222,7 @@ void Pc_Scooter_Update(void)
 
     if (Pc_Revenge_Active() && g_GameWork.gameState == GameState_InGame)
         update_parked();
+    engine_update();
 
     can = Pc_Revenge_Active() && Pc_Merchant_HasScooter() && outdoors() &&
           g_GameWork.gameState == GameState_InGame && g_SysWork.sysState == SysState_Gameplay &&
@@ -234,6 +238,89 @@ void Pc_Scooter_Update(void)
     if (pressed)
         set_riding(!s_riding);
     s_lastHp = player->health;
+}
+
+/* ------------------------------------------------------------------ engine */
+
+/* gamedata/revenge/scooter_engine.wav (a seamless loop) on its own SDL audio
+ * device, read at a variable rate so the pitch follows the speed: an idle
+ * burble when stopped, revving up as Harry moves. Gain and rate are set from
+ * the game thread and only read by the audio callback. */
+#define ENGINE_IDLE_RATE  0.72f
+#define ENGINE_FULL_RATE  1.18f
+#define ENGINE_GAIN       0.55f
+#define ENGINE_FADE       0.08f /* per frame toward the target gain */
+
+static SDL_AudioDeviceID s_engDev;
+static Sint16*           s_engPcm;
+static Uint32            s_engLen;  /* samples */
+static double            s_engPos;
+static volatile float    s_engGain, s_engRate = ENGINE_IDLE_RATE;
+static int               s_engTried;
+
+static void SDLCALL engine_fill(void* user, Uint8* out, int len)
+{
+    Sint16* dst  = (Sint16*)out;
+    int     n    = len / 2, i;
+    float   gain = s_engGain, rate = s_engRate;
+
+    (void)user;
+    for (i = 0; i < n; i++)
+    {
+        Uint32 a = (Uint32)s_engPos, b = (a + 1) % s_engLen;
+        float  t = (float)(s_engPos - a);
+
+        dst[i]    = (Sint16)(((float)s_engPcm[a] * (1.0f - t) + (float)s_engPcm[b] * t) * gain);
+        s_engPos += rate;
+        if (s_engPos >= s_engLen)
+            s_engPos -= s_engLen;
+    }
+}
+
+static int engine_open(void)
+{
+    char          path[512];
+    SDL_AudioSpec spec, have;
+    Uint8*        pcm;
+    Uint32        bytes;
+
+    s_engTried = 1;
+    snprintf(path, sizeof(path), "%s/revenge/scooter_engine.wav", PcPort_GetGameDataPath());
+    if (!SDL_LoadWAV(path, &spec, &pcm, &bytes))
+        return 0;
+    if (spec.format != AUDIO_S16LSB || spec.channels != 1 || bytes < 4)
+    {
+        SDL_FreeWAV(pcm);
+        return 0;
+    }
+    s_engPcm      = (Sint16*)pcm;
+    s_engLen      = bytes / 2;
+    spec.callback = engine_fill;
+    spec.userdata = NULL;
+    spec.samples  = 1024;
+    s_engDev      = SDL_OpenAudioDevice(NULL, 0, &spec, &have, 0);
+    return s_engDev != 0;
+}
+
+static void engine_update(void)
+{
+    int   playing = s_riding && g_SysWork.sysState == SysState_Gameplay && !Pc_QuickOptions_IsOpen();
+    float target  = playing ? ENGINE_GAIN * g_PcConfig.xaVolume : 0.0f;
+    float speed   = (float)g_SysWork.playerWork.player.moveSpeed / (float)SCOOTER_RUN_REF;
+
+    if (!s_engDev && (s_engTried || !engine_open()))
+        return;
+    if (speed > 1.0f) speed = 1.0f;
+    if (speed < 0.0f) speed = 0.0f;
+    s_engRate = ENGINE_IDLE_RATE + (ENGINE_FULL_RATE - ENGINE_IDLE_RATE) * speed;
+    s_engGain = s_engGain + (target - s_engGain) * ENGINE_FADE;
+    if (s_engGain < 0.002f && target == 0.0f)
+    {
+        s_engGain = 0.0f;
+        SDL_PauseAudioDevice(s_engDev, 1);
+    }
+    else
+        SDL_PauseAudioDevice(s_engDev, 0);
 }
 
 /* ------------------------------------------------------------------ seat */
