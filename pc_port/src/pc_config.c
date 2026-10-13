@@ -96,14 +96,14 @@ s_PcConfig g_PcConfig = {
     .revengeEnemyMultiplier = 3,
     .revengeHorde           = 10,
     .revengeWaves           = 3,
-    .revengeRest            = 40,
+    .revengeRest            = 300,
     .revengeInvaderPct      = 35,
     .revengeAmmoDrops       = 1,
     .revengeBarks           = 1,
     .revengeSwearing        = 1,
     .revengeRage            = 1,
     .revengeRadio           = 1,
-    .revengeMusic           = 70,
+    .revengeMusic           = 40,
     .controllerMovement = 2, /* 0=analog, 1=dpad, 2=both */
     .movementOriginal = 1,   /* 1 = PSX lower-body movement machine (default); 0 = legacy PC shim */
 
