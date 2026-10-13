@@ -273,6 +273,21 @@ BARKS = {
         "[impressed] Ooh, now you're talkin', stranger.",
         "[chuckles] Careful... she bites.",
     ],
+    # Harry's scooter (pc_scooter.c).
+    "scooter_on": [
+        "[delighted] Beep beep, monsters!",
+        "[smug] Vespa mode, activated.",
+        "[laughing] I'm a novelist on a scooter. Peak dignity.",
+        "[shouts] Out of the way, coming through!",
+        "[cheerful] Should've rented one of these on day one.",
+    ],
+    "scooter_on_salty": [
+        "[laughing] Hell yeah, wheels!",
+    ],
+    "scooter_off": [
+        "[sighs] Back on foot. Great.",
+        "[dryly] Parking's free, at least.",
+    ],
     # The merchant (MERCHANT_VOICE_ID).
     "merchant_hello": [
         "[creepy whisper] Ah... a customer. What're you buyin', stranger?",
@@ -287,6 +302,9 @@ BARKS = {
     "merchant_upgrade": [
         "[gleeful] Ooh, she'll hit harder now.",
         "[admiring] Now that's a weapon worth dyin' for. Or killin' for.",
+    ],
+    "merchant_scooter": [
+        "[chuckles] A scooter, stranger? Mind the fog. And the monsters.",
     ],
     "merchant_poor": [
         "[tsk] Not enough, stranger. Not nearly enough.",

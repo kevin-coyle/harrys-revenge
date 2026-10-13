@@ -518,6 +518,8 @@ void Gfx_InGameDraw(bool arg0) // 0x8003C878
     /* Bullet-hole decals ride the world OT here so GsWSMATRIX matches the
      * chunk geometry they sit on (pc_decals.c). */
     { extern void Pc_DecalsDraw(GsOT* ot); Pc_DecalsDraw(&g_OrderingTable0[g_ActiveBufferIdx]); }
+    /* Harry's Revenge scooter, in the same world OT and matrix space. */
+    { extern void Pc_Scooter_Draw(GsOT* ot); Pc_Scooter_Draw(&g_OrderingTable0[g_ActiveBufferIdx]); }
 #endif
     Gfx_2dEffectsDraw();
 }

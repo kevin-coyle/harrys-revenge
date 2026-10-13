@@ -5,7 +5,8 @@
  * Savegame storage, all in bytes the original game never reads:
  *   0xA0..0xA3 (field_A0 + unused_A1[3])  money, little-endian u32
  *   ovlEnemyStates[43], [44]              upgrade levels, one nibble each
- *                                         (the two @unused test maps' slots)
+ *                                         (the two @unused test maps' slots);
+ *                                         bit 31 of [44] is the scooter
  *   0x23E (unused_23E)                    MERCHANT_SAVE_MAGIC once initialised
  * A save from vanilla or an older build has no magic there, so it starts with
  * no money and no upgrades. New Game sets ovlEnemyStates[] to all ones and
@@ -102,6 +103,14 @@ static void set_level(int weapon, int stat, int level)
     g_SavegamePtr->ovlEnemyStates[43 + nib / 8] = (s32)word;
 }
 
+#define MERCHANT_SCOOTER_BIT (1u << 31)
+
+int Pc_Merchant_HasScooter(void)
+{
+    save_init();
+    return g_SavegamePtr != NULL && ((u32)g_SavegamePtr->ovlEnemyStates[44] & MERCHANT_SCOOTER_BIT) != 0;
+}
+
 /* ------------------------------------------------------------------ inventory */
 
 static int has_item(u8 id)
@@ -190,6 +199,7 @@ enum
 {
     ITEM_HANDGUN_AMMO = 0, ITEM_SHOTGUN_AMMO, ITEM_RIFLE_AMMO,
     ITEM_HEALTH_DRINK, ITEM_FIRST_AID, ITEM_AMPOULE,
+    ITEM_SCOOTER,
     ITEM_WEAPON_FIRST, /* + index into WEAPONS_FOR_SALE */
     ITEM_UPGRADE_FIRST = ITEM_WEAPON_FIRST + 7 /* + weapon * MERCHANT_STAT_COUNT + stat */
 };
@@ -222,7 +232,7 @@ static const u8 WEAPON_ITEM[MERCHANT_WPN_COUNT] = {
 };
 
 static const int PAGE_SUPPLIES[] = { ITEM_HANDGUN_AMMO, ITEM_SHOTGUN_AMMO, ITEM_RIFLE_AMMO,
-                                     ITEM_HEALTH_DRINK, ITEM_FIRST_AID, ITEM_AMPOULE };
+                                     ITEM_HEALTH_DRINK, ITEM_FIRST_AID, ITEM_AMPOULE, ITEM_SCOOTER };
 static const int PAGE_WEAPONS[]  = { ITEM_WEAPON_FIRST + 0, ITEM_WEAPON_FIRST + 1, ITEM_WEAPON_FIRST + 2,
                                      ITEM_WEAPON_FIRST + 3, ITEM_WEAPON_FIRST + 4, ITEM_WEAPON_FIRST + 5,
                                      ITEM_WEAPON_FIRST + 6 };
@@ -278,6 +288,7 @@ static int item_price(int item)
         case ITEM_HEALTH_DRINK: return 200;
         case ITEM_FIRST_AID:    return 450;
         case ITEM_AMPOULE:      return 1000;
+        case ITEM_SCOOTER:      return 1500;
         default:
         {
             if (item < ITEM_UPGRADE_FIRST)
@@ -300,6 +311,7 @@ const char* Pc_Merchant_ItemName(int item)
         case ITEM_HEALTH_DRINK: return "Health drink";
         case ITEM_FIRST_AID:    return "First aid kit";
         case ITEM_AMPOULE:      return "Ampoule";
+        case ITEM_SCOOTER:      return "Scooter";
         default:
         {
             if (item < ITEM_UPGRADE_FIRST)
@@ -323,6 +335,7 @@ static const char* unavailable(int item)
         case ITEM_HEALTH_DRINK:
         case ITEM_FIRST_AID:
         case ITEM_AMPOULE:      return NULL;
+        case ITEM_SCOOTER:      return Pc_Merchant_HasScooter() ? "Owned" : NULL;
         default:
         {
             if (item < ITEM_UPGRADE_FIRST)
@@ -374,6 +387,15 @@ void Pc_Merchant_Buy(int item)
         return;
     }
 
+    if (item == ITEM_SCOOTER)
+    {
+        set_money(Pc_Merchant_Money() - price);
+        g_SavegamePtr->ovlEnemyStates[44] = (s32)((u32)g_SavegamePtr->ovlEnemyStates[44] | MERCHANT_SCOOTER_BIT);
+        Sd_PlaySfx(Sfx_MenuConfirm, 0, 64);
+        Pc_Revenge_Voice("merchant_scooter");
+        DbgOverlay_ToastLine("Scooter: sprint in the open streets to ride.");
+        return;
+    }
     if (item < ITEM_UPGRADE_FIRST)
     {
         u8 id = 0, count = 1;

@@ -2189,7 +2189,9 @@ void MainLoop(void) // 0x80032EE0
             Pc_Music_Update();
             {
                 extern void Pc_Waves_Update(void);
+                extern void Pc_Scooter_Update(void);
                 Pc_Waves_Update();
+                Pc_Scooter_Update();
             }
         }
         {

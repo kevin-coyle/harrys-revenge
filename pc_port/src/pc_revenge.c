@@ -198,6 +198,11 @@ u32 Pc_Revenge_Rand(void)
     return rnd();
 }
 
+void Pc_Revenge_ScooterLine(int mounting)
+{
+    bark(mounting ? "scooter_on" : "scooter_off", mounting ? 55 : 25);
+}
+
 void Pc_Revenge_OnReload(void)
 {
     bark("reload", 25);

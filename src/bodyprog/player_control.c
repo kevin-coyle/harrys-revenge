@@ -9794,7 +9794,9 @@ void func_8007C0D8(s_SubCharacter* player, s_PlayerExtra* extra, GsCOORDINATE2* 
     {
         /* Rage slows the world's clock; Harry keeps his own pace. */
         extern int Pc_Rage_HarrySpeedPct(void);
+        extern int Pc_Scooter_SpeedPct(void);
         temp_s0_2 = (temp_s0_2 * Pc_Rage_HarrySpeedPct()) / 100;
+        temp_s0_2 = (temp_s0_2 * Pc_Scooter_SpeedPct()) / 100;
     }
 #endif
 
