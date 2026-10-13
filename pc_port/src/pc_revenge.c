@@ -31,6 +31,7 @@
 #include "pc_merchant.h"
 #include "pc_quick_options.h"
 #include "pc_rage.h"
+#include "pc_scooter.h"
 #include "pc_waves.h"
 #include "pc_revenge.h"
 #include "sh_log.h"
@@ -358,8 +359,8 @@ void Pc_Revenge_Update(void)
     apply_capacity();
     count_wave_deaths();
 
-    /* A long run earns Harry a complaint about his cardio. */
-    if (g_SysWork.sysState == SysState_Gameplay &&
+    /* A long run earns Harry a complaint about his cardio; riding is not running. */
+    if (g_SysWork.sysState == SysState_Gameplay && !Pc_Scooter_Riding() &&
         g_SysWork.playerWork.player.moveSpeed >= REVENGE_RUN_SPEED)
     {
         s_runFor += g_DeltaTimeRaw;
